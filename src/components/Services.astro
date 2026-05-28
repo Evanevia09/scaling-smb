@@ -20,16 +20,16 @@ const services = [
     features: ["Map pack", "Citation building", "Review strategy"],
   },
   {
-    title: "Paid Ads",
-    description: "Google Ads & Meta campaigns engineered to generate high-intent leads at predictable costs.",
-    icon: "target",
-    features: ["Audience targeting", "A/B testing", "ROAS tracking"],
+    title: "Ecommerce",
+    description: "We help businesses accept payments online, whether they're selling products or services, through our payment gateway provider partners.",
+    icon: "cart",
+    features: ["Payment gateway", "Multi-currency", "Secure checkout"],
   },
   {
-    title: "Native Apps",
-    description: "Cross-platform mobile apps for iOS and Android that feel native and perform flawlessly.",
-    icon: "mobile",
-    features: ["iOS & Android", "Push notifications", "App store deploy"],
+    title: "API Integration",
+    description: "For businesses who want to extend their systems' capabilities with seamless API integrations.",
+    icon: "plug",
+    features: ["RESTful APIs", "Third-party connect", "System automation"],
   },
   {
     title: "AI Automations",
@@ -43,16 +43,16 @@ const iconMap = {
   code: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
   message: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
   map: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/></svg>`,
-  target: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
-  mobile: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+  cart: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`,
+  plug: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a6 6 0 0 1-12 0V8"/></svg>`,
   bot: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="16" r="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>`,
 };
 ---
 
-<section id="services" class="py-24 lg:py-32">
+<section id="services" class="py-16 sm:py-20 lg:py-32">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <!-- Section header -->
-    <div class="mx-auto max-w-2xl text-center mb-16 lg:mb-20" data-reveal>
+    <div class="mx-auto max-w-2xl text-center mb-12 sm:mb-16 lg:mb-20" data-reveal>
       <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-4">What We Do</p>
       <h2 class="text-4xl sm:text-5xl font-black tracking-tight mb-6">
         Services That <span class="text-primary">Scale</span>

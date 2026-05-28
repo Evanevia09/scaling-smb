@@ -5,6 +5,12 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Serve the thank-you page from its own file
+[[redirects]]
+  from = "/thank-you"
+  to = "/thank-you/index.html"
+  status = 200
+
 # Astro needs to serve from root
 [[redirects]]
   from = "/*"

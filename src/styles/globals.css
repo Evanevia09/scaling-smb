@@ -38,6 +38,10 @@
   html {
     scroll-behavior: smooth;
   }
+  /* Fix 100vh on mobile Safari (dynamic toolbar) */
+  .min-h-screen {
+    min-height: 100dvh;
+  }
   body {
     @apply bg-white text-dark font-sans antialiased;
   }

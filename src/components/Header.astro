@@ -10,20 +10,12 @@ const links = [
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="site-header"
-  data-scroll-header>
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between py-4 md:py-5 transition-all duration-500">
+ data-scroll-header>
+ <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+ <div class="flex items-center justify-between py-3 md:py-5 transition-all duration-500">
       <!-- Logo -->
-      <a href="#home" class="flex items-center gap-2.5 group">
-        <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-primary">
-            <path d="M2 16L9 2L16 16H2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M6 11L9 6L12 11H6Z" fill="currentColor" opacity="0.4"/>
-          </svg>
-        </div>
-        <span class="text-lg font-bold tracking-tight">
-          Scaling <span class="text-primary">SMB</span>
-        </span>
+      <a href="#home" class="flex items-center group shrink-0">
+        <img src="/logo.jpg" alt="Scaling SMB" class="h-9 w-auto object-contain" />
       </a>
 
       <!-- Desktop nav -->
@@ -50,7 +42,7 @@ const links = [
       <!-- Mobile menu button -->
       <button
         type="button"
-        class="md:hidden relative z-50 p-2 text-dark"
+        class="md:hidden relative z-50 p-3 -mr-2 text-dark touch-manipulation"
         aria-label="Toggle menu"
         data-menu-toggle
       >
@@ -63,7 +55,7 @@ const links = [
 
   <!-- Mobile menu drawer -->
   <div
-    class="fixed inset-0 z-40 flex flex-col bg-white/98 backdrop-blur-xl md:hidden translate-x-full transition-transform duration-500 ease-out"
+    class="fixed inset-0 z-40 flex flex-col bg-white/95 backdrop-blur-xl md:hidden translate-x-full transition-transform duration-500 ease-out"
     data-mobile-menu
     aria-hidden="true"
   >
@@ -105,34 +97,44 @@ const links = [
 
   let isOpen = false;
 
+  function openMenu() {
+    isOpen = true;
+    menu.classList.remove('translate-x-full');
+    toggle.setAttribute('aria-expanded', 'true');
+    menu.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    bars.b1.classList.add('rotate-45', 'translate-y-[7px]');
+    bars.b2.classList.add('opacity-0');
+    bars.b3.classList.add('-rotate-45', '-translate-y-[7px]');
+  }
+
+  function closeMenu() {
+    isOpen = false;
+    menu.classList.add('translate-x-full');
+    toggle.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    bars.b1.classList.remove('rotate-45', 'translate-y-[7px]');
+    bars.b2.classList.remove('opacity-0');
+    bars.b3.classList.remove('-rotate-45', '-translate-y-[7px]');
+  }
+
   toggle.addEventListener('click', () => {
-    isOpen = !isOpen;
-    menu.setAttribute('aria-hidden', String(!isOpen));
-    if (isOpen) {
-      menu.classList.remove('translate-x-full');
-      document.body.style.overflow = 'hidden';
-      bars.b1.classList.add('rotate-45', 'translate-y-[7px]');
-      bars.b2.classList.add('opacity-0');
-      bars.b3.classList.add('-rotate-45', '-translate-y-[7px]');
-    } else {
-      menu.classList.add('translate-x-full');
-      document.body.style.overflow = '';
-      bars.b1.classList.remove('rotate-45', 'translate-y-[7px]');
-      bars.b2.classList.remove('opacity-0');
-      bars.b3.classList.remove('-rotate-45', '-translate-y-[7px]');
-    }
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) closeMenu();
+  });
+
+  // Close on backdrop click (tap outside nav)
+  menu.addEventListener('click', (e) => {
+    if (e.target === menu) closeMenu();
   });
 
   links.forEach((link) => {
-    link.addEventListener('click', () => {
-      isOpen = false;
-      menu.classList.add('translate-x-full');
-      menu.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      bars.b1.classList.remove('rotate-45', 'translate-y-[7px]');
-      bars.b2.classList.remove('opacity-0');
-      bars.b3.classList.remove('-rotate-45', '-translate-y-[7px]');
-    });
+    link.addEventListener('click', () => closeMenu());
   });
 
   // Header scroll effect

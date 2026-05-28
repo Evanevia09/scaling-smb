@@ -26,7 +26,7 @@ const stats = [
       </div>
 
       <!-- Headline -->
-      <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[0.95] mb-8" data-reveal data-delay="100">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.05] sm:leading-[0.95] mb-6 sm:mb-8" data-reveal data-delay="100">
         Custom Websites That
         <span class="relative inline-block">
           <span class="text-primary">Scale</span>
@@ -36,16 +36,16 @@ const stats = [
       </h1>
 
       <!-- Subtitle -->
-      <p class="mx-auto max-w-2xl text-lg sm:text-xl text-muted leading-relaxed mb-10" data-reveal data-delay="200">
+      <p class="mx-auto max-w-2xl text-base sm:text-lg md:text-xl text-muted leading-relaxed mb-8 sm:mb-10" data-reveal data-delay="200">
         We build fast, modern, and scalable websites that turn visitors into customers. 
         Based in <strong class="text-dark">Macau</strong>, serving businesses across <strong class="text-dark">APAC</strong>.
       </p>
 
       <!-- CTAs -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16" data-reveal data-delay="300">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 sm:mb-16" data-reveal data-delay="300">
         <a
           href="#contact"
-          class="inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-base font-semibold text-white transition-all hover:bg-primary-dark active:scale-[0.97] shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/30"
+          class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-white transition-all hover:bg-primary-dark active:scale-[0.97] shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/30"
         >
           Start Your Project
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -54,7 +54,7 @@ const stats = [
         </a>
         <a
           href="#portfolio"
-          class="inline-flex items-center gap-2 rounded-xl border-2 border-border bg-white px-8 py-4 text-base font-semibold text-dark transition-all hover:border-primary/30 hover:bg-primary-light active:scale-[0.97]"
+          class="inline-flex items-center gap-2 rounded-xl border-2 border-border bg-white px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-dark transition-all hover:border-primary/30 hover:bg-primary-light active:scale-[0.97]"
         >
           View Our Work
         </a>
@@ -63,7 +63,7 @@ const stats = [
 
     <!-- Stats bar -->
     <div class="mx-auto max-w-2xl" data-reveal data-delay="400">
-      <div class="grid grid-cols-3 gap-8 rounded-2xl border border-border bg-white/80 backdrop-blur-sm p-8 shadow-sm">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 rounded-2xl border border-border bg-white/80 backdrop-blur-sm p-6 sm:p-8 shadow-sm">
         {stats.map((stat) => (
           <div class="text-center">
             <div class="text-3xl font-black text-primary">{stat.value}</div>
