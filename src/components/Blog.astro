@@ -1,0 +1,80 @@
+---
+// Blog section
+const posts = [
+  {
+    category: "WeChat",
+    date: "Apr 12, 2026",
+    title: "WeChat Mini Programs: a practical guide for Macau SMBs",
+    excerpt: "When a full app is overkill but your customers live on WeChat, a mini program can handle bookings, menus, and payments in one place.",
+    readTime: "6 min read",
+  },
+  {
+    category: "SEO",
+    date: "Mar 28, 2026",
+    title: "Local SEO checklist for service businesses in APAC",
+    excerpt: "Google Business Profile, citations, on-page basics, and review strategy — the essentials we set up on every local client site.",
+    readTime: "5 min read",
+  },
+  {
+    category: "Web",
+    date: "Mar 14, 2026",
+    title: "5 signs it is time to rebuild your website",
+    excerpt: "Slow load times, poor mobile scores, and leads that never convert often trace back to an outdated site. Here is how to tell.",
+    readTime: "4 min read",
+  },
+  {
+    category: "Automation",
+    date: "Feb 22, 2026",
+    title: "AI automations that actually save SMB teams time",
+    excerpt: "From inbox triage to quote follow-ups — small workflows that pay off without hiring a data science team.",
+    readTime: "7 min read",
+  },
+];
+---
+
+<section id="blog" class="py-24 lg:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mx-auto max-w-2xl text-center mb-16 lg:mb-20" data-reveal>
+      <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-4">Blog</p>
+      <h2 class="text-4xl sm:text-5xl font-black tracking-tight mb-6">
+        Insights for <span class="text-primary">Growing</span> Online
+      </h2>
+      <p class="text-lg text-muted">
+        Practical guides on web, SEO, WeChat, and automation — written for owners and operators, not developers.
+      </p>
+    </div>
+
+    <!-- Blog grid -->
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {posts.map((post) => (
+        <article
+          class="group rounded-2xl border border-border bg-white p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:-translate-y-1"
+          data-reveal
+        >
+          <div class="flex items-center gap-2 text-xs text-muted mb-4">
+            <span class="font-semibold text-primary">{post.category}</span>
+            <span>·</span>
+            <time datetime={post.date}>{post.date}</time>
+          </div>
+          <h3 class="text-lg font-bold mb-3 leading-snug group-hover:text-primary transition-colors">
+            {post.title}
+          </h3>
+          <p class="text-sm text-muted leading-relaxed mb-4 line-clamp-3">
+            {post.excerpt}
+          </p>
+          <p class="text-xs text-muted">{post.readTime}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center" data-reveal>
+      <a href="#contact" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+        Discuss Your Project
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 12L10 8L6 4"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

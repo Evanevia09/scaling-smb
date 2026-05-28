@@ -1,0 +1,91 @@
+---
+// Services section
+const services = [
+  {
+    title: "Web Development",
+    description: "High-performance websites built with modern frameworks. Fast, conversion-focused, and mobile-first.",
+    icon: "code",
+    features: ["Custom design", "SEO optimized", "Blazing fast"],
+  },
+  {
+    title: "WeChat Mini Programs",
+    description: "Lightweight apps inside WeChat for bookings, menus, payments, and customer engagement in China & APAC.",
+    icon: "message",
+    features: ["WeChat Pay", "Share to chat", "CRM integration"],
+  },
+  {
+    title: "Local SEO",
+    description: "Dominate local search and Google Maps. Get found by customers searching for your services nearby.",
+    icon: "map",
+    features: ["Map pack", "Citation building", "Review strategy"],
+  },
+  {
+    title: "Paid Ads",
+    description: "Google Ads & Meta campaigns engineered to generate high-intent leads at predictable costs.",
+    icon: "target",
+    features: ["Audience targeting", "A/B testing", "ROAS tracking"],
+  },
+  {
+    title: "Native Apps",
+    description: "Cross-platform mobile apps for iOS and Android that feel native and perform flawlessly.",
+    icon: "mobile",
+    features: ["iOS & Android", "Push notifications", "App store deploy"],
+  },
+  {
+    title: "AI Automations",
+    description: "Smart workflows that save your team hours — from chatbot support to automated lead follow-ups.",
+    icon: "bot",
+    features: ["Chatbots", "Email sequences", "Data pipelines"],
+  },
+];
+
+const iconMap = {
+  code: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+  message: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+  map: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/></svg>`,
+  target: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+  mobile: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+  bot: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="16" r="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>`,
+};
+---
+
+<section id="services" class="py-24 lg:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mx-auto max-w-2xl text-center mb-16 lg:mb-20" data-reveal>
+      <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-4">What We Do</p>
+      <h2 class="text-4xl sm:text-5xl font-black tracking-tight mb-6">
+        Services That <span class="text-primary">Scale</span>
+      </h2>
+      <p class="text-lg text-muted">
+        From your first website to full digital growth systems — we build what your business needs to win online.
+      </p>
+    </div>
+
+    <!-- Services grid -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((service) => (
+        <div
+          class="group relative rounded-2xl border border-border bg-white p-8 transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
+          data-reveal
+        >
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-light text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+            <span set:html={iconMap[service.icon]} />
+          </div>
+          <h3 class="text-xl font-bold mb-3">{service.title}</h3>
+          <p class="text-muted text-sm leading-relaxed mb-5">{service.description}</p>
+          <ul class="space-y-1.5">
+            {service.features.map((feature) => (
+              <li class="flex items-center gap-2 text-sm text-muted">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="shrink-0 text-primary">
+                  <circle cx="7" cy="7" r="3" fill="currentColor" />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,89 @@
+---
+// Portfolio section
+const projects = [
+  {
+    title: "Avis Macau",
+    category: "Car Rental",
+    description: "Booking-focused site with fleet discovery, real-time availability, and local pickup flows.",
+    highlights: ["Web design", "Online booking", "Mobile-ready"],
+  },
+  {
+    title: "Elite Riders",
+    category: "Motorcycle Tours",
+    description: "Experience marketing site with tour itineraries, gallery, and direct booking integration.",
+    highlights: ["Tourism site", "Booking system", "Photo gallery"],
+  },
+  {
+    title: "Intellco",
+    category: "Enterprise SaaS",
+    description: "Brand site with service positioning, case studies, and lead capture for B2B buyers.",
+    highlights: ["Brand site", "Lead capture", "Corporate UX"],
+  },
+  {
+    title: "Island Junks",
+    category: "Tourism",
+    description: "Experience marketing site with itineraries, gallery, and inquiry paths optimized for conversions.",
+    highlights: ["Tourism site", "Inquiry forms", "Local SEO"],
+  },
+];
+---
+
+<section id="portfolio" class="py-24 lg:py-32 bg-surface/50">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mx-auto max-w-2xl text-center mb-16 lg:mb-20" data-reveal>
+      <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-4">Portfolio</p>
+      <h2 class="text-4xl sm:text-5xl font-black tracking-tight mb-6">
+        Work We're <span class="text-primary">Proud Of</span>
+      </h2>
+      <p class="text-lg text-muted">
+        Real projects for real businesses across APAC.
+      </p>
+    </div>
+
+    <!-- Portfolio grid -->
+    <div class="grid gap-8 sm:grid-cols-2">
+      {projects.map((project) => (
+        <div
+          class="group relative rounded-2xl border border-border bg-white overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
+          data-reveal
+        >
+          <!-- Project visual placeholder -->
+          <div class="aspect-[16/10] bg-gradient-to-br from-primary/5 to-primary-light/50 flex items-center justify-center overflow-hidden">
+            <div class="text-center p-8">
+              <div class="text-5xl font-black text-primary/20 tracking-tight">{project.category}</div>
+              <div class="mt-2 text-sm font-medium text-primary/30">{project.title}</div>
+            </div>
+          </div>
+
+          <!-- Project info -->
+          <div class="p-6 lg:p-8">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="inline-block rounded-full bg-primary-light px-3 py-1 text-xs font-semibold text-primary">
+                {project.category}
+              </span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">{project.title}</h3>
+            <p class="text-muted text-sm leading-relaxed mb-4">{project.description}</p>
+            <div class="flex flex-wrap gap-2">
+              {project.highlights.map((tag) => (
+                <span class="inline-block rounded-lg bg-surface px-3 py-1 text-xs font-medium text-muted border border-border">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center" data-reveal>
+      <a href="#contact" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+        Start Your Project
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 12L10 8L6 4"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
