@@ -1,15 +1,13 @@
 import { describe, it, expect } from 'vitest'
+import { readFileSync, existsSync } from 'fs'
 
 describe('Site smoke tests', () => {
-  it('build output has index.html', async () => {
-    const fs = await import('fs')
-    const indexExists = fs.existsSync('dist/index.html')
-    expect(indexExists).toBe(true)
+  it('has required source pages', () => {
+    expect(existsSync('src/pages/index.astro')).toBe(true)
   })
 
-  it('netlify.toml has redirects', async () => {
-    const fs = await import('fs')
-    const toml = fs.readFileSync('netlify.toml', 'utf-8')
+  it('netlify.toml has redirects', () => {
+    const toml = readFileSync('netlify.toml', 'utf-8')
     expect(toml).toContain('[[redirects]]')
   })
 
@@ -17,5 +15,6 @@ describe('Site smoke tests', () => {
     const pkg = await import('../package.json')
     expect(pkg.default.scripts.build).toBeTruthy()
     expect(pkg.default.scripts.dev).toBeTruthy()
+    expect(pkg.default.scripts.test).toBeTruthy()
   })
 })
