@@ -216,7 +216,7 @@ export async function onRequest(context) {
         "X-Title": "Scaling SMB Chat",
       },
       body: JSON.stringify({
-        model: "qwen/qwen3-coder:free",
+        model: "meta-llama/llama-3.3-70b-instruct:free",
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
           { role: "user", content: trimmed },
@@ -240,7 +240,7 @@ export async function onRequest(context) {
             "X-Title": "Scaling SMB Chat",
           },
           body: JSON.stringify({
-            model: "deepseek/deepseek-v4-flash",
+            model: "deepseek/deepseek-v4-flash:free",
             messages: [
               { role: "system", content: SYSTEM_PROMPT },
               { role: "user", content: trimmed },
