@@ -259,7 +259,7 @@ export async function onRequest(context) {
           }),
         });
         if (!fallback.ok) {
-          return new Response(JSON.stringify({ error: "Service temporarily unavailable" }), {
+          return new Response(JSON.stringify({ error: "Service temporarily unavailable", debug: { status: fallback.status, keyLen: (env.OPENROUTER_API_KEY || "").length } }), {
             status: 502,
             headers: {
               "Content-Type": "application/json",
@@ -277,7 +277,7 @@ export async function onRequest(context) {
         });
       }
 
-      return new Response(JSON.stringify({ error: "Service temporarily unavailable", debug: { status: response.status, fallback: false } }), {
+      return new Response(JSON.stringify({ error: "Service temporarily unavailable", debug: { status: response.status, keyLen: (env.OPENROUTER_API_KEY || "").length } }), {
         status: 502,
         headers: {
           "Content-Type": "application/json",
