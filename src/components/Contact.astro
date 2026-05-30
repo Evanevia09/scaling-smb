@@ -4,24 +4,24 @@
 <section id="contact" class="py-20 sm:py-28">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center mb-12">
-      <p class="text-xs font-semibold text-primary tracking-widest uppercase mb-4">Get Started</p>
-      <h2 class="text-3xl sm:text-4xl font-light tracking-tight text-heading mb-4">
-        Ready to <span class="font-medium">hire your AI team?</span>
-      </h2>
-      <p class="text-body text-base leading-relaxed">
-        Book a free discovery call. We'll identify the right roles for your business and get you set up.
-      </p>
+    <p class="text-xs font-semibold text-primary tracking-widest uppercase mb-4">Get Started</p>
+    <h2 class="text-3xl sm:text-4xl font-light tracking-tight text-heading mb-4">
+      Let's find the right <span class="font-medium">AI Employee</span> for you
+    </h2>
+    <p class="text-body text-base leading-relaxed">
+      Tell us about your bottleneck. We'll get back to you within 24 hours with a plan.
+    </p>
     </div>
 
     <div class="mx-auto max-w-lg">
       <form
-        action="https://formspree.io/f/your-form-id"
-        method="POST"
+        id="lead-form"
         class="space-y-5"
+        onsubmit="return handleSubmit(event)"
       >
         <div class="grid gap-5 sm:grid-cols-2">
           <div>
-            <label for="name" class="block text-sm font-medium text-heading mb-1.5">Name</label>
+            <label for="name" class="block text-sm font-medium text-heading mb-1.5">Name <span class="text-red-400">*</span></label>
             <input
               type="text"
               id="name"
@@ -32,7 +32,7 @@
             />
           </div>
           <div>
-            <label for="email" class="block text-sm font-medium text-heading mb-1.5">Email</label>
+            <label for="email" class="block text-sm font-medium text-heading mb-1.5">Email <span class="text-red-400">*</span></label>
             <input
               type="email"
               id="email"
@@ -43,29 +43,70 @@
             />
           </div>
         </div>
+
         <div>
-          <label for="message" class="block text-sm font-medium text-heading mb-1.5">What roles interest you?</label>
+          <label for="whatsapp" class="block text-sm font-medium text-heading mb-1.5">WhatsApp <span class="text-muted font-normal">(optional)</span></label>
+          <input
+            type="tel"
+            id="whatsapp"
+            name="whatsapp"
+            class="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-heading placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+            placeholder="+852 9123 4567"
+          />
+        </div>
+
+        <div>
+          <label for="department" class="block text-sm font-medium text-heading mb-1.5">Which department has a bottleneck? <span class="text-red-400">*</span></label>
+          <select
+            id="department"
+            name="department"
+            required
+            class="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-heading focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%239CA3AF%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:16px] bg-[right_12px_center] bg-no-repeat pr-10"
+          >
+            <option value="" disabled selected>Select a department</option>
+            <option value="Operations">Operations — Admin, invoicing, reporting, scheduling</option>
+            <option value="Marketing">Marketing — Content, social media, email, SEO</option>
+            <option value="Sales">Sales — Lead gen, follow-ups, proposals, CRM</option>
+            <option value="Not sure">Not sure — I need help figuring it out</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium text-heading mb-1.5">What roles or tasks do you need help with? <span class="text-red-400">*</span></label>
           <textarea
             id="message"
             name="message"
-            rows="3"
+            rows="4"
+            required
             class="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-heading placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none"
-            placeholder="Tell us about your business and what you need..."
+            placeholder="Tell us about the specific tasks, roles, or bottlenecks you're facing. For example: I need help with bookkeeping and invoicing, I want consistent social media posting, or my sales follow-ups keep falling through the cracks..."
           ></textarea>
         </div>
+
         <button
           type="submit"
-          class="w-full rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-primary-dark active:scale-[0.98] shadow-lg shadow-primary/25"
+          id="submit-btn"
+          class="w-full rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-primary-dark active:scale-[0.98] shadow-lg shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Book a discovery call
+          Send enquiry
         </button>
+
+        <div id="form-success" class="hidden text-center py-4">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 mb-3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <p class="text-heading font-semibold">Thanks! We'll be in touch within 24 hours.</p>
+          <p class="text-sm text-body mt-1">In the meantime, feel free to book a <a href="#contact" class="text-primary underline">discovery call</a>.</p>
+        </div>
       </form>
 
       <div class="mt-10 pt-8 border-t border-border text-center">
         <p class="text-xs text-body mb-3">Or reach us directly</p>
         <div class="flex items-center justify-center gap-6 text-sm">
-          <a href="mailto:evan@scalingsmb.com" class="text-primary hover:text-primary-dark transition-colors font-medium">
-            evan@scalingsmb.com
+          <a href="mailto:scalingsmb@agentmail.to" class="text-primary hover:text-primary-dark transition-colors font-medium">
+            scalingsmb@agentmail.to
           </a>
           <span class="text-muted">·</span>
           <a href="tel:+85362750705" class="text-primary hover:text-primary-dark transition-colors font-medium">
@@ -76,3 +117,45 @@
     </div>
   </div>
 </section>
+
+<script>
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const btn = document.getElementById('submit-btn');
+    const success = document.getElementById('form-success');
+
+    const data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      whatsapp: form.whatsapp.value.trim(),
+      department: form.department.value,
+      message: form.message.value.trim(),
+    };
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error('Failed to submit');
+
+      form.reset();
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+    } catch (err) {
+      btn.textContent = 'Something went wrong. Try again.';
+      btn.disabled = false;
+      setTimeout(() => {
+        btn.textContent = 'Send enquiry';
+      }, 3000);
+    }
+
+    return false;
+  }
+</script>

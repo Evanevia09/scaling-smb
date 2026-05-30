@@ -1,19 +1,19 @@
 ---
 const links = [
   { href: "#roles", label: "AI Employees" },
-  { href: "#pricing", label: "Pricing" },
   { href: "#about", label: "About" },
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="site-header">
+<header class="fixed top-0 left-0 right-0 z-50 bg-white backdrop-blur-md transition-all duration-300" id="site-header">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between py-4 md:py-5 transition-all duration-300">
-      <a href="/" class="flex items-center gap-2 group shrink-0">
-        <span class="text-xl font-bold text-heading tracking-tight">scalingsmb</span>
-        <span class="hidden sm:inline text-xs font-medium text-primary/70 bg-primary-light px-2 py-0.5 rounded">AI</span>
+    <div class="flex items-center justify-between py-3 md:py-4 transition-all duration-300">
+      <a href="/" class="flex items-center gap-2 shrink-0">
+        <span class="text-lg sm:text-xl font-bold text-heading tracking-tight">scalingsmb</span>
+        <span class="text-[10px] sm:text-xs font-medium text-primary/70 bg-primary-light px-1.5 sm:px-2 py-0.5 rounded">AI</span>
       </a>
 
+      <!-- Desktop nav -->
       <nav class="hidden md:flex items-center gap-8">
         {links.map((link) => (
           <a
@@ -31,38 +31,41 @@ const links = [
         </a>
       </nav>
 
+      <!-- Mobile hamburger -->
       <button
         type="button"
-        class="md:hidden relative z-50 p-3 -mr-2 text-heading touch-manipulation"
+        class="md:hidden relative z-50 p-2 -mr-2 text-heading touch-manipulation"
         aria-label="Toggle menu"
+        aria-expanded="false"
         data-menu-toggle
       >
-        <span class="block h-0.5 w-6 bg-current transition-all duration-300" data-bar-1></span>
-        <span class="block h-0.5 w-6 bg-current mt-1.5 transition-all duration-300" data-bar-2></span>
-        <span class="block h-0.5 w-6 bg-current mt-1.5 transition-all duration-300" data-bar-3></span>
+        <span class="block h-0.5 w-6 bg-current transition-all duration-300 origin-center" data-bar-1></span>
+        <span class="block h-0.5 w-6 bg-current my-1.5 transition-all duration-300" data-bar-2></span>
+        <span class="block h-0.5 w-6 bg-current transition-all duration-300 origin-center" data-bar-3></span>
       </button>
     </div>
   </div>
 
+  <!-- Mobile dropdown menu -->
   <div
-    class="fixed inset-0 z-40 flex flex-col bg-white/95 backdrop-blur-xl md:hidden translate-x-full transition-transform duration-500 ease-out"
+    class="md:hidden bg-white border-b border-border shadow-lg transition-all duration-300 overflow-hidden data-[open=false]:max-h-0 data-[open=false]:opacity-0 data-[open=true]:max-h-80 data-[open=true]:opacity-100"
     data-mobile-menu
+    data-open="false"
     aria-hidden="true"
   >
-    <nav class="flex flex-1 flex-col items-center justify-center gap-8 px-8">
-      {links.map((link, i) => (
+    <nav class="px-4 sm:px-6 pb-5 pt-2 space-y-1">
+      {links.map((link) => (
         <a
           href={link.href}
-          class="text-2xl font-semibold tracking-tight text-body/60 hover:text-heading transition-colors"
+          class="block rounded-lg px-4 py-3 text-base font-medium text-body hover:text-heading hover:bg-surface transition-colors"
           data-menu-link
-          style={`transition-delay: ${i * 50}ms`}
         >
           {link.label}
         </a>
       ))}
       <a
         href="#contact"
-        class="mt-4 inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-primary-dark"
+        class="block rounded-lg bg-primary px-4 py-3 text-center text-base font-semibold text-white transition-all hover:bg-primary-dark active:scale-[0.98] mt-3"
         data-menu-link
       >
         Book a discovery call
@@ -75,7 +78,7 @@ const links = [
   const header = document.getElementById('site-header');
   const toggle = document.querySelector('[data-menu-toggle]');
   const menu = document.querySelector('[data-mobile-menu]');
-  const links = document.querySelectorAll('[data-menu-link]');
+  const menuLinks = document.querySelectorAll('[data-menu-link]');
   const bars = {
     b1: document.querySelector('[data-bar-1]'),
     b2: document.querySelector('[data-bar-2]'),
@@ -86,24 +89,22 @@ const links = [
 
   function openMenu() {
     isOpen = true;
-    menu.classList.remove('translate-x-full');
-    toggle.setAttribute('aria-expanded', 'true');
+    menu.dataset.open = 'true';
     menu.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    bars.b1.classList.add('rotate-45', 'translate-y-[7px]');
-    bars.b2.classList.add('opacity-0');
-    bars.b3.classList.add('-rotate-45', '-translate-y-[7px]');
+    toggle.setAttribute('aria-expanded', 'true');
+    bars.b1.classList.add('rotate-45', 'translate-y-[8px]');
+    bars.b2.classList.add('opacity-0', 'scale-0');
+    bars.b3.classList.add('-rotate-45', '-translate-y-[8px]');
   }
 
   function closeMenu() {
     isOpen = false;
-    menu.classList.add('translate-x-full');
-    toggle.setAttribute('aria-expanded', 'false');
+    menu.dataset.open = 'false';
     menu.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    bars.b1.classList.remove('rotate-45', 'translate-y-[7px]');
-    bars.b2.classList.remove('opacity-0');
-    bars.b3.classList.remove('-rotate-45', '-translate-y-[7px]');
+    toggle.setAttribute('aria-expanded', 'false');
+    bars.b1.classList.remove('rotate-45', 'translate-y-[8px]');
+    bars.b2.classList.remove('opacity-0', 'scale-0');
+    bars.b3.classList.remove('-rotate-45', '-translate-y-[8px]');
   }
 
   toggle.addEventListener('click', () => {
@@ -114,23 +115,22 @@ const links = [
     if (e.key === 'Escape' && isOpen) closeMenu();
   });
 
-  menu.addEventListener('click', (e) => {
-    if (e.target === menu) closeMenu();
-  });
-
-  links.forEach((link) => {
+  // Close on outside click (the menu is inside header, so clicking outside would be rare)
+  // Close on link click
+  menuLinks.forEach((link) => {
     link.addEventListener('click', () => closeMenu());
   });
 
+  // Scroll effect
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    const nav = header.querySelector('div');
-    if (scrollY > 50) {
-      nav.classList.add('!py-3');
-      header.classList.add('bg-white/90', 'backdrop-blur-xl', 'shadow-sm', 'border-b', 'border-border');
+    const inner = header.querySelector('[class*="mx-auto"]');
+    if (scrollY > 40) {
+      inner.classList.add('!py-2', 'md:!py-3');
+      header.classList.add('shadow-sm', 'border-b', 'border-border');
     } else {
-      nav.classList.remove('!py-3');
-      header.classList.remove('bg-white/90', 'backdrop-blur-xl', 'shadow-sm', 'border-b', 'border-border');
+      inner.classList.remove('!py-2', 'md:!py-3');
+      header.classList.remove('shadow-sm', 'border-b', 'border-border');
     }
   });
 </script>
