@@ -84,14 +84,6 @@ export async function onRequest(context) {
   const { request, env } = context;
   const origin = request.headers.get("origin") || "";
 
-  // Debug endpoint - remove after testing
-  if (request.method === "GET" && new URL(request.url).pathname === "/chat/debug") {
-    return new Response(JSON.stringify({
-      hasKey: !!env.OPENROUTER_API_KEY,
-      keyLen: (env.OPENROUTER_API_KEY || "").length,
-    }), { status: 200, headers: { "Content-Type": "application/json" } });
-  }
-
   // CORS preflight
   if (request.method === "OPTIONS") {
     const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : "https://scalingsmb.com";
@@ -235,8 +227,7 @@ export async function onRequest(context) {
     });
 
     if (!response.ok) {
-      const errText = await response.text();
-      console.error("OpenRouter error:", response.status, errText.slice(0,200));
+      console.error("OpenRouter error:", response.status);
 
       // Fallback to flash if free model rate-limited
       if (response.status === 429) {
@@ -259,7 +250,7 @@ export async function onRequest(context) {
           }),
         });
         if (!fallback.ok) {
-          return new Response(JSON.stringify({ error: "Service temporarily unavailable", debug: { status: fallback.status, keyLen: (env.OPENROUTER_API_KEY || "").length } }), {
+          return new Response(JSON.stringify({ error: "Service temporarily unavailable" }), {
             status: 502,
             headers: {
               "Content-Type": "application/json",
@@ -277,7 +268,7 @@ export async function onRequest(context) {
         });
       }
 
-      return new Response(JSON.stringify({ error: "Service temporarily unavailable", debug: { status: response.status, keyLen: (env.OPENROUTER_API_KEY || "").length } }), {
+      return new Response(JSON.stringify({ error: "Service temporarily unavailable" }), {
         status: 502,
         headers: {
           "Content-Type": "application/json",
