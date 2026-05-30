@@ -84,6 +84,14 @@ export async function onRequest(context) {
   const { request, env } = context;
   const origin = request.headers.get("origin") || "";
 
+  // Debug endpoint - remove after testing
+  if (request.method === "GET" && new URL(request.url).pathname === "/chat/debug") {
+    return new Response(JSON.stringify({
+      hasKey: !!env.OPENROUTER_API_KEY,
+      keyLen: (env.OPENROUTER_API_KEY || "").length,
+    }), { status: 200, headers: { "Content-Type": "application/json" } });
+  }
+
   // CORS preflight
   if (request.method === "OPTIONS") {
     const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : "https://scalingsmb.com";
@@ -227,7 +235,8 @@ export async function onRequest(context) {
     });
 
     if (!response.ok) {
-      console.error("OpenRouter error:", response.status);
+      const errText = await response.text();
+      console.error("OpenRouter error:", response.status, errText.slice(0,200));
 
       // Fallback to flash if free model rate-limited
       if (response.status === 429) {
@@ -268,7 +277,7 @@ export async function onRequest(context) {
         });
       }
 
-      return new Response(JSON.stringify({ error: "Service temporarily unavailable" }), {
+      return new Response(JSON.stringify({ error: "Service temporarily unavailable", debug: { status: response.status, fallback: false } }), {
         status: 502,
         headers: {
           "Content-Type": "application/json",
