@@ -6,9 +6,10 @@ describe('Site smoke tests', () => {
     expect(existsSync('src/pages/index.astro')).toBe(true)
   })
 
-  it('netlify.toml has redirects', () => {
-    const toml = readFileSync('netlify.toml', 'utf-8')
-    expect(toml).toContain('[[redirects]]')
+  it('has Cloudflare Pages chat function', () => {
+    const chat = readFileSync('functions/chat.js', 'utf-8')
+    expect(chat).toContain('OPENROUTER_API_KEY')
+    expect(chat).toContain('onRequest')
   })
 
   it('package.json has required scripts', async () => {
