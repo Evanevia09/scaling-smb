@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI
 on:
   push:
     branches: [main]
@@ -18,20 +18,7 @@ jobs:
       - run: npx astro check
       - run: npx vitest run
       - run: npm run build
-  deploy:
-    needs: test
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build
-      - name: Deploy to Netlify
-        run: npx netlify-cli deploy --prod --dir=dist --message="CI deploy ${{ github.sha }}"
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+# Deploy handled by Cloudflare Pages native Git integration
+# — every push to main auto-triggers build + deploy on Cloudflare's infra.
+# Config: https://dash.cloudflare.com → Workers & Pages → scaling-smb
