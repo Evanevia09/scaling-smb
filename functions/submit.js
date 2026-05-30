@@ -40,8 +40,8 @@ async function composeLeadPayload(data) {
         arguments: {
           spreadsheetId: SHEET_ID,
           range: 'Sheet1!A:F',
-          valueInputOption: 'RAW',
-          values: [[timestamp, name, email, whatsapp || '', department, message]],
+          valueInputOption: 'USER_ENTERED',
+          values: [[timestamp, name, email, whatsapp ? "'" + whatsapp : '', department, message]],
         },
       },
     ],
