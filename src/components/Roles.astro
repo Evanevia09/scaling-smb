@@ -1,0 +1,102 @@
+---
+const categories = [
+  {
+    id: "operations",
+    label: "Operations",
+    icon: "gear",
+    color: "text-blue-600 bg-blue-50",
+    roles: [
+      { title: "Data Entry Clerk", desc: "Extract data from PDFs, emails, forms → populate CRM or sheets." },
+      { title: "Invoice & Expense Processor", desc: "Read invoices, match to POs, flag discrepancies, log expenses." },
+      { title: "Meeting Scheduler", desc: "Coordinate calendars, send invites, resolve conflicts, send reminders." },
+      { title: "Internal Helpdesk", desc: "Answer employee questions on IT, HR, and policies via chat." },
+      { title: "Report Generator", desc: "Pull data from sources, compile weekly/monthly reports, email stakeholders." },
+      { title: "Onboarding Assistant", desc: "Send welcome packets, create accounts, assign training, collect signed docs." },
+      { title: "Inventory Monitor", desc: "Track stock levels, predict reorder points, auto-generate purchase orders." },
+      { title: "Compliance Checker", desc: "Scan documents for compliance risks (GDPR, HIPAA), flag violations, log audits." },
+    ],
+  },
+  {
+    id: "marketing",
+    label: "Marketing",
+    icon: "megaphone",
+    color: "text-purple-600 bg-purple-50",
+    roles: [
+      { title: "SEO Content Writer", desc: "Research keywords, write SEO-optimized articles, publish to your CMS." },
+      { title: "Social Media Manager", desc: "Create platform-specific posts, schedule, respond to comments and DMs." },
+      { title: "Competitor Monitor", desc: "Track competitor sites, social, and ads; summarize changes weekly." },
+      { title: "Email Marketer", desc: "Write drip sequences, segment lists, send campaigns, track opens and clicks." },
+      { title: "Ad Copy Generator", desc: "Generate ad variations for Google, Meta, LinkedIn from landing pages." },
+      { title: "Review Responder", desc: "Monitor Google, Yelp, Trustpilot; draft professional replies to reviews." },
+      { title: "Video Scriptwriter", desc: "Create short video scripts for Shorts, Reels, TikTok from blog posts." },
+      { title: "Landing Page Builder", desc: "Spin up simple landing pages with forms, copy, and images for campaigns." },
+    ],
+  },
+  {
+    id: "sales",
+    label: "Sales",
+    icon: "trending",
+    color: "text-emerald-600 bg-emerald-50",
+    roles: [
+      { title: "Lead Qualifier", desc: "Chat with inbound leads, ask qualifying questions, score, book meetings." },
+      { title: "Follow-up Specialist", desc: "Send personalized email/SMS sequences to leads who didn't convert." },
+      { title: "Proposal Generator", desc: "Pull client data, insert case studies, generate custom PDF proposals." },
+      { title: "CRM Updater", desc: "Log calls, emails, and meeting notes into your CRM automatically." },
+      { title: "Price Quote Assistant", desc: "Calculate quotes from pricing tables, email to client." },
+      { title: "Objection Handler", desc: "Answer common sales objections via chat with pre-approved scripts." },
+      { title: "Upsell Recommender", desc: "Analyze purchase history, suggest relevant add-ons, send offers." },
+      { title: "Customer Success Check-in", desc: "Send satisfaction surveys, flag at-risk accounts, schedule renewals." },
+    ],
+  },
+];
+---
+
+<section id="roles" class="py-20 sm:py-28 bg-surface">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center mb-16">
+      <p class="text-xs font-semibold text-primary tracking-widest uppercase mb-4">AI Employees</p>
+      <h2 class="text-3xl sm:text-4xl font-light tracking-tight text-heading mb-4">
+        24+ roles across <span class="font-medium">three departments</span>
+      </h2>
+      <p class="text-body text-base leading-relaxed">
+        Each role is a dedicated AI employee. Pick the ones you need. We build and deploy them.
+      </p>
+    </div>
+
+    <div class="space-y-16">
+      {categories.map((cat) => (
+        <div>
+          <div class="flex items-center gap-3 mb-8">
+            <h3 class="text-2xl font-semibold text-heading">{cat.label}</h3>
+            <span class="text-xs font-medium text-body/60 bg-white border border-border px-2.5 py-0.5 rounded">{cat.roles.length} roles</span>
+          </div>
+
+          <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {cat.roles.map((role) => (
+              <div class="rounded-xl border border-border bg-white p-5 transition-all duration-200 hover:border-primary/20 hover:shadow-sm hover:shadow-primary/5">
+                <div class={`inline-flex items-center justify-center w-8 h-8 rounded-lg ${cat.color} text-xs font-bold mb-3`}>
+                  {role.title.charAt(0)}
+                </div>
+                <h4 class="text-sm font-semibold text-heading mb-1.5">{role.title}</h4>
+                <p class="text-xs text-body leading-relaxed">{role.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 text-center">
+      <p class="text-sm text-body mb-4">Not sure which roles fit your business?</p>
+      <a
+        href="#contact"
+        class="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-primary-dark"
+      >
+        Book a free discovery call
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 12L10 8L6 4"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

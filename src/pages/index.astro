@@ -2,27 +2,26 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
-import TrustBar from "../components/TrustBar.astro";
-import Services from "../components/Services.astro";
-import Portfolio from "../components/Portfolio.astro";
-import Blog from "../components/Blog.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import Roles from "../components/Roles.astro";
+import Pricing from "../components/Pricing.astro";
 import About from "../components/About.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
-import ChatWidget from "../components/ChatWidget.astro";
 ---
 
-<Layout title="Scaling SMB · Custom Websites That Scale Your Business" description="Scaling SMB builds fast, modern, scalable websites and digital systems that help SMBs grow online. Trusted delivery from Macau and the APAC region.">
+<Layout
+  title="Scaling SMB · Dedicated AI Employees, Flat Monthly Fee"
+  description="Hire dedicated AI employees for your business operations, marketing, and sales. No per-task charges, no setup fees. $997/role/month."
+>
   <Header />
   <main>
     <Hero />
-    <TrustBar />
-    <Services />
-    <Portfolio />
-    <Blog />
+    <HowItWorks />
+    <Roles />
+    <Pricing />
     <About />
     <Contact />
   </main>
   <Footer />
-  <ChatWidget />
 </Layout>

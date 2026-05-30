@@ -1,206 +1,78 @@
 ---
-// Contact section with Netlify Forms
 ---
 
-<section id="contact" class="py-16 sm:py-20 lg:py-32">
+<section id="contact" class="py-20 sm:py-28">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="grid gap-12 lg:grid-cols-5 lg:gap-16">
-      <!-- Contact info panel -->
-      <div class="lg:col-span-2" data-reveal>
-        <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-4">Let's Work Together</p>
-        <h2 class="text-4xl sm:text-5xl font-black tracking-tight mb-6">
-          Let's Build Something <span class="text-primary">Great</span>
-        </h2>
-        <p class="text-muted leading-relaxed mb-8">
-          Have a project in mind or need help growing your business online? We'd love to hear from you.
-        </p>
+    <div class="mx-auto max-w-2xl text-center mb-12">
+      <p class="text-xs font-semibold text-primary tracking-widest uppercase mb-4">Get Started</p>
+      <h2 class="text-3xl sm:text-4xl font-light tracking-tight text-heading mb-4">
+        Ready to <span class="font-medium">hire your AI team?</span>
+      </h2>
+      <p class="text-body text-base leading-relaxed">
+        Book a free discovery call. We'll identify the right roles for your business and get you set up.
+      </p>
+    </div>
 
-        <div class="space-y-6">
-          <!-- Email -->
-          <div class="flex items-start gap-4">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs font-semibold text-muted uppercase tracking-wider">Email</p>
-              <a href="mailto:evan@scalingsmb.com" class="font-medium hover:text-primary transition-colors">evan@scalingsmb.com</a>
-            </div>
+    <div class="mx-auto max-w-lg">
+      <form
+        action="https://formspree.io/f/your-form-id"
+        method="POST"
+        class="space-y-5"
+      >
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="name" class="block text-sm font-medium text-heading mb-1.5">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-heading placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+              placeholder="Your name"
+            />
           </div>
-
-          <!-- Phone -->
-          <div class="flex items-start gap-4">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs font-semibold text-muted uppercase tracking-wider">Phone</p>
-              <a href="tel:+85362750705" class="font-medium hover:text-primary transition-colors">+853 6275 0705</a>
-            </div>
-          </div>
-
-          <!-- Location -->
-          <div class="flex items-start gap-4">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs font-semibold text-muted uppercase tracking-wider">Location</p>
-              <p class="font-medium">Macau · APAC (Remote Worldwide)</p>
-            </div>
-          </div>
-
-          <!-- Hours -->
-          <div class="flex items-start gap-4">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs font-semibold text-muted uppercase tracking-wider">Business Hours</p>
-              <p class="font-medium">Mon – Fri, 9:00 AM – 6:00 PM (HKT)</p>
-            </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-heading mb-1.5">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-heading placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+              placeholder="you@company.com"
+            />
           </div>
         </div>
-
-        <!-- WhatsApp button -->
-        <a
-          href="https://wa.me/85362750705"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="mt-8 inline-flex items-center gap-3 rounded-xl border-2 border-green-500/30 bg-green-50 px-6 py-4 text-sm font-semibold text-green-700 transition-all hover:bg-green-100 hover:border-green-500/50"
+        <div>
+          <label for="message" class="block text-sm font-medium text-heading mb-1.5">What roles interest you?</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="3"
+            class="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-heading placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none"
+            placeholder="Tell us about your business and what you need..."
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="w-full rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-primary-dark active:scale-[0.98] shadow-lg shadow-primary/25"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-          </svg>
-          Message us on WhatsApp
-        </a>
-      </div>
+          Book a discovery call
+        </button>
+      </form>
 
-      <!-- Form panel -->
-      <div class="lg:col-span-3" data-reveal data-delay="100">
-        <div class="rounded-2xl border border-border bg-white p-6 sm:p-8 lg:p-10 shadow-sm">
-          <h3 class="text-xl sm:text-2xl font-bold mb-2">Send us a message</h3>
-          <p class="text-muted text-sm mb-6 sm:mb-8">Fill in the form below and we'll get back to you within 24 hours.</p>
-
-          <form
-            name="enquiries"
-            method="POST"
-            netlify
-            data-netlify="true"
-            action="/thank-you"
-            class="space-y-6"
-            onsubmit="sessionStorage.setItem('thankYouName', document.getElementById('name').value)"
-          >
-            <input type="hidden" name="form-name" value="enquiries" />
-
-            <div class="grid gap-6 sm:grid-cols-2">
-              <div>
-                <label for="name" class="block text-sm font-medium text-dark mb-2">Full Name *</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  placeholder="Your name"
-                  class="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm transition-all placeholder:text-muted/50 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
-                />
-              </div>
-              <div>
-                <label for="email" class="block text-sm font-medium text-dark mb-2">Email *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="your@email.com"
-                  class="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm transition-all placeholder:text-muted/50 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label for="company" class="block text-sm font-medium text-dark mb-2">Company</label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                placeholder="Your business name"
-                class="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm transition-all placeholder:text-muted/50 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
-              />
-            </div>
-
-            <div>
-              <label for="service" class="block text-sm font-medium text-dark mb-2">Service Interested In</label>
-              <select
-                id="service"
-                name="service"
-                class="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
-              >
-                <option value="">Select a service...</option>
-                <option value="web-development">Web Development</option>
-                <option value="wechat-mini-program">WeChat Mini Program</option>
-                <option value="local-seo">Local SEO</option>
-                <option value="ecommerce">Ecommerce</option>
-                <option value="api-integration">API Integration</option>
-                <option value="ai-automations">AI Automations</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="message" class="block text-sm font-medium text-dark mb-2">Message *</label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows="5"
-                placeholder="Tell us about your project..."
-                class="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm transition-all placeholder:text-muted/50 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10 resize-y"
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full rounded-xl bg-primary px-8 py-4 text-sm font-semibold text-white transition-all hover:bg-primary-dark active:scale-[0.98] shadow-lg shadow-primary/25"
-            >
-              Send Message
-            </button>
-          </form>
+      <div class="mt-10 pt-8 border-t border-border text-center">
+        <p class="text-xs text-body mb-3">Or reach us directly</p>
+        <div class="flex items-center justify-center gap-6 text-sm">
+          <a href="mailto:evan@scalingsmb.com" class="text-primary hover:text-primary-dark transition-colors font-medium">
+            evan@scalingsmb.com
+          </a>
+          <span class="text-muted">·</span>
+          <a href="tel:+85362750705" class="text-primary hover:text-primary-dark transition-colors font-medium">
+            +853 6275 0705
+          </a>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<script>
-  // Show success message if form was submitted
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('form') === 'sent') {
-    const form = document.querySelector('form[name="enquiries"]');
-    if (form) {
-      form.innerHTML = `
-        <div class="text-center py-12">
-          <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-2">Thank you!</h3>
-          <p class="text-muted">Your message was sent successfully. We'll get back to you within 24 hours.</p>
-        </div>
-      `;
-    }
-    // Clean URL
-    window.history.replaceState({}, '', window.location.pathname);
-  }
-</script>
