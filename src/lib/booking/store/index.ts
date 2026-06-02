@@ -8,6 +8,9 @@ import type { BookingStore } from './types';
 export type BookingEnv = {
 	// BOOKINGS_KV?: KVNamespace;
 	// BOOKINGS_D1?: D1Database;
+	COMPOSIO_API_KEY?: string;
+	COMPOSIO_GCAL_ID?: string;
+	COMPOSIO_GMAIL_ID?: string;
 };
 
 export function getBookingStore(_env?: BookingEnv): BookingStore {

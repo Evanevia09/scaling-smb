@@ -53,6 +53,7 @@ export type BookingRecord = CreateBookingRequest & {
 
 export type CreateBookingResponse = {
 	booking: BookingRecord;
+	meetLink?: string;
 };
 
 export type ApiErrorBody = {

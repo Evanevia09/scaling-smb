@@ -5,6 +5,7 @@ import { BOOKING_API_PREFIX, errorResponse, handleOptions, jsonResponse } from '
 import { getBookingStore, type BookingEnv } from './store';
 import type { BookingStore } from './store/types';
 import { validateCreateBookingBody } from './validate';
+import { createBookingEvent } from './composio';
 
 export type BookingHandlerContext = {
 	store: BookingStore;
@@ -82,7 +83,21 @@ export async function handleBookingRequest(
 
 			try {
 				const booking = await store.createBooking(validation.data);
-				return jsonResponse({ booking }, 201);
+
+				// Fire-and-forget Composio: create Calendar event + send confirmation email
+				// We do NOT block the response on this — the booking is already stored.
+				let meetLink: string | undefined;
+				if (ctx?.env) {
+					try {
+						const result = await createBookingEvent(ctx.env, validation.data);
+						meetLink = result.meetLink ?? undefined;
+					} catch (compErr) {
+						console.error('[booking] Composio integration failed:', compErr);
+						// Non-blocking — booking is stored regardless
+					}
+				}
+
+				return jsonResponse({ booking, meetLink }, 201);
 			} catch (err) {
 				if (err instanceof Error && err.message === 'TIME_SLOT_TAKEN') {
 					return errorResponse('That time slot was just booked', 409, 'SLOT_TAKEN');
