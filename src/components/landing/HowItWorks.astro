@@ -2,49 +2,60 @@
 import { howItWorksSection, processSteps } from '../../content/site';
 
 const stepIcons = [
-	// Strategy call
 	`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" stroke-linecap="round"/></svg>`,
-	// Build & launch
 	`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="m3 17 6-6 4 4 8-10 4 4" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 7h4v4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-	// Measure & improve
 	`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-	// Scale what works
 	`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3v18M3 12h4m10 0h4M5.6 5.6l2.8 2.8m7.2 7.2 2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8" stroke-linecap="round"/></svg>`,
 ] as const;
 ---
 
-<section class="landing-section landing-process" id="how-it-works" aria-labelledby="process-title">
-	<div class="landing-wrap">
+<section
+	class="landing-section landing-process"
+	id="how-it-works"
+	aria-labelledby="process-title"
+	data-process-section
+>
+	<div class="landing-wrap landing-process__intro">
 		<header class="landing-head landing-head--center" data-reveal>
 			<p class="eyebrow">{howItWorksSection.eyebrow}</p>
 			<h2 id="process-title" class="landing-head__title">{howItWorksSection.title}</h2>
 		</header>
+	</div>
 
-		<div class="process-timeline" data-process-timeline>
-			<div class="process-timeline__track" aria-hidden="true">
-				<div class="process-timeline__line"></div>
-				<div class="process-timeline__progress"></div>
+	<div
+		class="process-scroll-track"
+		data-process-scroll-track
+		style={`--process-steps: ${processSteps.length}`}
+	>
+		<div class="process-scroll-sticky" data-process-scroll-sticky>
+			<div class="landing-wrap process-scroll-sticky__inner">
+				<div class="process-timeline" data-process-timeline>
+					<div class="process-timeline__track" aria-hidden="true">
+						<div class="process-timeline__line"></div>
+						<div class="process-timeline__progress"></div>
+					</div>
+
+					<ol class="process-timeline__steps">
+						{
+							processSteps.map((step, i) => (
+								<li class="process-timeline__step" style={`--step-index: ${i}`}>
+									<div class="process-timeline__marker">
+										<span class="process-timeline__ring"></span>
+										<span class="process-timeline__dot">
+											<span class="process-timeline__icon" set:html={stepIcons[i]} />
+										</span>
+										<span class="process-timeline__number">{step.number}</span>
+									</div>
+									<div class="process-timeline__card" data-step={step.number}>
+										<h3 class="process-timeline__title">{step.title}</h3>
+										<p class="process-timeline__desc">{step.description}</p>
+									</div>
+								</li>
+							))
+						}
+					</ol>
+				</div>
 			</div>
-
-			<ol class="process-timeline__steps">
-				{
-					processSteps.map((step, i) => (
-						<li class="process-timeline__step" style={`--step-index: ${i}`}>
-							<div class="process-timeline__marker">
-								<span class="process-timeline__ring"></span>
-								<span class="process-timeline__dot">
-									<span class="process-timeline__icon" set:html={stepIcons[i]} />
-								</span>
-								<span class="process-timeline__number">{step.number}</span>
-							</div>
-							<div class="process-timeline__card" data-step={step.number}>
-								<h3 class="process-timeline__title">{step.title}</h3>
-								<p class="process-timeline__desc">{step.description}</p>
-							</div>
-						</li>
-					))
-				}
-			</ol>
 		</div>
 	</div>
 </section>

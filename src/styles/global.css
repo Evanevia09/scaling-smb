@@ -50,8 +50,23 @@ body {
 	overflow-x: clip;
 }
 
+@media (min-width: 900px) {
+	/* clip on body breaks position:sticky for scrollytelling sections */
+	body {
+		overflow-x: visible;
+	}
+}
+
 main.landing {
 	overflow-x: clip;
+}
+
+/* Sticky scroll-pinning (process section) requires visible overflow on ancestors */
+@media (min-width: 900px) {
+	main.landing {
+		overflow-x: visible;
+		overflow-y: visible;
+	}
 }
 
 html.site-header-nav-open,
@@ -615,7 +630,7 @@ main.landing {
 /* Process — animated timeline */
 .landing-process {
 	background: linear-gradient(180deg, #fff 0%, #f8faff 50%, #fff 100%);
-	overflow: hidden;
+	overflow: visible;
 }
 
 .process-timeline {
@@ -665,10 +680,6 @@ main.landing {
 	transition: height 1.4s var(--ease-out);
 }
 
-.process-timeline.is-active .process-timeline__progress {
-	height: 100%;
-}
-
 .process-timeline__steps {
 	list-style: none;
 	margin: 0;
@@ -683,18 +694,18 @@ main.landing {
 .process-timeline__step {
 	display: grid;
 	grid-template-columns: auto minmax(0, 1fr);
-	gap: 1.25rem;
+	gap: 1rem;
 	align-items: start;
 	opacity: 0;
-	transform: translateX(-12px);
+	transform: translateY(16px);
 	transition:
-		opacity 0.65s var(--ease-out),
-		transform 0.65s var(--ease-out);
+		opacity 0.55s var(--ease-out),
+		transform 0.55s var(--ease-out);
 }
 
 .process-timeline__step.is-visible {
 	opacity: 1;
-	transform: translateX(0);
+	transform: translateY(0);
 }
 
 .process-timeline__marker {
@@ -719,7 +730,7 @@ main.landing {
 	opacity: 0;
 }
 
-.process-timeline.is-active .process-timeline__step.is-visible .process-timeline__ring {
+.process-timeline.is-active .process-timeline__step.is-reached .process-timeline__ring {
 	animation: timeline-pulse 2.2s var(--ease-out) infinite;
 	animation-delay: calc(var(--step-index, 0) * 0.35s);
 }
@@ -734,24 +745,27 @@ main.landing {
 	height: var(--timeline-dot-size);
 	border-radius: 50%;
 	background: #fff;
-	border: 2px solid var(--accent);
-	color: var(--accent);
-	box-shadow:
-		0 0 0 4px rgba(0, 85, 255, 0.08),
-		0 8px 20px rgba(0, 85, 255, 0.18);
+	border: 2px solid rgba(15, 23, 42, 0.14);
+	color: var(--text-muted);
+	box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
 	transition:
 		transform 0.35s var(--ease-out),
 		box-shadow 0.35s var(--ease-out),
-		background 0.35s ease,
-		color 0.35s ease;
+		background 0.4s var(--ease-out),
+		border-color 0.4s var(--ease-out),
+		color 0.4s var(--ease-out);
 }
 
-.process-timeline__step.is-visible .process-timeline__dot {
+.process-timeline__step.is-reached .process-timeline__dot {
 	background: var(--accent);
+	border-color: var(--accent);
 	color: #fff;
+	box-shadow:
+		0 0 0 4px rgba(0, 85, 255, 0.08),
+		0 8px 20px rgba(0, 85, 255, 0.18);
 }
 
-.process-timeline__step:hover .process-timeline__dot {
+.process-timeline__step.is-reached:hover .process-timeline__dot {
 	transform: scale(1.08);
 	box-shadow:
 		0 0 0 6px rgba(0, 85, 255, 0.12),
@@ -769,10 +783,7 @@ main.landing {
 }
 
 .process-timeline__number {
-	font-size: 0.65rem;
-	font-weight: 800;
-	letter-spacing: 0.08em;
-	color: var(--accent-strong);
+	display: none;
 }
 
 .process-timeline__card {
@@ -807,25 +818,144 @@ main.landing {
 	line-height: 1.55;
 }
 
-/* Horizontal timeline (desktop) */
-@media (min-width: 900px) {
-	.process-timeline {
-		--timeline-dot-size: 3.25rem;
-		padding: 1.5rem 0 1rem;
+/* Vertical timeline — mobile / tablet */
+@media (max-width: 899.98px) {
+	.landing-process {
+		overflow-x: clip;
 	}
 
-	/* Rail spans column centers; line is vertically centered in the dot row */
+	.process-scroll-track {
+		height: auto;
+	}
+
+	.process-scroll-sticky {
+		position: relative;
+		top: auto;
+		height: auto;
+	}
+
+	.process-scroll-sticky__inner {
+		height: auto;
+		max-height: none;
+		padding-top: 0;
+	}
+
+	.process-timeline {
+		--timeline-dot-size: 2.5rem;
+		padding: 0.25rem 0 0.5rem;
+	}
+
 	.process-timeline__track {
+		left: calc(var(--timeline-dot-size) / 2 - 1.5px);
+		top: 0;
+		bottom: auto;
+		/* top + height set by JS between first and last dot centers */
+	}
+
+	.process-timeline__progress {
+		transition: height 0.1s linear;
+		will-change: height;
+	}
+
+	.process-timeline__steps {
+		gap: 1.5rem;
+	}
+
+	.process-timeline__marker {
+		gap: 0;
+	}
+
+	.process-timeline__card {
+		padding: 1.1rem 1.15rem;
+	}
+
+	.process-timeline__title {
+		font-size: 1.05rem;
+	}
+
+	.process-timeline__desc {
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+}
+
+@media (max-width: 399.98px) {
+	.process-timeline__step {
+		gap: 0.85rem;
+	}
+
+	.process-timeline__steps {
+		gap: 1.35rem;
+	}
+}
+
+/* Desktop scrollytelling: tall scroll track + sticky 100vh container */
+@media (min-width: 900px) {
+	.landing-process {
+		padding-bottom: 0;
+		overflow: visible;
+	}
+
+	.landing-process__intro {
+		padding-bottom: clamp(1rem, 2.5vw, 1.75rem);
+	}
+
+	.landing-process__intro .landing-head {
+		margin-bottom: 0;
+	}
+
+	/* Outer scroll track — one viewport height per step (e.g. 400vh for 4 steps) */
+	.process-scroll-track {
+		position: relative;
+		height: calc(var(--process-steps, 4) * 100vh);
+		overflow: visible;
+	}
+
+	/* Inner sticky container — locks to viewport while scrolling the track */
+	.process-scroll-sticky {
+		position: sticky;
+		top: 0;
+		z-index: 2;
+		height: 100vh;
+		width: 100%;
+		overflow: visible;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+	}
+
+	.process-scroll-sticky__inner {
+		width: 100%;
+		height: 100%;
+		max-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-top: var(--header-height);
+		padding-bottom: clamp(0.75rem, 2vh, 1.25rem);
+		box-sizing: border-box;
+	}
+
+	.process-timeline--scrolly {
+		--timeline-dot-size: 3.25rem;
+		--timeline-stagger: clamp(1rem, 2vw, 1.5rem);
+		width: 100%;
+		padding: clamp(0.5rem, 2vw, 1.25rem) 0;
+	}
+
+	.process-timeline--scrolly .process-timeline__track {
 		left: 12.5%;
 		right: 12.5%;
-		top: 1.5rem;
+		top: 50%;
 		bottom: auto;
 		width: auto;
 		height: var(--timeline-dot-size);
+		transform: translateY(-50%);
 	}
 
-	.process-timeline__line,
-	.process-timeline__progress {
+	.process-timeline--scrolly .process-timeline__line,
+	.process-timeline--scrolly .process-timeline__progress {
 		top: 50%;
 		left: 0;
 		width: 100%;
@@ -833,12 +963,8 @@ main.landing {
 		transform: translateY(-50%);
 	}
 
-	.process-timeline__line {
-		height: 3px;
-	}
-
-	.process-timeline__progress {
-		width: 0;
+	.process-timeline--scrolly .process-timeline__progress {
+		width: calc(var(--process-progress, 0) * 100%);
 		height: 3px;
 		background: linear-gradient(
 			90deg,
@@ -847,43 +973,72 @@ main.landing {
 			var(--accent-strong) 100%
 		);
 		background-size: 200% 100%;
-		transition: width 1.6s var(--ease-out);
+		transition: none;
+		will-change: width;
 	}
 
-	.process-timeline.is-active .process-timeline__progress {
-		width: 100%;
-		height: 3px;
-	}
-
-	.process-timeline__steps {
+	.process-timeline--scrolly .process-timeline__steps {
 		display: grid;
 		grid-template-columns: repeat(4, minmax(0, 1fr));
-		gap: 1.5rem 1.25rem;
-		padding-top: 0;
+		gap: 1rem 1.25rem;
+		align-items: stretch;
+		min-height: clamp(15rem, 38vh, 22rem);
 	}
 
-	.process-timeline__step {
+	.process-timeline--scrolly .process-timeline__step {
+		--step-progress: 0;
+		position: relative;
+		z-index: calc(1 + var(--step-index, 0));
+		display: grid;
 		grid-template-columns: 1fr;
-		grid-template-rows: auto 1fr;
-		gap: 1.25rem;
+		grid-template-rows: 1fr auto 1fr;
+		gap: 0;
 		justify-items: center;
+		align-items: center;
 		text-align: center;
-		opacity: 0;
-		transform: translateY(20px);
+		opacity: var(--step-progress, 0);
+		transform: translateY(calc((1 - var(--step-progress, 0)) * 28px))
+			scale(calc(0.94 + var(--step-progress, 0) * 0.06));
+		pointer-events: none;
+		transition: none;
 	}
 
-	.process-timeline__step.is-visible {
-		transform: translateY(0);
+	.process-timeline--scrolly .process-timeline__step.is-visible {
+		pointer-events: auto;
 	}
 
-	.process-timeline__marker {
+	.process-timeline--scrolly .process-timeline__step.is-reached {
+		opacity: 0.55;
+		transform: translateY(0) scale(0.97);
+	}
+
+	.process-timeline--scrolly .process-timeline__step.is-current {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+
+	.process-timeline--scrolly .process-timeline__marker {
+		grid-row: 2;
+		grid-column: 1;
 		width: var(--timeline-dot-size);
 		min-height: var(--timeline-dot-size);
-		justify-content: flex-start;
+		justify-content: center;
+		align-self: center;
 	}
 
-	/* Step number lives in the card area on desktop so the rail aligns with dots only */
-	.process-timeline__number {
+	.process-timeline--scrolly .process-timeline__step:nth-child(odd) .process-timeline__card {
+		grid-row: 3;
+		align-self: start;
+		margin-top: var(--timeline-stagger);
+	}
+
+	.process-timeline--scrolly .process-timeline__step:nth-child(even) .process-timeline__card {
+		grid-row: 1;
+		align-self: end;
+		margin-bottom: var(--timeline-stagger);
+	}
+
+	.process-timeline--scrolly .process-timeline__number {
 		position: absolute;
 		width: 1px;
 		height: 1px;
@@ -895,12 +1050,23 @@ main.landing {
 		border: 0;
 	}
 
-	.process-timeline__card {
+	.process-timeline--scrolly .process-timeline__card {
+		grid-column: 1;
 		width: 100%;
 		text-align: left;
+		box-shadow: var(--shadow-sm);
 	}
 
-	.process-timeline__card::before {
+	.process-timeline--scrolly .process-timeline__step.is-current .process-timeline__card {
+		box-shadow: var(--shadow-md);
+		border-color: rgba(0, 85, 255, 0.22);
+	}
+
+	.process-timeline--scrolly .process-timeline__step:nth-child(even):hover .process-timeline__card {
+		transform: translateY(4px);
+	}
+
+	.process-timeline--scrolly .process-timeline__card::before {
 		content: attr(data-step);
 		display: block;
 		font-size: 0.72rem;
@@ -908,6 +1074,13 @@ main.landing {
 		letter-spacing: 0.08em;
 		color: var(--accent-strong);
 		margin-bottom: 0.35rem;
+	}
+
+	.process-timeline--scrolly .process-timeline__step.is-reached .process-timeline__dot,
+	.process-timeline--scrolly .process-timeline__step.is-current .process-timeline__dot {
+		background: var(--accent);
+		border-color: var(--accent);
+		color: #fff;
 	}
 }
 
@@ -942,9 +1115,38 @@ main.landing {
 		transition: none;
 	}
 
-	.process-timeline.is-active .process-timeline__progress {
-		height: 100%;
-		width: 100%;
+	@media (max-width: 899.98px) {
+		.process-timeline.is-active .process-timeline__progress {
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 900px) {
+		.process-scroll-track {
+			height: auto;
+		}
+
+		.process-scroll-sticky {
+			position: relative;
+			top: auto;
+			height: auto;
+		}
+
+		.process-scroll-sticky__inner {
+			padding-top: 0;
+			height: auto;
+			max-height: none;
+		}
+
+		.process-timeline--scrolly .process-timeline__progress {
+			width: 100%;
+			height: 3px;
+		}
+
+		.process-timeline--scrolly .process-timeline__step {
+			opacity: 1;
+			transform: none;
+		}
 	}
 
 	.process-timeline__step {
@@ -953,12 +1155,18 @@ main.landing {
 		transition: none;
 	}
 
-	.process-timeline.is-active .process-timeline__step .process-timeline__ring {
+	.process-timeline.is-active .process-timeline__step.is-reached .process-timeline__ring {
 		animation: none;
 	}
 
+	.process-timeline__step.is-reached .process-timeline__dot {
+		background: var(--accent);
+		border-color: var(--accent);
+		color: #fff;
+	}
+
 	.process-timeline__step:hover .process-timeline__card,
-	.process-timeline__step:hover .process-timeline__dot {
+	.process-timeline__step.is-reached:hover .process-timeline__dot {
 		transform: none;
 	}
 }
@@ -1235,193 +1443,190 @@ main.landing {
 	min-height: 100%;
 }
 
+.landing-cta-band__geo-fill {
+	pointer-events: none;
+}
+
+.landing-cta-band__geo-group path,
 .landing-cta-band__geo-group line,
-.landing-cta-band__geo-group rect,
-.landing-cta-band__geo-group polygon,
 .landing-cta-band__geo-group circle {
-	fill: none;
 	vector-effect: non-scaling-stroke;
-}
-
-.landing-cta-band__geo-group--lines line {
-	stroke: rgba(255, 255, 255, 0.22);
-	stroke-width: 1;
-}
-
-.landing-cta-band__geo-group--grid line {
-	stroke: rgba(255, 255, 255, 0.1);
-	stroke-width: 1;
-}
-
-.landing-cta-band__geo-group--shapes rect,
-.landing-cta-band__geo-group--shapes polygon,
-.landing-cta-band__geo-group--shapes circle {
-	stroke: rgba(255, 255, 255, 0.18);
-	stroke-width: 1.25;
-}
-
-.landing-cta-band__geo-group--accent line,
-.landing-cta-band__geo-group--accent rect {
-	stroke: rgba(200, 225, 255, 0.35);
-	stroke-width: 1.5;
-}
-
-.landing-cta-band__geo-group--lines {
-	transform-origin: 50% 50%;
-	animation: cta-geo-drift-lines 24s ease-in-out infinite;
-}
-
-.landing-cta-band__geo-group--grid {
-	transform-origin: 50% 50%;
-	animation: cta-geo-drift-grid 32s linear infinite;
-}
-
-.landing-cta-band__geo-group--shapes {
-	transform-origin: 50% 50%;
-	animation: cta-geo-drift-shapes 20s ease-in-out infinite;
-}
-
-.landing-cta-band__geo-group--accent {
-	transform-origin: 720px 160px;
-	animation: cta-geo-drift-accent 16s ease-in-out infinite;
-}
-
-.landing-cta-band__geo-group line,
-.landing-cta-band__geo-group rect,
-.landing-cta-band__geo-group polygon,
-.landing-cta-band__geo-group circle {
 	transition:
 		stroke 0.35s var(--ease-out),
 		stroke-width 0.35s var(--ease-out),
 		opacity 0.35s var(--ease-out);
 }
 
+.landing-cta-band__geo-group--arcs path {
+	fill: none;
+	stroke: rgba(255, 255, 255, 0.14);
+	stroke-width: 1.25;
+}
+
+.landing-cta-band__geo-group--hex path {
+	fill: none;
+	stroke: rgba(255, 255, 255, 0.2);
+	stroke-width: 1.25;
+}
+
+.landing-cta-band__geo-group--mesh line {
+	stroke: rgba(255, 255, 255, 0.16);
+	stroke-width: 1;
+}
+
+.landing-cta-band__geo-group--mesh circle {
+	fill: rgba(255, 255, 255, 0.35);
+	stroke: rgba(255, 255, 255, 0.5);
+	stroke-width: 1;
+}
+
+.landing-cta-band__geo-group--pulse circle {
+	fill: none;
+	stroke: rgba(200, 225, 255, 0.22);
+	stroke-width: 1;
+}
+
+.landing-cta-band__geo-group--arcs {
+	transform-origin: 50% 50%;
+	animation: cta-geo-drift-arcs 26s ease-in-out infinite;
+}
+
+.landing-cta-band__geo-group--hex {
+	transform-origin: 50% 50%;
+	animation: cta-geo-drift-hex 22s ease-in-out infinite;
+}
+
+.landing-cta-band__geo-group--mesh {
+	transform-origin: 50% 50%;
+	animation: cta-geo-drift-mesh 18s ease-in-out infinite;
+}
+
+.landing-cta-band__geo-group--pulse {
+	transform-origin: 720px 160px;
+	animation: cta-geo-drift-pulse 14s ease-in-out infinite;
+}
+
 @media (hover: hover) {
-	.landing-cta-band:hover .landing-cta-band__geo-group--lines {
-		animation: cta-geo-drift-lines-hover 9s ease-in-out infinite;
+	.landing-cta-band:hover .landing-cta-band__geo-group--arcs {
+		animation: cta-geo-drift-arcs-hover 10s ease-in-out infinite;
 	}
 
-	.landing-cta-band:hover .landing-cta-band__geo-group--grid {
-		animation: cta-geo-drift-grid-hover 11s linear infinite;
+	.landing-cta-band:hover .landing-cta-band__geo-group--hex {
+		animation: cta-geo-drift-hex-hover 8s ease-in-out infinite;
 	}
 
-	.landing-cta-band:hover .landing-cta-band__geo-group--shapes {
-		animation: cta-geo-drift-shapes-hover 8s ease-in-out infinite;
+	.landing-cta-band:hover .landing-cta-band__geo-group--mesh {
+		animation: cta-geo-drift-mesh-hover 7s ease-in-out infinite;
 	}
 
-	.landing-cta-band:hover .landing-cta-band__geo-group--accent {
-		animation: cta-geo-drift-accent-hover 6s ease-in-out infinite;
+	.landing-cta-band:hover .landing-cta-band__geo-group--pulse {
+		animation: cta-geo-drift-pulse-hover 5s ease-in-out infinite;
 	}
 
-	.landing-cta-band:hover .landing-cta-band__geo-group--lines line {
+	.landing-cta-band:hover .landing-cta-band__geo-group--arcs path {
+		stroke: rgba(255, 255, 255, 0.28);
+	}
+
+	.landing-cta-band:hover .landing-cta-band__geo-group--hex path {
 		stroke: rgba(255, 255, 255, 0.38);
-		stroke-width: 1.25;
-	}
-
-	.landing-cta-band:hover .landing-cta-band__geo-group--grid line {
-		stroke: rgba(255, 255, 255, 0.18);
-	}
-
-	.landing-cta-band:hover .landing-cta-band__geo-group--shapes rect,
-	.landing-cta-band:hover .landing-cta-band__geo-group--shapes polygon,
-	.landing-cta-band:hover .landing-cta-band__geo-group--shapes circle {
-		stroke: rgba(255, 255, 255, 0.32);
 		stroke-width: 1.5;
 	}
 
-	.landing-cta-band:hover .landing-cta-band__geo-group--accent line,
-	.landing-cta-band:hover .landing-cta-band__geo-group--accent rect {
-		stroke: rgba(230, 242, 255, 0.65);
-		stroke-width: 2;
+	.landing-cta-band:hover .landing-cta-band__geo-group--mesh line {
+		stroke: rgba(255, 255, 255, 0.28);
+	}
+
+	.landing-cta-band:hover .landing-cta-band__geo-group--mesh circle {
+		fill: rgba(255, 255, 255, 0.55);
+	}
+
+	.landing-cta-band:hover .landing-cta-band__geo-group--pulse circle {
+		stroke: rgba(230, 242, 255, 0.45);
+		stroke-width: 1.25;
 	}
 }
 
-@keyframes cta-geo-drift-lines {
+@keyframes cta-geo-drift-arcs {
+	0%,
+	100% {
+		transform: translate(0, 0) scale(1);
+	}
+	50% {
+		transform: translate(2%, -1.5%) scale(1.03);
+	}
+}
+
+@keyframes cta-geo-drift-hex {
 	0%,
 	100% {
 		transform: translate(0, 0) rotate(0deg);
 	}
 	50% {
-		transform: translate(3%, -2%) rotate(1.5deg);
+		transform: translate(-2%, 2%) rotate(-2deg);
 	}
 }
 
-@keyframes cta-geo-drift-grid {
-	0% {
+@keyframes cta-geo-drift-mesh {
+	0%,
+	100% {
 		transform: translate(0, 0);
-	}
-	100% {
-		/* One grid column (180 in viewBox) — seamless loop */
-		transform: translate(-180px, 0);
-	}
-}
-
-@keyframes cta-geo-drift-shapes {
-	0%,
-	100% {
-		transform: translate(0, 0) scale(1);
-	}
-	33% {
-		transform: translate(-4%, 3%) scale(1.04);
-	}
-	66% {
-		transform: translate(5%, -2%) scale(0.97);
-	}
-}
-
-@keyframes cta-geo-drift-accent {
-	0%,
-	100% {
-		transform: rotate(0deg) scale(1);
-		opacity: 0.85;
-	}
-	50% {
-		transform: rotate(90deg) scale(1.08);
-		opacity: 1;
-	}
-}
-
-@keyframes cta-geo-drift-lines-hover {
-	0%,
-	100% {
-		transform: translate(0, 0) rotate(0deg);
-	}
-	50% {
-		transform: translate(6%, -4%) rotate(3deg);
-	}
-}
-
-@keyframes cta-geo-drift-grid-hover {
-	0% {
-		transform: translate(0, 0);
-	}
-	100% {
-		transform: translate(-360px, 0);
-	}
-}
-
-@keyframes cta-geo-drift-shapes-hover {
-	0%,
-	100% {
-		transform: translate(0, 0) scale(1);
-	}
-	33% {
-		transform: translate(-8%, 5%) scale(1.08);
-	}
-	66% {
-		transform: translate(10%, -4%) scale(0.94);
-	}
-}
-
-@keyframes cta-geo-drift-accent-hover {
-	0%,
-	100% {
-		transform: rotate(0deg) scale(1);
 		opacity: 0.9;
 	}
 	50% {
-		transform: rotate(180deg) scale(1.14);
+		transform: translate(3%, -2%);
 		opacity: 1;
+	}
+}
+
+@keyframes cta-geo-drift-pulse {
+	0%,
+	100% {
+		transform: scale(1);
+		opacity: 0.75;
+	}
+	50% {
+		transform: scale(1.06);
+		opacity: 1;
+	}
+}
+
+@keyframes cta-geo-drift-arcs-hover {
+	0%,
+	100% {
+		transform: translate(0, 0) scale(1);
+	}
+	50% {
+		transform: translate(4%, -3%) scale(1.06);
+	}
+}
+
+@keyframes cta-geo-drift-hex-hover {
+	0%,
+	100% {
+		transform: translate(0, 0) rotate(0deg);
+	}
+	50% {
+		transform: translate(-4%, 3%) rotate(-4deg);
+	}
+}
+
+@keyframes cta-geo-drift-mesh-hover {
+	0%,
+	100% {
+		transform: translate(0, 0);
+	}
+	50% {
+		transform: translate(6%, -4%);
+	}
+}
+
+@keyframes cta-geo-drift-pulse-hover {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.12);
 	}
 }
 
