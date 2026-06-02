@@ -1,5 +1,6 @@
 ---
 import BlogLayout from '../../../layouts/BlogLayout.astro';
+import JsonLd from '../../../components/seo/JsonLd.astro';
 import BlogPostList from '../../../components/blog/BlogPostList.astro';
 import {
 	filterByCategory,
@@ -8,6 +9,7 @@ import {
 	slugifyCategory,
 } from '../../../lib/blog';
 import { blogIndex } from '../../../content/site';
+import { breadcrumbJsonLd, collectionPageJsonLd } from '../../../lib/seo';
 
 export async function getStaticPaths() {
 	const posts = await getPublishedPosts();
@@ -23,9 +25,23 @@ const posts = await getPublishedPosts();
 const filtered = filterByCategory(posts, Astro.params.category!);
 const title = `${category} | Blog | Scaling SMB`;
 const description = `Articles about ${category} for local small and medium businesses. ${blogIndex.lede}`;
+const categoryPath = `/blog/category/${Astro.params.category}/`;
 ---
 
 <BlogLayout title={title} description={description} posts={posts} activeCategory={category}>
+	<JsonLd
+		data={[
+			collectionPageJsonLd({ name: title, description, path: categoryPath }, Astro.site),
+			breadcrumbJsonLd(
+				[
+					{ name: 'Home', path: '/' },
+					{ name: 'Blog', path: '/blog/' },
+					{ name: category, path: categoryPath },
+				],
+				Astro.site,
+			),
+		]}
+	/>
 	<header class="blog-category-head">
 		<p class="blog-category-head__back">
 			<a href="/blog/">← All posts</a>

@@ -17,6 +17,12 @@ type Props = {
 	activeCategory?: string;
 	activePostId?: string;
 	ogImage?: string;
+	ogTitle?: string;
+	articlePublishedTime?: string;
+	articleModifiedTime?: string;
+	prevUrl?: string;
+	nextUrl?: string;
+	noindex?: boolean;
 };
 
 const {
@@ -28,10 +34,27 @@ const {
 	activeCategory,
 	activePostId,
 	ogImage,
+	ogTitle,
+	articlePublishedTime,
+	articleModifiedTime,
+	prevUrl,
+	nextUrl,
+	noindex,
 } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage} ogType="article">
+<BaseLayout
+	title={title}
+	description={description}
+	ogImage={ogImage}
+	ogTitle={ogTitle}
+	ogType="article"
+	articlePublishedTime={articlePublishedTime}
+	articleModifiedTime={articleModifiedTime}
+	prevUrl={prevUrl}
+	nextUrl={nextUrl}
+	noindex={noindex}
+>
 	<Header />
 	<main id="main" class="blog-main">
 		<div class="blog-shell landing-wrap">

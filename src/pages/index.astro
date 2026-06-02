@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/landing/Hero.astro';
 import Services from '../components/landing/Services.astro';
@@ -10,9 +11,17 @@ import Contact from '../components/landing/Contact.astro';
 import Footer from '../components/landing/Footer.astro';
 import WhatsAppFab from '../components/WhatsAppFab.astro';
 import { seo } from '../content/site';
+import {
+	organizationJsonLd,
+	professionalServiceJsonLd,
+	webSiteJsonLd,
+} from '../lib/seo';
 ---
 
-<BaseLayout title={seo.title} description={seo.description}>
+<BaseLayout title={seo.title} description={seo.description} ogImage={seo.defaultOgImage}>
+	<JsonLd
+		data={[organizationJsonLd(Astro.site), webSiteJsonLd(Astro.site), professionalServiceJsonLd(Astro.site)]}
+	/>
 	<Header />
 	<main id="main" class="landing">
 		<Hero />

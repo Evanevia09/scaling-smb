@@ -1,9 +1,11 @@
 ---
 import BlogLayout from '../../../layouts/BlogLayout.astro';
+import JsonLd from '../../../components/seo/JsonLd.astro';
 import BlogPagination from '../../../components/blog/BlogPagination.astro';
 import BlogPostList from '../../../components/blog/BlogPostList.astro';
 import { blogIndex } from '../../../content/site';
-import { BLOG_LIST_PAGE_SIZE, getPublishedPosts, paginate } from '../../../lib/blog';
+import { BLOG_LIST_PAGE_SIZE, blogListPageHref, getPublishedPosts, paginate } from '../../../lib/blog';
+import { absoluteUrl, collectionPageJsonLd } from '../../../lib/seo';
 
 export async function getStaticPaths() {
 	const posts = await getPublishedPosts();
@@ -21,9 +23,26 @@ const { page, totalPages, posts } = Astro.props;
 const { items } = paginate(posts, page, BLOG_LIST_PAGE_SIZE);
 const title = `${blogIndex.title} — Page ${page} | Scaling SMB`;
 const description = blogIndex.description;
+const path = blogListPageHref(page);
+const prevUrl =
+	page === 2 ? absoluteUrl('/blog/', Astro.site) : absoluteUrl(blogListPageHref(page - 1), Astro.site);
+const nextUrl =
+	page < totalPages ? absoluteUrl(blogListPageHref(page + 1), Astro.site) : undefined;
 ---
 
-<BlogLayout title={title} description={description} posts={posts}>
+<BlogLayout
+	title={title}
+	description={description}
+	posts={posts}
+	prevUrl={prevUrl}
+	nextUrl={nextUrl}
+>
+	<JsonLd
+		data={collectionPageJsonLd(
+			{ name: title, description, path },
+			Astro.site,
+		)}
+	/>
 	<header class="blog-index-head">
 		<p class="eyebrow">{blogIndex.eyebrow}</p>
 		<h1 class="blog-index-head__title">{blogIndex.title}</h1>

@@ -106,13 +106,13 @@ export function blogListPageHref(page: number): string {
 	return page <= 1 ? '/blog/' : `/blog/page/${page}/`;
 }
 
-/** Category defaults — JPEGs live in src/Images/blog-featured-images/ (copied to public on build/deploy). */
+/** Category default featured images (SVG in public/images/blog/featured/). */
 const CATEGORY_FEATURED_IMAGES: Record<string, string> = {
 	'Local SEO': '/images/blog/featured/local-seo.svg',
 	Website: '/images/blog/featured/website.svg',
-	'Web Application': '/images/blog/featured/software-development.jpeg',
-	'AI Employees': '/images/blog/featured/ai-employees.jpeg',
-	'Business Growth': '/images/blog/featured/business-growth.jpeg',
+	'Web Application': '/images/blog/featured/web-application.svg',
+	'AI Employees': '/images/blog/featured/ai-employees.svg',
+	'Business Growth': '/images/blog/featured/business-growth.svg',
 };
 
 const DEFAULT_FEATURED_IMAGE = '/images/blog/featured/default.svg';

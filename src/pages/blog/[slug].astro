@@ -4,6 +4,7 @@ import BlogLayout from '../../layouts/BlogLayout.astro';
 import BlogPostCta from '../../components/blog/BlogPostCta.astro';
 import BlogFeaturedImage from '../../components/blog/BlogFeaturedImage.astro';
 import BlogShare from '../../components/blog/BlogShare.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
 import {
 	categoryHref,
 	formatDate,
@@ -12,6 +13,7 @@ import {
 	getPublishedPosts,
 	postHref,
 } from '../../lib/blog';
+import { blogPostBreadcrumbs, blogPostingJsonLd } from '../../lib/seo';
 
 export async function getStaticPaths() {
 	const entries = await getCollection('blog', ({ data }) => data.draft !== true);
@@ -37,6 +39,9 @@ const ogImage = getFeaturedImageOgUrl(entry, Astro.site);
 	sidebar="article"
 	currentPost={entry}
 	ogImage={ogImage}
+	ogTitle={title}
+	articlePublishedTime={pubDate.toISOString()}
+	articleModifiedTime={updatedDate?.toISOString()}
 >
 	<article class="blog-article">
 		<nav class="blog-article__breadcrumb" aria-label="Breadcrumb">
@@ -76,22 +81,5 @@ const ogImage = getFeaturedImageOgUrl(entry, Astro.site);
 
 		<BlogPostCta />
 	</article>
+	<JsonLd data={[blogPostingJsonLd(entry, Astro.site), blogPostBreadcrumbs(entry, Astro.site)]} />
 </BlogLayout>
-
-<script type="application/ld+json" set:html={JSON.stringify({
-	'@context': 'https://schema.org',
-	'@type': 'BlogPosting',
-	headline: title,
-	description,
-	datePublished: pubDate.toISOString(),
-	...(updatedDate && { dateModified: updatedDate.toISOString() }),
-	mainEntityOfPage: {
-		'@type': 'WebPage',
-		'@id': canonicalUrl,
-	},
-	image: ogImage,
-	publisher: {
-		'@type': 'Organization',
-		name: 'Scaling SMB',
-	},
-})} />

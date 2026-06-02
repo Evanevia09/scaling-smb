@@ -1,0 +1,37 @@
+# Scaling SMB
+
+> Scaling SMB helps small and medium local businesses get found online, convert more leads, and automate operations with local SEO, websites, custom web apps, and AI assistants.
+
+## Services
+
+- Local SEO — Google Maps and local search visibility for nearby customers
+- Website — Conversion-focused sites for local businesses
+- Web Application — Custom tools and workflow automation
+- AI Employees — 24/7 lead response, booking, and follow-up in your brand voice
+
+## Primary pages
+
+- Home: /
+- Blog: /blog/
+- Book a strategy call: /#contact
+
+## Blog topics
+
+- Local SEO and Google Business Profile
+- Website conversion and local lead generation
+- Web applications and SMB automation
+- AI for local business customer service
+- Business growth and local marketing
+
+## Contact
+
+- Email: hello@scalingsmb.com
+- Phone: +853 6275 0705
+- Location: Macau · APAC (remote worldwide)
+- Website: https://scaling-smb.pages.dev/
+
+## Technical
+
+- Sitemap: /sitemap-index.xml
+- Robots: /robots.txt
+- Language: English (en)

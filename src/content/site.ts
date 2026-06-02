@@ -261,4 +261,6 @@ export const seo = {
 	title: 'Scaling SMB — Get More Local Customers Without Working More Hours',
 	description:
 		'Scaling SMB helps small and medium local businesses get found online, automate daily operations, and grow faster — without hiring more staff.',
+	/** Default Open Graph / Twitter image (1200×630 recommended) */
+	defaultOgImage: '/images/blog/featured/business-growth.svg',
 };

@@ -1,41 +1,60 @@
-import { openShareUrl, tryNativeShare, type SharePlatform } from '../lib/social-share';
+import {
+	getShareUrlForPlatform,
+	openShareUrl,
+	tryNativeShare,
+	type SharePlatform,
+	type ShareTargets,
+} from '../lib/social-share';
+
+function getShareTargets(root: HTMLElement): ShareTargets | null {
+	const url = root.dataset.shareUrl?.trim();
+	if (!url) return null;
+	return {
+		url,
+		title: root.dataset.shareTitle?.trim() ?? document.title,
+		description: root.dataset.shareDescription?.trim() ?? '',
+	};
+}
 
 export function initBlogShare(): void {
 	const root = document.querySelector<HTMLElement>('[data-blog-share]');
 	if (!root) return;
 
+	const targets = getShareTargets(root);
+
 	const copyBtn = root.querySelector<HTMLButtonElement>('[data-copy-link]');
 	const label = root.querySelector<HTMLElement>('[data-copy-label]');
-	const url = root.dataset.shareUrl;
-	const title = root.dataset.shareTitle ?? document.title;
-	const description = root.dataset.shareDescription ?? '';
 
-	if (url) {
+	if (targets) {
 		root.querySelectorAll<HTMLAnchorElement>('[data-share-link]').forEach((link) => {
+			const platform = link.dataset.sharePlatform as SharePlatform | undefined;
+			if (!platform) return;
+
+			const refreshHref = () => {
+				link.href = getShareUrlForPlatform(targets, platform);
+			};
+			refreshHref();
+
 			link.addEventListener('click', (e) => {
 				e.preventDefault();
-				const href = link.getAttribute('href');
-				if (!href) return;
-				const platform = link.dataset.sharePlatform as SharePlatform | undefined;
-				openShareUrl(href, platform);
+				const shareHref = getShareUrlForPlatform(targets, platform);
+				link.href = shareHref;
+				openShareUrl(shareHref, platform, targets);
 			});
 		});
 
 		const nativeBtn = root.querySelector<HTMLButtonElement>('[data-native-share]');
 		nativeBtn?.addEventListener('click', async () => {
-			const shared = await tryNativeShare({ url, title, description });
-			if (!shared && nativeBtn) {
-				nativeBtn.setAttribute('aria-disabled', 'true');
-			}
+			await tryNativeShare(targets);
 		});
 	}
 
-	if (!copyBtn || !label || !url) return;
+	if (!copyBtn || !label || !targets?.url) return;
 
 	copyBtn.addEventListener('click', async () => {
 		const original = label.textContent ?? 'Copy link';
 		try {
-			await navigator.clipboard.writeText(url);
+			await navigator.clipboard.writeText(targets.url);
 			label.textContent = 'Copied!';
 			copyBtn.setAttribute('aria-label', 'Link copied to clipboard');
 			window.setTimeout(() => {

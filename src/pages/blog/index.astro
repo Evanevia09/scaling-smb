@@ -1,18 +1,27 @@
 ---
 import BlogLayout from '../../layouts/BlogLayout.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
 import BlogPagination from '../../components/blog/BlogPagination.astro';
 import BlogPostList from '../../components/blog/BlogPostList.astro';
 import { blogIndex } from '../../content/site';
 import { BLOG_LIST_PAGE_SIZE, getPublishedPosts, paginate } from '../../lib/blog';
+import { absoluteUrl, collectionPageJsonLd } from '../../lib/seo';
 
 const posts = await getPublishedPosts();
 const totalPages = Math.max(1, Math.ceil(posts.length / BLOG_LIST_PAGE_SIZE));
 const { items } = paginate(posts, 1, BLOG_LIST_PAGE_SIZE);
 const title = `${blogIndex.title} | Scaling SMB`;
 const description = blogIndex.description;
+const nextUrl = totalPages > 1 ? absoluteUrl('/blog/page/2/', Astro.site) : undefined;
 ---
 
-<BlogLayout title={title} description={description} posts={posts}>
+<BlogLayout title={title} description={description} posts={posts} nextUrl={nextUrl}>
+	<JsonLd
+		data={collectionPageJsonLd(
+			{ name: blogIndex.title, description: blogIndex.description, path: '/blog/' },
+			Astro.site,
+		)}
+	/>
 	<header class="blog-index-head">
 		<p class="eyebrow">{blogIndex.eyebrow}</p>
 		<h1 class="blog-index-head__title">{blogIndex.title}</h1>
