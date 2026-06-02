@@ -1,0 +1,390 @@
+---
+import { contact, trustStrip, contactFormServiceOptions } from '../../content/site';
+import ConsultationScheduler from '../react/ConsultationScheduler.tsx';
+import contactHeroBg from '../../Images/Laptop_on_office_desk_202605172109.jpeg';
+
+const { scheduling } = contact;
+---
+
+<section class="snap-panel snap-panel--contact" id="contact" aria-labelledby="contact-title">
+	<div class="snap-panel__inner snap-panel__inner--contact">
+		<div class="contact-layout">
+			<aside class="contact-hero" aria-labelledby="contact-title">
+				<div
+					class="contact-hero__bg"
+					style={`background-image: url('${contactHeroBg.src}')`}
+					role="presentation"
+				/>
+				<div class="contact-hero__overlay" aria-hidden="true" />
+				<div class="contact-hero__content">
+					<div class="contact-hero__copy">
+						<p class="contact-hero__eyebrow">{contact.heroEyebrow}</p>
+						<h2 id="contact-title" class="contact-hero__title">
+							{contact.titleBefore}<span class="contact-hero__accent">{contact.titleAccent}</span
+							>{contact.titleAfter}
+						</h2>
+						<p class="contact-hero__lede">{contact.lede}</p>
+					</div>
+
+					<ul class="contact-hero__list">
+						<li class="contact-hero__item">
+							<span class="contact-hero__icon" aria-hidden="true">
+								<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<path d="M4 6h16v12H4z" />
+									<path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round" />
+								</svg>
+							</span>
+							<div>
+								<span class="contact-hero__item-label">Email</span>
+								<a class="contact-hero__item-value" href={`mailto:${contact.email}`}>{contact.email}</a>
+							</div>
+						</li>
+						<li class="contact-hero__item">
+							<span class="contact-hero__icon" aria-hidden="true">
+								<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<path
+										d="M6.5 4h11l1 2h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3l1-2z"
+										stroke-linejoin="round"
+									/>
+									<circle cx="12" cy="13" r="3.2" />
+								</svg>
+							</span>
+							<div>
+								<span class="contact-hero__item-label">Phone</span>
+								<a class="contact-hero__item-value" href={`tel:${contact.phoneTel}`}>
+									{contact.phoneDisplay}
+								</a>
+							</div>
+						</li>
+						<li class="contact-hero__item">
+							<span class="contact-hero__icon" aria-hidden="true">
+								<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" />
+									<circle cx="12" cy="10" r="2.2" />
+								</svg>
+							</span>
+							<div>
+								<span class="contact-hero__item-label">Location</span>
+								<span class="contact-hero__item-value">{contact.location}</span>
+							</div>
+						</li>
+						<li class="contact-hero__item">
+							<span class="contact-hero__icon" aria-hidden="true">
+								<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<circle cx="12" cy="12" r="9" />
+									<path d="M12 7v5l3 2" stroke-linecap="round" />
+								</svg>
+							</span>
+							<div>
+								<span class="contact-hero__item-label">Business Hours</span>
+								<span class="contact-hero__item-value">{contact.businessHours}</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</aside>
+
+			<div class="contact-booking">
+				<header class="contact-booking__head">
+					<p class="contact-booking__eyebrow">{contact.scheduleEyebrow}</p>
+					<h3 class="contact-booking__title">{contact.scheduleTitle}</h3>
+					<p class="contact-booking__lede">{contact.scheduleLede}</p>
+				</header>
+
+				<div class="contact-booking__widget">
+					<ConsultationScheduler
+						client:visible
+						meetingTitle={scheduling.meetingTitle}
+						duration={scheduling.duration}
+						description={scheduling.description}
+						features={[...scheduling.features]}
+						timeSlots={[...scheduling.timeSlots]}
+						timezones={[...scheduling.timezones]}
+						serviceOptions={contactFormServiceOptions}
+						stepLabels={[...scheduling.steps]}
+						stepTitles={scheduling.stepTitles}
+						success={scheduling.success}
+						contactEmail={contact.email}
+					/>
+				</div>
+
+				<div class="contact-trust" aria-label="Social proof">
+					<p class="contact-trust__label">{trustStrip.title}</p>
+					<ul class="contact-trust__logos">
+						{
+							trustStrip.logos.map((logoItem) => (
+								<li class="contact-trust__item" aria-label={logoItem.name}>
+									<span class="contact-trust__mark" set:html={logoItem.icon} />
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.snap-panel--contact {
+		background: #fff;
+		padding: 0 !important;
+	}
+
+	.snap-panel__inner--contact {
+		padding: 0 !important;
+		height: 100%;
+		min-height: 0;
+		max-width: none;
+		opacity: 1 !important;
+		transform: none !important;
+		filter: none !important;
+	}
+
+	.contact-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+		height: 100%;
+		min-height: 100vh;
+		min-height: 100svh;
+		width: 100%;
+	}
+
+	/* —— Left hero —— */
+	.contact-hero {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		min-height: 0;
+		height: 100%;
+		overflow: hidden;
+		color: #fff;
+	}
+
+	.contact-hero__bg {
+		position: absolute;
+		inset: 0;
+		background-size: cover;
+		background-position: center 35%;
+		filter: saturate(0.8) brightness(0.7);
+	}
+
+	.contact-hero__overlay {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background: linear-gradient(
+			to bottom right,
+			rgba(0, 28, 70, 0.42) 0%,
+			rgba(0, 20, 52, 0.62) 38%,
+			rgba(0, 12, 32, 0.82) 72%,
+			rgba(0, 6, 18, 0.92) 100%
+		);
+	}
+
+	.contact-hero__content {
+		position: relative;
+		z-index: 1;
+		text-shadow:
+			0 1px 3px rgba(0, 12, 32, 0.65),
+			0 0 24px rgba(0, 12, 32, 0.35);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		flex: 1;
+		min-height: 0;
+		height: 100%;
+		padding: calc(var(--header-height) + 1.25rem) clamp(1.5rem, 3vw, 2.25rem)
+			clamp(1.5rem, 3.5vw, 2.5rem);
+		gap: 1.75rem;
+		overflow-y: auto;
+	}
+
+	.contact-hero__eyebrow {
+		margin: 0 0 0.65rem;
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: #4d9fff;
+	}
+
+	.contact-hero__title {
+		margin: 0 0 1rem;
+		font-size: clamp(1.75rem, 3vw, 2.35rem);
+		font-weight: 800;
+		line-height: 1.12;
+		letter-spacing: -0.03em;
+		max-width: 14ch;
+	}
+
+	.contact-hero__accent {
+		color: #4d9fff;
+	}
+
+	.contact-hero__lede {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: 1.65;
+		color: rgba(255, 255, 255, 0.9);
+		max-width: 26rem;
+	}
+
+	.contact-hero__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1.35rem;
+	}
+
+	.contact-hero__item {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.85rem;
+	}
+
+	.contact-hero__icon {
+		flex-shrink: 0;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: rgba(0, 85, 255, 0.35);
+		border: 1px solid rgba(77, 159, 255, 0.35);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #7eb8ff;
+	}
+
+	.contact-hero__item-label {
+		display: block;
+		font-size: 0.72rem;
+		font-weight: 600;
+		color: rgba(255, 255, 255, 0.68);
+		margin-bottom: 0.15rem;
+	}
+
+	.contact-hero__item-value {
+		font-size: 0.92rem;
+		font-weight: 600;
+		color: #fff !important;
+		text-decoration: none;
+		line-height: 1.4;
+	}
+
+	a.contact-hero__item-value:hover {
+		text-decoration: underline;
+	}
+
+	/* —— Right booking —— */
+	.contact-booking {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: clamp(1.25rem, 2.5vh, 1.75rem);
+		min-height: 0;
+		height: 100%;
+		padding: calc(var(--header-height) + 1rem) clamp(1.25rem, 3vw, 2.5rem)
+			clamp(1.25rem, 2.5vw, 2rem);
+		background: #fff;
+		overflow-y: auto;
+	}
+
+	.contact-booking__head {
+		flex-shrink: 0;
+		width: 100%;
+		max-width: 720px;
+		margin-bottom: 0;
+	}
+
+	.contact-booking__eyebrow {
+		margin: 0 0 0.4rem;
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #0055ff;
+	}
+
+	.contact-booking__title {
+		margin: 0 0 0.45rem;
+		font-size: clamp(1.5rem, 2.5vw, 1.85rem);
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		color: #0f172a;
+	}
+
+	.contact-booking__lede {
+		margin: 0;
+		font-size: 0.92rem;
+		line-height: 1.55;
+		color: #64748b;
+		max-width: 36rem;
+	}
+
+	.contact-booking__widget {
+		flex: 0 1 auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		max-width: 720px;
+	}
+
+	.contact-trust {
+		flex-shrink: 0;
+		width: 100%;
+		padding-top: 0;
+		text-align: center;
+	}
+
+	.contact-trust__label {
+		margin: 0 0 0.85rem;
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: #94a3b8;
+	}
+
+	.contact-trust__logos {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: clamp(1rem, 3vw, 2rem);
+	}
+
+	.contact-trust__item {
+		display: flex;
+		color: #9ca3af;
+	}
+
+	.contact-trust__mark :global(svg) {
+		display: block;
+		height: 22px;
+		width: auto;
+		max-width: 120px;
+	}
+
+	@media (max-width: 960px) {
+		.contact-layout {
+			grid-template-columns: 1fr;
+			min-height: auto;
+		}
+
+		.contact-hero {
+			min-height: min(72vh, 560px);
+		}
+
+		.contact-booking {
+			min-height: auto;
+		}
+	}
+</style>

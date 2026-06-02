@@ -1,0 +1,28 @@
+---
+import { hero } from '../../content/site';
+import HeroDashboard from '../react/HeroDashboard.tsx';
+---
+
+<section class="landing-hero" id="hero" aria-labelledby="hero-title">
+	<div class="landing-hero__inner">
+		<div class="landing-hero__grid">
+			<div class="landing-hero__copy">
+				<p class="landing-hero__tagline hero-anim">{hero.tagline}</p>
+				<h1 id="hero-title" class="landing-hero__title hero-anim">{hero.headline}</h1>
+				<p class="landing-hero__lede hero-anim">{hero.subheadline}</p>
+				<div class="landing-hero__actions hero-anim">
+					<a class="btn btn--primary" href={hero.ctaPrimaryHref}>{hero.ctaPrimary}</a>
+					<a class="btn btn--ghost" href={hero.ctaSecondaryHref}>
+						{hero.ctaSecondary}
+						<span aria-hidden="true"> →</span>
+					</a>
+				</div>
+			</div>
+			<div class="landing-hero__dashboard hero-anim">
+				<div class="landing-hero__dashboard-inner">
+					<HeroDashboard client:visible />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

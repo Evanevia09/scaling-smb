@@ -1,0 +1,70 @@
+---
+import { projectsSection, projects } from '../../content/site';
+import islandJunksImg from '../../Images/portfolio-image/Islandjunks.jpg';
+
+const placeholderAccent: Record<string, string> = {
+	transpolink: '220 38% 42%',
+	'lof-hotel': '262 52% 48%',
+	whatsorders: '158 64% 38%',
+};
+
+const [featured, ...rest] = projects;
+---
+
+<section class="landing-section landing-projects" id="projects" aria-labelledby="projects-title">
+	<div class="landing-wrap">
+		<header class="landing-head landing-head--center" data-reveal>
+			<p class="eyebrow">{projectsSection.eyebrow}</p>
+			<h2 id="projects-title" class="landing-head__title">{projectsSection.title}</h2>
+		</header>
+
+		<div class="projects-layout">
+			<article class="project-card project-card--lead" data-reveal>
+				<div class="project-card__media">
+					<img
+						src={islandJunksImg.src}
+						alt={`${featured.name} website preview`}
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+				<div class="project-card__body">
+					<p class="project-card__service">{featured.service}</p>
+					<h3 class="project-card__name">{featured.name}</h3>
+					<p class="project-card__industry">{featured.industry}</p>
+					<p class="project-card__desc">{featured.description}</p>
+					{featured.quote && (
+						<blockquote class="project-card__quote">
+							<p>{featured.quote}</p>
+						</blockquote>
+					)}
+				</div>
+			</article>
+
+			<div class="projects-layout__grid">
+				{
+					rest.map((project) => {
+						const accent = placeholderAccent[project.id];
+						return (
+							<article class="project-card" data-reveal>
+								<div
+									class="project-card__media project-card__media--placeholder"
+									style={accent ? `--accent-hsl: ${accent}` : undefined}
+									aria-hidden="true"
+								>
+									<span class="project-card__initial">{project.name.charAt(0)}</span>
+								</div>
+								<div class="project-card__body">
+									<p class="project-card__service">{project.service}</p>
+									<h3 class="project-card__name">{project.name}</h3>
+									<p class="project-card__industry">{project.industry}</p>
+									<p class="project-card__desc">{project.description}</p>
+								</div>
+							</article>
+						);
+					})
+				}
+			</div>
+		</div>
+	</div>
+</section>

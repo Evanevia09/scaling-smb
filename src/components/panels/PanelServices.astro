@@ -1,0 +1,169 @@
+---
+import { servicesPanel, services } from '../../content/site';
+import ServiceIcon from './ServiceIcon.astro';
+---
+
+<section class="snap-panel snap-panel--services" id="services" aria-labelledby="services-title">
+	<div class="snap-panel__inner snap-panel__inner--services content-wrap">
+		<header class="services-head">
+			<p class="eyebrow services-head__eyebrow">{servicesPanel.eyebrow}</p>
+			<h2 id="services-title" class="services-head__title">
+				{servicesPanel.titleBefore}<span class="text-accent">{servicesPanel.titleAccent}</span>{servicesPanel.titleAfter}
+			</h2>
+			<p class="services-head__subtitle">{servicesPanel.subtitle}</p>
+		</header>
+		<div class="services-grid">
+			{
+				services.map((s) => (
+					<article class="service-card">
+						<ServiceIcon icon={s.icon} />
+						<h3 class="service-card__title">{s.title}</h3>
+						<p class="service-card__desc">{s.description}</p>
+						<a class="service-card__more" href="#contact">
+							Learn more <span aria-hidden="true">→</span>
+						</a>
+					</article>
+				))
+			}
+		</div>
+		<footer class="services-foot">
+			<p class="services-foot__text">{servicesPanel.ctaFootnote}</p>
+			<a class="btn btn--primary services-foot__btn" href={servicesPanel.ctaBottomHref}>
+				{servicesPanel.ctaBottom}
+			</a>
+		</footer>
+	</div>
+</section>
+
+<style>
+	.snap-panel--services {
+		background: #fff;
+	}
+	.snap-panel__inner--services {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: clamp(1rem, 2vh, 1.5rem);
+		padding-block: clamp(1rem, 2vh, 1.5rem);
+	}
+	.services-head {
+		text-align: center;
+		width: 100%;
+	}
+	.services-head__eyebrow {
+		margin-bottom: 0.5rem;
+	}
+	.services-head__title {
+		font-size: clamp(1.65rem, 3vw, 2.35rem);
+		line-height: 1.12;
+		margin: 0 0 0.65rem;
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		color: var(--text);
+	}
+	.text-accent {
+		color: var(--accent);
+	}
+	.services-head__subtitle {
+		margin: 0 auto;
+		max-width: 44rem;
+		color: var(--text-muted);
+		font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+		line-height: 1.5;
+	}
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: clamp(0.65rem, 1.5vw, 1rem);
+		width: 100%;
+	}
+	@media (max-width: 900px) {
+		.services-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (max-width: 520px) {
+		.services-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+	.service-card {
+		background: var(--bg-subtle);
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		padding: 1.1rem 1.1rem 1rem;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.65rem;
+		transition:
+			box-shadow 0.2s ease,
+			border-color 0.2s ease;
+	}
+	.service-card:hover {
+		box-shadow: var(--shadow-md);
+		border-color: rgba(0, 85, 255, 0.15);
+	}
+	.service-card__title {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 700;
+		line-height: 1.25;
+		color: var(--text);
+	}
+	.service-card__desc {
+		margin: 0;
+		flex: 1;
+		font-size: 0.84rem;
+		line-height: 1.45;
+		color: var(--text-muted);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	.service-card__more {
+		font-size: 0.88rem;
+		font-weight: 600;
+		color: var(--accent) !important;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.2rem;
+		margin-top: auto;
+		padding-top: 0.15rem;
+	}
+	.service-card__more:hover {
+		text-decoration: underline;
+		color: var(--accent-strong) !important;
+	}
+	.services-foot {
+		text-align: center;
+		margin-top: 0.25rem;
+	}
+	.services-foot__text {
+		margin: 0 0 0.85rem;
+		color: var(--text-muted);
+		font-size: 0.95rem;
+	}
+	.services-foot__btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		padding: 0.65rem 1.5rem;
+		border-radius: 8px;
+		font-weight: 600;
+		font-size: 0.95rem;
+		text-decoration: none;
+		background: var(--accent);
+		color: #fff !important;
+		border: 1px solid transparent;
+		box-shadow: 0 8px 24px rgba(0, 85, 255, 0.25);
+	}
+	.services-foot__btn:hover {
+		background: var(--accent-strong);
+		color: #fff !important;
+		text-decoration: none;
+	}
+</style>

@@ -1,0 +1,36 @@
+---
+import { portfolioPanel, portfolioProjects } from '../../content/site';
+import PortfolioShowcase from '../react/PortfolioShowcase.tsx';
+import avisImg from '../../Images/portfolio-image/AvisMacau.jpg';
+import eliteRidersImg from '../../Images/portfolio-image/Elite Riders.jpg';
+import intellcoImg from '../../Images/portfolio-image/Intellco.jpg';
+import islandJunksImg from '../../Images/portfolio-image/Islandjunks.jpg';
+
+const portfolioImages = [avisImg, eliteRidersImg, intellcoImg, islandJunksImg];
+
+const slides = portfolioProjects.map((project, i) => ({
+	...project,
+	image: portfolioImages[i].src,
+	imageAlt: `${project.title} website preview`,
+}));
+---
+
+<section class="snap-panel snap-panel--portfolio" id="portfolio" aria-labelledby="portfolio-active-title">
+	<div class="snap-panel__inner snap-panel__inner--portfolio content-wrap">
+		<PortfolioShowcase client:visible eyebrow={portfolioPanel.eyebrow} projects={slides} />
+	</div>
+</section>
+
+<style>
+	.snap-panel--portfolio {
+		background: var(--bg-subtle);
+	}
+
+	.snap-panel__inner--portfolio {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-block: clamp(1rem, 2vh, 1.5rem);
+		min-height: 0;
+	}
+</style>

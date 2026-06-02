@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/landing/Hero.astro';
+import Services from '../components/landing/Services.astro';
+import HowItWorks from '../components/landing/HowItWorks.astro';
+import Projects from '../components/landing/Projects.astro';
+import CtaBand from '../components/landing/CtaBand.astro';
+import Contact from '../components/landing/Contact.astro';
+import Footer from '../components/landing/Footer.astro';
+import WhatsAppFab from '../components/WhatsAppFab.astro';
+import { seo } from '../content/site';
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+	<Header />
+	<main id="main" class="landing">
+		<Hero />
+		<Services />
+		<HowItWorks />
+		<Projects />
+		<CtaBand />
+		<Contact />
+	</main>
+	<Footer />
+	<WhatsAppFab />
+</BaseLayout>

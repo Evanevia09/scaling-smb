@@ -1,0 +1,198 @@
+---
+import { homePanel, trustStrip } from '../../content/site';
+import HeroDashboard from '../react/HeroDashboard.tsx';
+---
+
+<section class="snap-panel snap-panel--home" id="home" aria-labelledby="home-title">
+	<div class="snap-panel__inner snap-panel__inner--home">
+		<div class="home-top">
+			<div class="home-copy">
+				<h1 id="home-title" class="home-title hero-anim">
+					{homePanel.titleBefore}<span class="home-title__accent">{homePanel.titleAccent}</span>{homePanel.titleAfter}
+				</h1>
+				<p class="home-subtitle hero-anim">{homePanel.subtitle}</p>
+				<div class="home-actions hero-anim">
+					<a class="home-btn home-btn--primary" href={homePanel.ctaPrimaryHref}>{homePanel.ctaPrimary}</a>
+					<a class="home-btn home-btn--secondary" href={homePanel.ctaSecondaryHref}>{homePanel.ctaSecondary}</a>
+				</div>
+			</div>
+			<div class="home-dashboard hero-anim">
+				<HeroDashboard client:visible />
+			</div>
+		</div>
+		<div class="home-trust" aria-label="Social proof">
+			<p class="home-trust__label">{trustStrip.title}</p>
+			<ul class="home-trust__logos">
+				{
+					trustStrip.logos.map((logo) => (
+						<li class="home-trust__item" aria-label={logo.name}>
+							<span class="home-trust__mark" set:html={logo.icon} />
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+</section>
+
+<style>
+	.snap-panel--home {
+		background: #fff;
+	}
+	.snap-panel__inner--home {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+		min-height: 0;
+		padding-block: clamp(0.75rem, 2vh, 1.25rem);
+		box-sizing: border-box;
+	}
+	.home-top {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+		gap: clamp(1.5rem, 4vw, 3.5rem);
+		align-items: center;
+		flex: 1;
+		min-height: 0;
+	}
+	@media (max-width: 1080px) {
+		.home-top {
+			grid-template-columns: 1fr;
+			align-items: stretch;
+			gap: clamp(1.25rem, 4vw, 2rem);
+		}
+		.home-dashboard {
+			width: 100%;
+			max-width: 100%;
+			overflow-x: clip;
+		}
+	}
+	@media (max-width: 480px) {
+		.home-actions {
+			flex-direction: column;
+			align-items: stretch;
+		}
+		.home-btn {
+			width: 100%;
+		}
+	}
+	.home-copy {
+		max-width: none;
+	}
+	.home-title {
+		margin: 0 0 1.25rem;
+		font-size: clamp(2.25rem, 4.2vw, 3.5rem);
+		line-height: 1.06;
+		font-weight: 800;
+		letter-spacing: -0.038em;
+		color: #000;
+	}
+	.home-title__accent {
+		color: #0055ff;
+	}
+	.home-subtitle {
+		margin: 0 0 1.75rem;
+		font-size: clamp(1.02rem, 1.65vw, 1.2rem);
+		line-height: 1.55;
+		color: #6b7280;
+		max-width: 36rem;
+	}
+	.home-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem 1rem;
+		align-items: center;
+	}
+	.home-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 48px;
+		padding: 0 1.5rem;
+		border-radius: 10px;
+		font-weight: 600;
+		font-size: 0.98rem;
+		text-decoration: none;
+		transition:
+			transform 0.18s ease,
+			box-shadow 0.18s ease,
+			background 0.18s ease,
+			border-color 0.18s ease;
+	}
+	.home-btn--primary {
+		background: #0055ff;
+		color: #fff !important;
+		border: 1px solid transparent;
+		box-shadow: 0 10px 28px rgba(0, 85, 255, 0.28);
+	}
+	.home-btn--primary:hover {
+		background: #0046d6;
+		color: #fff !important;
+		text-decoration: none;
+		transform: translateY(-1px);
+	}
+	.home-btn--secondary {
+		background: #fff;
+		color: #000 !important;
+		border: 1px solid #e5e7eb;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	}
+	.home-btn--secondary:hover {
+		border-color: #d1d5db;
+		text-decoration: none;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.home-btn:hover {
+			transform: none;
+		}
+	}
+	.home-dashboard {
+		min-width: 0;
+		width: 100%;
+	}
+	.home-trust {
+		flex-shrink: 0;
+		padding-top: clamp(1rem, 2.5vh, 1.75rem);
+		margin-top: auto;
+		border-top: 1px solid #f3f4f6;
+	}
+	.home-trust__label {
+		margin: 0 0 1rem;
+		text-align: center;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #9ca3af;
+	}
+	.home-trust__logos {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: clamp(1.25rem, 4vw, 2.75rem);
+	}
+	.home-trust__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		color: #9ca3af;
+	}
+	.home-trust__mark {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 26px;
+		opacity: 0.95;
+	}
+	.home-trust__mark :global(svg) {
+		display: block;
+		height: 24px;
+		width: auto;
+		max-width: 140px;
+	}
+</style>

@@ -1,0 +1,60 @@
+---
+import { contact, contactFormServiceOptions } from '../../content/site';
+import ConsultationScheduler from '../react/ConsultationScheduler.tsx';
+
+const { scheduling } = contact;
+---
+
+<section class="landing-section landing-contact" id="contact" aria-labelledby="contact-title">
+	<div class="landing-wrap">
+		<header class="landing-head landing-head--center landing-contact__intro" data-reveal>
+			<p class="eyebrow">{contact.eyebrow}</p>
+			<h2 id="contact-title" class="landing-head__title">{contact.title}</h2>
+			<p class="landing-contact__intro-lede">{contact.lede}</p>
+		</header>
+
+		<div class="landing-contact__grid">
+			<aside class="landing-contact__info" data-reveal aria-label="Contact details">
+				<ul class="landing-contact__details">
+					<li>
+						<span class="landing-contact__label">Email</span>
+						<a href={`mailto:${contact.email}`}>{contact.email}</a>
+					</li>
+					<li>
+						<span class="landing-contact__label">Phone</span>
+						<a href={`tel:${contact.phoneTel}`}>{contact.phoneDisplay}</a>
+					</li>
+					<li>
+						<span class="landing-contact__label">Location</span>
+						<span>{contact.location}</span>
+					</li>
+					<li>
+						<span class="landing-contact__label">Hours</span>
+						<span>{contact.businessHours}</span>
+					</li>
+				</ul>
+			</aside>
+
+			<div class="landing-contact__booking" data-reveal>
+				<p class="landing-contact__booking-label">{contact.scheduleTitle}</p>
+				<p class="landing-contact__booking-lede">{contact.scheduleLede}</p>
+				<div class="landing-contact__scheduler">
+					<ConsultationScheduler
+						client:visible
+						meetingTitle={scheduling.meetingTitle}
+						duration={scheduling.duration}
+						description={scheduling.description}
+						features={[...scheduling.features]}
+						timeSlots={[...scheduling.timeSlots]}
+						timezones={[...scheduling.timezones]}
+						serviceOptions={contactFormServiceOptions}
+						stepLabels={[...scheduling.steps]}
+						stepTitles={scheduling.stepTitles}
+						success={scheduling.success}
+						contactEmail={contact.email}
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

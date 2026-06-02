@@ -1,0 +1,70 @@
+---
+import type { ServiceIconId } from '../../content/site';
+
+type Props = { icon: ServiceIconId };
+
+const { icon }: Props = Astro.props;
+---
+
+<span class="svc-icon" aria-hidden="true">
+	{
+		icon === 'web' && (
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+				<rect x="2" y="4" width="20" height="14" rx="2" />
+				<path d="M8 21h8M12 18v3" stroke-linecap="round" />
+			</svg>
+		)
+	}
+	{
+		icon === 'app' && (
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+				<rect x="6" y="2" width="12" height="20" rx="2" />
+				<path d="M10 18h4" stroke-linecap="round" />
+			</svg>
+		)
+	}
+	{
+		icon === 'wechat' && (
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+				<path d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.4-4 8-9 8H8l-4 3v-3.5C2 17 2 14.5 2 12a8 8 0 0 1 16 0Z" stroke-linejoin="round" />
+			</svg>
+		)
+	}
+	{
+		icon === 'seo' && (
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+				<circle cx="11" cy="11" r="7" />
+				<path d="M21 21l-4.3-4.3" stroke-linecap="round" />
+			</svg>
+		)
+	}
+	{
+		icon === 'ads' && (
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+				<path d="M3 3v18h18" stroke-linecap="round" />
+				<path d="M7 14l4-4 4 4 5-7" stroke-linecap="round" stroke-linejoin="round" />
+			</svg>
+		)
+	}
+	{
+		icon === 'ai' && (
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+				<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linejoin="round" />
+			</svg>
+		)
+	}
+</span>
+
+<style>
+	.svc-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border-radius: 10px;
+		background: var(--accent-soft);
+		color: var(--accent);
+		border: 1px solid rgba(0, 85, 255, 0.12);
+	}
+</style>

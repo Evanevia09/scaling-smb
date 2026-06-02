@@ -1,0 +1,77 @@
+---
+import { servicesSection, services } from '../../content/site';
+import localSeoBg from '../../Images/bg-services/Local_SEO_service_web_page_202606020831.jpeg';
+import websiteBg from '../../Images/bg-services/Web_page_and_cursor_background_202606020834.jpeg';
+import webAppBg from '../../Images/bg-services/Software_development_3d_animation_202606020834.jpeg';
+import aiEmployeesBg from '../../Images/bg-services/AI_Automation_on_cards_202606020834.jpeg';
+
+const serviceBackgrounds = [
+	localSeoBg,
+	websiteBg,
+	webAppBg,
+	aiEmployeesBg,
+] as const;
+---
+
+<section
+	class="landing-section landing-services"
+	id="services"
+	aria-labelledby="services-title"
+	data-services-section
+	data-active-service="0"
+>
+	<div class="landing-services__bg" aria-hidden="true">
+		{
+			serviceBackgrounds.map((bg, index) => (
+				<div
+					class:list={[
+						'landing-services__bg-layer',
+						{ 'is-active': index === 0 },
+					]}
+					data-service-bg={index}
+					style={`background-image: url(${bg.src})`}
+				/>
+			))
+		}
+		<div class="landing-services__bg-scrim"></div>
+	</div>
+
+	<div class="landing-services__content">
+		<div class="landing-wrap">
+			<header class="landing-head landing-head--center" data-reveal>
+				<p class="eyebrow">{servicesSection.eyebrow}</p>
+				<h2 id="services-title" class="landing-head__title">{servicesSection.title}</h2>
+			</header>
+
+			<div class="services-stack" data-services-stack>
+				{
+					services.map((service, index) => (
+						<article
+							class="service-card"
+							style={`--stack-index: ${index}`}
+							data-service-index={index}
+							data-reveal
+						>
+							<div class="service-card__glass">
+								<div class="service-card__inner">
+									<div class="service-card__header">
+										<span class="service-card__number">{service.number}</span>
+										<h3 class="service-card__title">{service.title}</h3>
+									</div>
+									<p class="service-card__tagline">{service.tagline}</p>
+									<p class="service-card__desc">{service.description}</p>
+									<ul class="service-card__bullets">
+										{service.bullets.map((bullet) => (
+											<li>{bullet}</li>
+										))}
+									</ul>
+								</div>
+							</div>
+						</article>
+					))
+				}
+				<div class="services-stack__spacer" aria-hidden="true"></div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,498 @@
+.card {
+	width: 100%;
+	max-width: 100%;
+	background: #fff;
+	border: 1px solid #e8ecf2;
+	border-radius: 14px;
+	box-shadow:
+		0 4px 6px -2px rgba(15, 23, 42, 0.05),
+		0 16px 40px -12px rgba(15, 23, 42, 0.1);
+}
+
+.cardInner {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+	min-height: 380px;
+}
+
+.meeting {
+	padding: 1.5rem 1.35rem;
+	border-right: 1px solid #eef1f6;
+	background: #fafbfd;
+}
+
+.meetingIcon {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: rgba(0, 85, 255, 0.1);
+	color: #0055ff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1rem;
+}
+
+.meetingTitle {
+	margin: 0 0 0.35rem;
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: #0f172a;
+	letter-spacing: -0.02em;
+}
+
+.meetingDuration {
+	margin: 0 0 0.85rem;
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+	font-size: 0.88rem;
+	font-weight: 600;
+	color: #64748b;
+}
+
+.meetingDesc {
+	margin: 0 0 1.1rem;
+	font-size: 0.84rem;
+	line-height: 1.55;
+	color: #64748b;
+}
+
+.meetingFeatures {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.55rem;
+}
+
+.meetingFeatures li {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.84rem;
+	color: #475569;
+}
+
+.featureDot {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: #94a3b8;
+	flex-shrink: 0;
+}
+
+.calendarPane {
+	padding: 1.35rem 1.5rem 1.25rem;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	overflow-y: auto;
+	max-height: min(72vh, 680px);
+}
+
+.steps {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.35rem;
+	margin-bottom: 1rem;
+}
+
+.step {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.25rem;
+	text-align: center;
+}
+
+.stepNum {
+	width: 1.65rem;
+	height: 1.65rem;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.72rem;
+	font-weight: 700;
+	background: #e8ecf2;
+	color: #64748b;
+}
+
+.stepCurrent .stepNum {
+	background: #0055ff;
+	color: #fff;
+}
+
+.stepDone .stepNum {
+	background: rgba(0, 85, 255, 0.15);
+	color: #0055ff;
+}
+
+.stepLabel {
+	font-size: 0.62rem;
+	font-weight: 600;
+	color: #94a3b8;
+	letter-spacing: 0.02em;
+}
+
+.stepCurrent .stepLabel {
+	color: #0055ff;
+}
+
+.stepDone .stepLabel {
+	color: #475569;
+}
+
+.stepBody {
+	flex: 1;
+	min-height: 0;
+}
+
+.stepActions {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	margin-top: auto;
+	padding-top: 1rem;
+}
+
+.backBtn {
+	min-height: 44px;
+	padding: 0 1rem;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	background: #fff;
+	color: #334155;
+	font-size: 0.88rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition:
+		background 0.15s ease,
+		border-color 0.15s ease;
+}
+
+.backBtn:hover {
+	background: #f8fafc;
+	border-color: #cbd5e1;
+}
+
+.confirmBtn:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
+}
+
+.confirmBtn:disabled:hover {
+	background: #0055ff;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	margin-bottom: 0.75rem;
+}
+
+.fieldLabel {
+	font-size: 0.72rem;
+	font-weight: 600;
+	color: #64748b;
+}
+
+.input,
+.select,
+.textarea {
+	width: 100%;
+	padding: 0.5rem 0.65rem;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	font-size: 0.84rem;
+	font-family: inherit;
+	color: #334155;
+	background: #fff;
+}
+
+.textarea {
+	resize: vertical;
+	min-height: 5rem;
+	line-height: 1.5;
+}
+
+.input:focus-visible,
+.select:focus-visible,
+.textarea:focus-visible {
+	outline: 2px solid #0055ff;
+	outline-offset: 2px;
+}
+
+.formError {
+	margin: 0 0 0.5rem;
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: #dc2626;
+}
+
+.meetingSummary {
+	margin-top: 1.25rem;
+	padding-top: 1rem;
+	border-top: 1px solid #e2e8f0;
+}
+
+.meetingSummaryLabel {
+	margin: 0 0 0.35rem;
+	font-size: 0.68rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: #94a3b8;
+}
+
+.meetingSummaryValue {
+	margin: 0;
+	font-size: 0.88rem;
+	font-weight: 700;
+	color: #0f172a;
+	line-height: 1.35;
+}
+
+.meetingSummaryMeta {
+	margin: 0.25rem 0 0;
+	font-size: 0.8rem;
+	color: #64748b;
+}
+
+.calendarTitle {
+	margin: 0 0 1rem;
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: #0f172a;
+}
+
+.monthRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 0.85rem;
+}
+
+.monthLabel {
+	font-size: 0.92rem;
+	font-weight: 700;
+	color: #0f172a;
+}
+
+.monthNav {
+	width: 32px;
+	height: 32px;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	background: #fff;
+	color: #334155;
+	font-size: 1.1rem;
+	line-height: 1;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition:
+		background 0.15s ease,
+		border-color 0.15s ease;
+}
+
+.monthNav:hover {
+	background: #f8fafc;
+	border-color: #cbd5e1;
+}
+
+.weekdays {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 2px;
+	margin-bottom: 0.35rem;
+}
+
+.weekday {
+	text-align: center;
+	font-size: 0.62rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	color: #94a3b8;
+	padding: 0.2rem 0;
+}
+
+.days {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 4px;
+}
+
+.dayEmpty {
+	min-height: 36px;
+}
+
+.day {
+	min-height: 36px;
+	border: none;
+	border-radius: 50%;
+	background: transparent;
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: #334155;
+	cursor: pointer;
+	transition:
+		background 0.15s ease,
+		color 0.15s ease;
+}
+
+.dayAvailable:hover {
+	background: rgba(0, 85, 255, 0.1);
+	color: #0055ff;
+}
+
+.daySelected {
+	background: #0055ff !important;
+	color: #fff !important;
+}
+
+.dayDisabled {
+	color: #cbd5e1;
+	cursor: not-allowed;
+}
+
+.times {
+	margin-top: 0.5rem;
+}
+
+.timesLabel {
+	margin: 0 0 0.65rem;
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: #475569;
+}
+
+.timeGrid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.45rem;
+}
+
+.timeSlot {
+	padding: 0.45rem 0.35rem;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	background: #fff;
+	font-size: 0.78rem;
+	font-weight: 600;
+	color: #334155;
+	cursor: pointer;
+	transition:
+		border-color 0.15s ease,
+		background 0.15s ease,
+		color 0.15s ease;
+}
+
+.timeSlot:hover {
+	border-color: #0055ff;
+	color: #0055ff;
+}
+
+.timeSlotActive {
+	padding: 0.45rem 0.35rem;
+	border: 1px solid #0055ff;
+	border-radius: 8px;
+	background: #0055ff;
+	font-size: 0.78rem;
+	font-weight: 600;
+	color: #fff;
+	cursor: pointer;
+}
+
+.confirmBtn {
+	flex: 1;
+	min-width: 0;
+	min-height: 44px;
+	border: none;
+	border-radius: 8px;
+	background: #0055ff;
+	color: #fff;
+	font-size: 0.9rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background 0.15s ease;
+}
+
+.confirmBtn:hover {
+	background: #0046d6;
+}
+
+.success {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 1.5rem 0.5rem;
+}
+
+.successIcon {
+	width: 4rem;
+	height: 4rem;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1rem;
+	background: rgba(34, 197, 94, 0.12);
+	color: #16a34a;
+}
+
+.successTitle {
+	margin: 0 0 0.5rem;
+	font-size: 1.35rem;
+	font-weight: 800;
+	color: #0f172a;
+	letter-spacing: -0.02em;
+}
+
+.successText {
+	margin: 0 0 1rem;
+	font-size: 0.9rem;
+	line-height: 1.55;
+	color: #475569;
+	max-width: 22rem;
+}
+
+.successBooking {
+	margin: 0;
+	padding: 0.65rem 0.85rem;
+	border-radius: 8px;
+	background: rgba(0, 85, 255, 0.06);
+	border: 1px solid rgba(0, 85, 255, 0.12);
+	font-size: 0.84rem;
+	line-height: 1.5;
+	color: #334155;
+	max-width: 20rem;
+}
+
+.successBooking strong {
+	color: #0f172a;
+}
+
+
+@media (max-width: 720px) {
+	.cardInner {
+		grid-template-columns: 1fr;
+	}
+
+	.meeting {
+		border-right: 0;
+		border-bottom: 1px solid #eef1f6;
+	}
+
+	.timeGrid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
