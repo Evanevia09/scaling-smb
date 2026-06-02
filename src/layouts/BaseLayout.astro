@@ -6,12 +6,23 @@ type Props = {
 	title?: string;
 	description?: string;
 	ogImage?: string;
+	ogType?: 'website' | 'article';
 };
 
-const { title = seoDefaults.title, description = seoDefaults.description, ogImage } = Astro.props;
+const {
+	title = seoDefaults.title,
+	description = seoDefaults.description,
+	ogImage,
+	ogType = 'website',
+} = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : canonical;
 const twitterCard = ogImage ? 'summary_large_image' : 'summary';
+const ogImageAbsolute = ogImage
+	? ogImage.startsWith('http')
+		? ogImage
+		: new URL(ogImage, Astro.site ?? 'https://scaling-smb.pages.dev').href
+	: undefined;
 ---
 
 <!doctype html>
@@ -23,15 +34,24 @@ const twitterCard = ogImage ? 'summary_large_image' : 'summary';
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:site_name" content="Scaling SMB" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={ogUrl} />
-		{ogImage && <meta property="og:image" content={ogImage} />}
+		{ogImageAbsolute && (
+			<>
+				<meta property="og:image" content={ogImageAbsolute} />
+				<meta property="og:image:secure_url" content={ogImageAbsolute} />
+				<meta property="og:image:width" content="1200" />
+				<meta property="og:image:height" content="630" />
+				<meta property="og:image:alt" content={title} />
+			</>
+		)}
 		<meta name="twitter:card" content={twitterCard} />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		{ogImage && <meta name="twitter:image" content={ogImage} />}
+		{ogImageAbsolute && <meta name="twitter:image" content={ogImageAbsolute} />}
 		<link rel="icon" href="/favicon.ico" sizes="any" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

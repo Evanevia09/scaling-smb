@@ -375,9 +375,14 @@
 	color: #fff !important;
 }
 
-.blog-share__btn--copy:hover {
+.blog-share__btn--copy:hover,
+.blog-share__btn--native:hover {
 	background: var(--accent-soft);
 	color: var(--accent-strong) !important;
+}
+
+.blog-share__btn--native {
+	cursor: pointer;
 }
 
 .blog-share__icon {

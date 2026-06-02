@@ -67,7 +67,7 @@ const ogImage = getFeaturedImageOgUrl(entry, Astro.site);
 			</div>
 			<h1 class="blog-article__title">{title}</h1>
 			<p class="blog-article__description">{description}</p>
-			<BlogShare title={title} url={canonicalUrl} />
+			<BlogShare title={title} url={canonicalUrl} description={description} />
 		</header>
 
 		<div class="blog-article__body">

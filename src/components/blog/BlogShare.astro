@@ -1,62 +1,63 @@
 ---
+import { buildShareUrls } from '../../lib/social-share';
+
 type Props = {
 	title: string;
 	url: string;
+	description?: string;
 };
 
-const { title, url: shareUrl } = Astro.props;
-const encodedUrl = encodeURIComponent(shareUrl);
-const encodedTitle = encodeURIComponent(title);
-const encodedText = encodeURIComponent(`${title} — Scaling SMB`);
+const { title, url: shareUrl, description = '' } = Astro.props;
 
-const shareLinks = [
-	{
-		id: 'x',
-		label: 'Share on X',
-		href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
-	},
-	{
-		id: 'facebook',
-		label: 'Share on Facebook',
-		href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-	},
-	{
-		id: 'linkedin',
-		label: 'Share on LinkedIn',
-		href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-	},
-	{
-		id: 'whatsapp',
-		label: 'Share on WhatsApp',
-		href: `https://wa.me/?text=${encodedText}%20${encodedUrl}`,
-	},
-] as const;
+const shareLinks = buildShareUrls({ url: shareUrl, title, description });
+
+const platforms = [
+	{ id: 'x' as const, label: 'Share on X', name: 'X' },
+	{ id: 'facebook' as const, label: 'Share on Facebook', name: 'Facebook' },
+	{ id: 'linkedin' as const, label: 'Share on LinkedIn', name: 'LinkedIn' },
+	{ id: 'whatsapp' as const, label: 'Share on WhatsApp', name: 'WhatsApp' },
+];
 ---
 
-<div class="blog-share" data-blog-share data-share-url={shareUrl}>
+<div
+	class="blog-share"
+	data-blog-share
+	data-share-url={shareUrl}
+	data-share-title={title}
+	data-share-description={description}
+>
 	<p class="blog-share__label">Share this article</p>
 	<div class="blog-share__actions" role="group" aria-label="Share this article">
 		{
-			shareLinks.map((link) => (
+			platforms.map((p) => (
 				<a
-					class={`blog-share__btn blog-share__btn--${link.id}`}
-					href={link.href}
-					target="_blank"
+					class={`blog-share__btn blog-share__btn--${p.id}`}
+					href={shareLinks[p.id]}
+					data-share-link
+					data-share-platform={p.id}
 					rel="noopener noreferrer"
-					aria-label={link.label}
+					aria-label={p.label}
 				>
 					<span class="blog-share__icon" aria-hidden="true">
-						{link.id === 'x' && '𝕏'}
-						{link.id === 'facebook' && 'f'}
-						{link.id === 'linkedin' && 'in'}
-						{link.id === 'whatsapp' && '✓'}
+						{p.id === 'x' && '𝕏'}
+						{p.id === 'facebook' && 'f'}
+						{p.id === 'linkedin' && 'in'}
+						{p.id === 'whatsapp' && '✓'}
 					</span>
-					<span class="blog-share__name">
-						{link.id === 'x' ? 'X' : link.id.charAt(0).toUpperCase() + link.id.slice(1)}
-					</span>
+					<span class="blog-share__name">{p.name}</span>
 				</a>
 			))
 		}
+		<button
+			type="button"
+			class="blog-share__btn blog-share__btn--native"
+			data-native-share
+			hidden
+			aria-label="Share using your device"
+		>
+			<span class="blog-share__icon" aria-hidden="true">↗</span>
+			<span class="blog-share__name">Share</span>
+		</button>
 		<button type="button" class="blog-share__btn blog-share__btn--copy" data-copy-link aria-label="Copy link to clipboard">
 			<span class="blog-share__icon" aria-hidden="true">⎘</span>
 			<span class="blog-share__name" data-copy-label>Copy link</span>
@@ -68,4 +69,8 @@ const shareLinks = [
 	import { initBlogShare } from '../../scripts/blog-share';
 
 	initBlogShare();
+
+	if (typeof navigator !== 'undefined' && navigator.share) {
+		document.querySelector<HTMLButtonElement>('[data-native-share]')?.removeAttribute('hidden');
+	}
 </script>
