@@ -149,7 +149,7 @@ export const projects = [
 		service: 'SEO Optimized Website',
 		description:
 			'A premium limousine service needed a website that matched the quality of their brand and showed up when high-value clients were searching. We built an SEO-optimized site designed to attract and convert the right customers.',
-		imageKey: null,
+		imageKey: 'transpolink' as const,
 	},
 	{
 		id: 'lof-hotel',
@@ -158,7 +158,7 @@ export const projects = [
 		service: 'Bespoke Web Redesign',
 		description:
 			'A growing hotel brand needed more than a website refresh — they needed a digital foundation built for expansion. We designed and built a bespoke website that unifies multiple locations under one cohesive brand, ready to scale as they grow.',
-		imageKey: null,
+		imageKey: 'lof-hotel' as const,
 	},
 	{
 		id: 'whatsorders',
@@ -167,7 +167,7 @@ export const projects = [
 		service: 'Progressive Web App (PWA)',
 		description:
 			'Restaurants lose a cut of every order to third-party delivery apps. We built WhatsOrders — a branded PWA that gives restaurants their own online ordering experience, so customers order directly and the restaurant keeps more of every sale.',
-		imageKey: null,
+		imageKey: 'whatsorder.food' as const,
 	},
 ] as const;
 
