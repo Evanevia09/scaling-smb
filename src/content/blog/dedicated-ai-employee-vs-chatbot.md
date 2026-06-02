@@ -68,19 +68,6 @@ I track deployment data across our clients. Here is what the numbers show when c
 
 The gap is not because our AI is "better" at language. It is because a dedicated employee has agency. It can act on information, not just repeat it.
 
-## The $997 Question
-
-Here is the part most articles will not tell you: cost.
-
-A dedicated AI employee costs $997 per role per month — flat fee. No per-task charges, no per-conversation fees, no usage tiers. That covers a dedicated VPS, perpetual training, tool integrations, and ongoing optimisation.
-
-Compare that to the alternatives:
-- A human employee handling out-of-hours leads: $2,000–4,000/month for part-time coverage (if you can find someone willing to work irregular hours)
-- A chatbot platform with premium features and integrations: $300–800/month, but no task execution — you still need a human to convert the lead once it is captured
-- Building your own AI agent from scratch: $15,000–50,000 upfront in development, plus ongoing infrastructure costs
-
-The math is not close. At $997/role, a dedicated AI employee pays for itself if it converts just two additional leads per month.
-
 ## The "It Feels Impersonal" Objection
 
 I hear this one constantly: "Customers want to talk to a real person."
