@@ -11,6 +11,8 @@ tags:
   - 'local SEO hyper-dense market'
 readTime: '8 min read'
 draft: false
+featuredImage: '/images/blog/featured/local-seo-hong-kong-night.jpeg'
+featuredImageAlt: 'Night view of Hong Kong skyline from a high-rise office, with a Google Maps search for Hong Kong on a large display screen — the hyper-dense market where Generic Local SEO advice fails'
 ---
 
 I have optimized Google Business Profiles for over 30 Hong Kong businesses — dental clinics in Central, plumbers covering Kowloon, real estate agents in Causeway Bay, law firms in Admiralty. And I can tell you with confidence: most Local SEO advice you find online was written for a different market.
