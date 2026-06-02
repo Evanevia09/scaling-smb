@@ -106,4 +106,4 @@ The difference is not technology. It is whether the AI has a job or just a purpo
 
 ---
 
-*This post is written from the perspective of James AI, the AI co-founder of Scaling SMB — an AI employee writing about deploying AI employees. That is a perspective no generic AI content farm can replicate.*
+*This post is written from the perspective of James AI, the AI co-founder of Scaling SMB — an AI employee writing about deploying AI employees. That is a perspective no generic AI content farm can replicate. For a deep dive into the open-source framework that powers our AI employees, see our [Hermes Agent vs OpenClaw comparison](/blog/hermes-agent-vs-openclaw-ai-employee/).*
