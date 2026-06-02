@@ -1,6 +1,10 @@
 ---
-import { brand, nav } from '../content/site';
+import { brand, nav, blogNav } from '../content/site';
 import logo from '../Images/SMB.png';
+
+const onBlog = Astro.url.pathname.startsWith('/blog');
+const home = onBlog ? '/' : '';
+const blogHref = '/blog/';
 ---
 
 <header
@@ -9,7 +13,7 @@ import logo from '../Images/SMB.png';
 	data-menu-close-label={nav.closeMenu}
 >
 	<div class="site-header__bar">
-		<a class="site-logo" href="#hero" aria-label={`${brand.name} — home`}>
+		<a class="site-logo" href={home || '#hero'} aria-label={`${brand.name} — home`}>
 			<img
 				class="site-logo__img"
 				src={logo.src}
@@ -21,7 +25,7 @@ import logo from '../Images/SMB.png';
 			/>
 		</a>
 		<div class="site-header__toolbar">
-			<a class="site-header__cta site-header__cta--toolbar" href="#contact">{nav.cta}</a>
+			<a class="site-header__cta site-header__cta--toolbar" href={`${home}#contact`}>{nav.cta}</a>
 			<button
 				type="button"
 				class="site-header__menu-btn"
@@ -33,11 +37,17 @@ import logo from '../Images/SMB.png';
 			</button>
 		</div>
 		<nav class="site-nav site-nav--desktop" aria-label="Primary" data-site-header-nav-desktop>
-			<a class="site-nav__link" data-nav-link href="#services">{nav.services}</a>
-			<a class="site-nav__link" data-nav-link href="#how-it-works">{nav.howItWorks}</a>
-			<a class="site-nav__link" data-nav-link href="#projects">{nav.projects}</a>
-			<a class="site-nav__link" data-nav-link href="#contact">{nav.contact}</a>
-			<a class="site-nav__link site-nav__link--cta" data-nav-link href="#contact">{nav.cta}</a>
+			<a class="site-nav__link" data-nav-link href={`${home}#services`}>{nav.services}</a>
+			<a class="site-nav__link" data-nav-link href={`${home}#how-it-works`}>{nav.howItWorks}</a>
+			<a class="site-nav__link" data-nav-link href={`${home}#projects`}>{nav.projects}</a>
+			<a
+				class="site-nav__link"
+				data-nav-link
+				href={blogHref}
+				aria-current={onBlog ? 'page' : undefined}
+			>{blogNav.label}</a>
+			<a class="site-nav__link" data-nav-link href={`${home}#contact`}>{nav.contact}</a>
+			<a class="site-nav__link site-nav__link--cta" data-nav-link href={`${home}#contact`}>{nav.cta}</a>
 		</nav>
 	</div>
 	<button
@@ -55,11 +65,12 @@ import logo from '../Images/SMB.png';
 		aria-hidden="true"
 		data-site-header-drawer
 	>
-		<a class="site-nav__link" data-nav-link href="#services">{nav.services}</a>
-		<a class="site-nav__link" data-nav-link href="#how-it-works">{nav.howItWorks}</a>
-		<a class="site-nav__link" data-nav-link href="#projects">{nav.projects}</a>
-		<a class="site-nav__link" data-nav-link href="#contact">{nav.contact}</a>
-		<a class="site-nav__link site-nav__link--cta" data-nav-link href="#contact">{nav.cta}</a>
+		<a class="site-nav__link" data-nav-link href={`${home}#services`}>{nav.services}</a>
+		<a class="site-nav__link" data-nav-link href={`${home}#how-it-works`}>{nav.howItWorks}</a>
+		<a class="site-nav__link" data-nav-link href={`${home}#projects`}>{nav.projects}</a>
+		<a class="site-nav__link" data-nav-link href={blogHref} aria-current={onBlog ? 'page' : undefined}>{blogNav.label}</a>
+		<a class="site-nav__link" data-nav-link href={`${home}#contact`}>{nav.contact}</a>
+		<a class="site-nav__link site-nav__link--cta" data-nav-link href={`${home}#contact`}>{nav.cta}</a>
 	</nav>
 </header>
 

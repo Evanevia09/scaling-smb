@@ -93,12 +93,13 @@ const { scheduling } = contact;
 
 				<div class="contact-booking__widget">
 					<ConsultationScheduler
-						client:visible
+						client:load
 						meetingTitle={scheduling.meetingTitle}
 						duration={scheduling.duration}
 						description={scheduling.description}
 						features={[...scheduling.features]}
 						timeSlots={[...scheduling.timeSlots]}
+						blockedTimeSlots={[...scheduling.blockedTimeSlots]}
 						timezones={[...scheduling.timezones]}
 						serviceOptions={contactFormServiceOptions}
 						stepLabels={[...scheduling.steps]}

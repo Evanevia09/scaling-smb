@@ -1,0 +1,17 @@
+---
+import { LANDING_CTA } from '../../lib/blog';
+---
+
+<aside class="blog-post-cta" aria-labelledby="blog-post-cta-title">
+	<div class="blog-post-cta__inner">
+		<h2 id="blog-post-cta-title" class="blog-post-cta__title">{LANDING_CTA.headline}</h2>
+		<p class="blog-post-cta__text">
+			We help local businesses get more customers without working more hours — Local SEO, websites,
+			automation, and AI that fits how you operate.
+		</p>
+		<a class="btn btn--primary blog-post-cta__btn" href={LANDING_CTA.href}>
+			{LANDING_CTA.button}
+			<span aria-hidden="true"> →</span>
+		</a>
+	</div>
+</aside>

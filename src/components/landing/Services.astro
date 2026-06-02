@@ -1,44 +1,19 @@
 ---
 import { servicesSection, services } from '../../content/site';
-import localSeoBg from '../../Images/bg-services/Local_SEO_service_web_page_202606020831.jpeg';
-import websiteBg from '../../Images/bg-services/Web_page_and_cursor_background_202606020834.jpeg';
-import webAppBg from '../../Images/bg-services/Software_development_3d_animation_202606020834.jpeg';
-import aiEmployeesBg from '../../Images/bg-services/AI_Automation_on_cards_202606020834.jpeg';
-
-const serviceBackgrounds = [
-	localSeoBg,
-	websiteBg,
-	webAppBg,
-	aiEmployeesBg,
-] as const;
+import servicesBg from '../../Images/bg-services/Man_standing_showing_confidence_202606021050.jpeg';
 ---
 
 <section
 	class="landing-section landing-services"
 	id="services"
 	aria-labelledby="services-title"
-	data-services-section
-	data-active-service="0"
+	style={`--services-bg-image: url(${servicesBg.src})`}
 >
-	<div class="landing-services__bg" aria-hidden="true">
-		{
-			serviceBackgrounds.map((bg, index) => (
-				<div
-					class:list={[
-						'landing-services__bg-layer',
-						{ 'is-active': index === 0 },
-					]}
-					data-service-bg={index}
-					style={`background-image: url(${bg.src})`}
-				/>
-			))
-		}
-		<div class="landing-services__bg-scrim"></div>
-	</div>
+	<div class="landing-services__bg" aria-hidden="true"></div>
 
 	<div class="landing-services__content">
 		<div class="landing-wrap">
-			<header class="landing-head landing-head--center" data-reveal>
+			<header class="landing-head" data-reveal>
 				<p class="eyebrow">{servicesSection.eyebrow}</p>
 				<h2 id="services-title" class="landing-head__title">{servicesSection.title}</h2>
 			</header>

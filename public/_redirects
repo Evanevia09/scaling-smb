@@ -1,0 +1,2 @@
+# Cloudflare Pages: normalize blog URL (static /blog/index.html is served after deploy)
+/blog  /blog/  301

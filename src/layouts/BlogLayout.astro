@@ -1,0 +1,54 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/landing/Footer.astro';
+import WhatsAppFab from '../components/WhatsAppFab.astro';
+import BlogSidebar from '../components/blog/BlogSidebar.astro';
+import BlogPostSidebar from '../components/blog/BlogPostSidebar.astro';
+import type { BlogPost } from '../lib/blog';
+import '../styles/blog.css';
+
+type Props = {
+	title: string;
+	description: string;
+	posts: BlogPost[];
+	sidebar?: 'listing' | 'article';
+	currentPost?: BlogPost;
+	activeCategory?: string;
+	activePostId?: string;
+	ogImage?: string;
+};
+
+const {
+	title,
+	description,
+	posts,
+	sidebar = 'listing',
+	currentPost,
+	activeCategory,
+	activePostId,
+	ogImage,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} ogImage={ogImage}>
+	<Header />
+	<main id="main" class="blog-main">
+		<div class="blog-shell landing-wrap">
+			<div class="blog-layout">
+				<div class="blog-layout__content">
+					<slot />
+				</div>
+				{
+					sidebar === 'article' && currentPost ? (
+						<BlogPostSidebar posts={posts} currentPost={currentPost} />
+					) : (
+						<BlogSidebar posts={posts} activeCategory={activeCategory} activePostId={activePostId} />
+					)
+				}
+			</div>
+		</div>
+	</main>
+	<Footer />
+	<WhatsAppFab />
+</BaseLayout>

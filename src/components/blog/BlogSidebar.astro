@@ -1,0 +1,93 @@
+---
+import type { BlogPost } from '../../lib/blog';
+import {
+	categoryHref,
+	formatDate,
+	getCategories,
+	postHref,
+	slugifyCategory,
+} from '../../lib/blog';
+
+type Props = {
+	posts: BlogPost[];
+	activeCategory?: string;
+	activePostId?: string;
+};
+
+const { posts, activeCategory, activePostId } = Astro.props;
+const categories = getCategories(posts);
+const recent = posts.slice(0, 5);
+---
+
+<aside class="blog-sidebar" aria-label="Blog sidebar">
+	<section class="blog-sidebar__block">
+		<h2 class="blog-sidebar__title">Categories</h2>
+		<ul class="blog-sidebar__list">
+			<li>
+				<a
+					class:list={['blog-sidebar__link', !activeCategory && 'blog-sidebar__link--active']}
+					href="/blog/"
+				>
+					All posts
+					<span class="blog-sidebar__count">{posts.length}</span>
+				</a>
+			</li>
+			{
+				categories.map((category) => {
+					const slug = slugifyCategory(category);
+					const count = posts.filter((p) => slugifyCategory(p.data.category) === slug).length;
+					return (
+						<li>
+							<a
+								class:list={[
+									'blog-sidebar__link',
+									activeCategory === category && 'blog-sidebar__link--active',
+								]}
+								href={categoryHref(category)}
+							>
+								{category}
+								<span class="blog-sidebar__count">{count}</span>
+							</a>
+						</li>
+					);
+				})
+			}
+		</ul>
+	</section>
+
+	{
+		recent.length > 0 && (
+			<section class="blog-sidebar__block">
+				<h2 class="blog-sidebar__title">Recent posts</h2>
+				<ul class="blog-sidebar__posts">
+					{recent.map((post) => (
+						<li>
+							<a
+								class:list={[
+									'blog-sidebar__post-link',
+									activePostId === post.id && 'blog-sidebar__post-link--active',
+								]}
+								href={postHref(post.id)}
+							>
+								<span class="blog-sidebar__post-title">{post.data.title}</span>
+								<time class="blog-sidebar__post-date" datetime={post.data.pubDate.toISOString()}>
+									{formatDate(post.data.pubDate)}
+								</time>
+							</a>
+						</li>
+					))}
+				</ul>
+			</section>
+		)
+	}
+
+	<section class="blog-sidebar__block blog-sidebar__cta">
+		<h2 class="blog-sidebar__title">Grow your business</h2>
+		<p class="blog-sidebar__cta-text">
+			Get found online, convert more leads, and automate busywork — built for local SMBs.
+		</p>
+		<a class="btn btn--primary blog-sidebar__cta-btn" href="/#contact">
+			Book a free strategy call
+		</a>
+	</section>
+</aside>

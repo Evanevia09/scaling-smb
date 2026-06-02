@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Web Application placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0040cc"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g fill="#fff" opacity="0.12" transform="translate(780 100)">
+    <rect width="80" height="80" rx="8"/>
+    <rect x="100" width="80" height="80" rx="8"/>
+    <rect x="200" width="80" height="80" rx="8"/>
+    <rect y="100" width="80" height="80" rx="8"/>
+    <rect x="100" y="100" width="80" height="80" rx="8"/>
+    <rect x="200" y="100" width="80" height="80" rx="8"/>
+  </g>
+  <text x="80" y="300" fill="#fff" font-family="system-ui,sans-serif" font-size="28" font-weight="600" opacity="0.85">Scaling SMB Blog</text>
+  <text x="80" y="360" fill="#fff" font-family="system-ui,sans-serif" font-size="52" font-weight="800">Web Application</text>
+  <text x="80" y="410" fill="#fff" font-family="system-ui,sans-serif" font-size="22" opacity="0.75">Featured image placeholder</text>
+</svg>

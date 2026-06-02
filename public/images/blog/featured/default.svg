@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Blog placeholder">
+  <rect width="1200" height="630" fill="#0055ff"/>
+  <text x="80" y="320" fill="#fff" font-family="system-ui,sans-serif" font-size="28" font-weight="600" opacity="0.85">Scaling SMB Blog</text>
+  <text x="80" y="380" fill="#fff" font-family="system-ui,sans-serif" font-size="48" font-weight="800">Insights for local businesses</text>
+  <text x="80" y="430" fill="#fff" font-family="system-ui,sans-serif" font-size="22" opacity="0.75">Featured image placeholder</text>
+</svg>

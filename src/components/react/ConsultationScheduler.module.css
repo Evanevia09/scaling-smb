@@ -393,9 +393,22 @@
 		color 0.15s ease;
 }
 
-.timeSlot:hover {
+.timeSlot:hover:not(:disabled) {
 	border-color: #0055ff;
 	color: #0055ff;
+}
+
+.timeSlotBlocked {
+	padding: 0.45rem 0.35rem;
+	border: 1px solid #e8ecf2;
+	border-radius: 8px;
+	background: #f1f5f9;
+	font-size: 0.78rem;
+	font-weight: 600;
+	color: #94a3b8;
+	cursor: not-allowed;
+	text-decoration: line-through;
+	opacity: 0.75;
 }
 
 .timeSlotActive {

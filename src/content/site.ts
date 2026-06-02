@@ -13,6 +13,18 @@ export const nav = {
 	closeMenu: 'Close menu',
 } as const;
 
+export const blogNav = {
+	label: 'Blog',
+} as const;
+
+export const blogIndex = {
+	eyebrow: 'Insights',
+	title: 'Blog for local businesses',
+	lede: 'Practical guides on local SEO, websites, automation, and AI — so you can get more customers without working more hours.',
+	description:
+		'Scaling SMB blog: local SEO, conversion-focused websites, business automation, and AI for small and medium local businesses.',
+} as const;
+
 export const hero = {
 	tagline: brand.tagline,
 	headline: 'More customers. Less busywork. A business that runs itself.',
@@ -220,6 +232,8 @@ export const contact = {
 			'3:30 PM',
 			'4:00 PM',
 		] as const,
+		/** Shown in the picker but not bookable */
+		blockedTimeSlots: ['9:00 AM', '9:30 AM', '3:30 PM', '4:00 PM'] as const,
 		timezones: [
 			{ value: 'Asia/Macau', label: 'Hong Kong / Macau (HKT)' },
 			{ value: 'America/New_York', label: 'Eastern Time (US & Canada)' },
@@ -237,6 +251,7 @@ export const footer = {
 		{ label: nav.services, href: '#services' },
 		{ label: nav.howItWorks, href: '#how-it-works' },
 		{ label: nav.projects, href: '#projects' },
+		{ label: blogNav.label, href: '/blog/' },
 		{ label: contact.email, href: `mailto:${contact.email}` },
 	] as const,
 	copyright: '© 2025 Scaling SMB. All rights reserved.',

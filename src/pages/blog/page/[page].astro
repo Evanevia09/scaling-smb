@@ -1,0 +1,35 @@
+---
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+import BlogPagination from '../../../components/blog/BlogPagination.astro';
+import BlogPostList from '../../../components/blog/BlogPostList.astro';
+import { blogIndex } from '../../../content/site';
+import { BLOG_LIST_PAGE_SIZE, getPublishedPosts, paginate } from '../../../lib/blog';
+
+export async function getStaticPaths() {
+	const posts = await getPublishedPosts();
+	const totalPages = Math.max(1, Math.ceil(posts.length / BLOG_LIST_PAGE_SIZE));
+
+	if (totalPages <= 1) return [];
+
+	return Array.from({ length: totalPages - 1 }, (_, i) => ({
+		params: { page: String(i + 2) },
+		props: { page: i + 2, totalPages, posts },
+	}));
+}
+
+const { page, totalPages, posts } = Astro.props;
+const { items } = paginate(posts, page, BLOG_LIST_PAGE_SIZE);
+const title = `${blogIndex.title} — Page ${page} | Scaling SMB`;
+const description = blogIndex.description;
+---
+
+<BlogLayout title={title} description={description} posts={posts}>
+	<header class="blog-index-head">
+		<p class="eyebrow">{blogIndex.eyebrow}</p>
+		<h1 class="blog-index-head__title">{blogIndex.title}</h1>
+		<p class="blog-index-head__lede">{blogIndex.lede}</p>
+	</header>
+
+	<BlogPostList posts={items} />
+	<BlogPagination page={page} totalPages={totalPages} />
+</BlogLayout>

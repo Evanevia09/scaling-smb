@@ -1,13 +1,20 @@
 ---
 import { brand, footer } from '../../content/site';
+
+const onBlog = Astro.url.pathname.startsWith('/blog');
+const home = onBlog ? '/' : '';
+const resolvedLinks = footer.links.map((link) => ({
+	...link,
+	href: link.href.startsWith('#') ? `${home}${link.href}` : link.href,
+}));
 ---
 
 <footer class="site-footer">
 	<div class="landing-wrap site-footer__inner">
-		<a class="site-footer__brand" href="#hero">{brand.name}</a>
+		<a class="site-footer__brand" href={home || '#hero'}>{brand.name}</a>
 		<nav class="site-footer__nav" aria-label="Footer">
 			{
-				footer.links.map((link) => (
+				resolvedLinks.map((link) => (
 					<a href={link.href}>{link.label}</a>
 				))
 			}

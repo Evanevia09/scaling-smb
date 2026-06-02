@@ -1,0 +1,119 @@
+---
+import type { BlogPost } from '../../lib/blog';
+import {
+	formatDate,
+	getRecentPosts,
+	getRelatedPosts,
+	postHref,
+	SIDEBAR_RECENT_LIMIT,
+	SIDEBAR_RELATED_PAGE_SIZE,
+} from '../../lib/blog';
+
+type Props = {
+	posts: BlogPost[];
+	currentPost: BlogPost;
+};
+
+const { posts, currentPost } = Astro.props;
+const recent = getRecentPosts(posts, currentPost.id, SIDEBAR_RECENT_LIMIT);
+const related = getRelatedPosts(posts, currentPost);
+const relatedPages = Math.max(1, Math.ceil(related.length / SIDEBAR_RELATED_PAGE_SIZE));
+const relatedJson = JSON.stringify(
+	related.map((post) => ({
+		id: post.id,
+		href: postHref(post.id),
+		title: post.data.title,
+		date: formatDate(post.data.pubDate),
+		dateTime: post.data.pubDate.toISOString(),
+	})),
+);
+---
+
+<aside class="blog-sidebar blog-sidebar--article" aria-label="Blog sidebar">
+	{
+		recent.length > 0 && (
+			<section class="blog-sidebar__block">
+				<h2 class="blog-sidebar__title">Recent posts</h2>
+				<ul class="blog-sidebar__posts">
+					{recent.map((post) => (
+						<li>
+							<a class="blog-sidebar__post-link" href={postHref(post.id)}>
+								<span class="blog-sidebar__post-title">{post.data.title}</span>
+								<time class="blog-sidebar__post-date" datetime={post.data.pubDate.toISOString()}>
+									{formatDate(post.data.pubDate)}
+								</time>
+							</a>
+						</li>
+					))}
+				</ul>
+			</section>
+		)
+	}
+
+	{
+		related.length > 0 && (
+			<section
+				class="blog-sidebar__block"
+				data-related-posts
+				data-page-size={SIDEBAR_RELATED_PAGE_SIZE}
+				data-posts={relatedJson}
+			>
+				<h2 class="blog-sidebar__title">Related posts</h2>
+				<ul class="blog-sidebar__posts" data-related-list>
+					{related.slice(0, SIDEBAR_RELATED_PAGE_SIZE).map((post) => (
+						<li>
+							<a class="blog-sidebar__post-link" href={postHref(post.id)}>
+								<span class="blog-sidebar__post-title">{post.data.title}</span>
+								<time class="blog-sidebar__post-date" datetime={post.data.pubDate.toISOString()}>
+									{formatDate(post.data.pubDate)}
+								</time>
+							</a>
+						</li>
+					))}
+				</ul>
+				{
+					related.length > SIDEBAR_RELATED_PAGE_SIZE && (
+						<nav class="blog-sidebar__pager" aria-label="Related posts pagination" data-related-pager>
+							<button
+								type="button"
+								class="blog-sidebar__pager-btn"
+								data-related-prev
+								disabled
+								aria-label="Previous related posts"
+							>
+								Previous
+							</button>
+							<span class="blog-sidebar__pager-status" data-related-status>
+								1 / {relatedPages}
+							</span>
+							<button
+								type="button"
+								class="blog-sidebar__pager-btn"
+								data-related-next
+								aria-label="Next related posts"
+							>
+								Next
+							</button>
+						</nav>
+					)
+				}
+			</section>
+		)
+	}
+
+	<section class="blog-sidebar__block blog-sidebar__cta">
+		<h2 class="blog-sidebar__title">Grow your business</h2>
+		<p class="blog-sidebar__cta-text">
+			Get found online, convert more leads, and automate busywork — built for local SMBs.
+		</p>
+		<a class="btn btn--primary blog-sidebar__cta-btn" href="/#contact">
+			Book a free strategy call
+		</a>
+	</section>
+</aside>
+
+<script>
+	import { initRelatedPostsPager } from '../../scripts/blog-related-pager';
+
+	initRelatedPostsPager();
+</script>

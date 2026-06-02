@@ -6,7 +6,9 @@ import react from '@astrojs/react';
 // Set SITE in Cloudflare Pages env vars (or .env) to your production URL for canonicals/OG.
 export default defineConfig({
   site: process.env.SITE ?? 'https://scaling-smb.pages.dev',
+  // Static site; `/api/booking/*` is served via `functions/` on Cloudflare (see docs/BOOKING_API.md).
   output: 'static',
+  trailingSlash: 'always',
   integrations: [react()],
   vite: {
     // Ensure the React SSR entry resolves with a proper default export in dev/build.

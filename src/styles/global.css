@@ -353,11 +353,12 @@ main.landing {
 	}
 }
 
-/* Services — sticky stack + viewport-pinned background crossfade */
+/* Services — sticky stack + single viewport-pinned background */
 .landing-services {
 	--stack-top-base: calc(var(--header-height) + 1.25rem);
 	--stack-step: 2.75rem;
 	--services-bg-height: 100vh;
+	--services-content-max: min(36rem, 100%);
 	position: relative;
 	isolation: isolate;
 	overflow: visible;
@@ -376,51 +377,20 @@ main.landing {
 	z-index: 0;
 	width: 100%;
 	height: var(--services-bg-height);
-	overflow: hidden;
-	background-color: var(--bg-subtle);
-	pointer-events: none;
-}
-
-.landing-services__bg-layer {
-	position: absolute;
-	inset: 0;
+	background-color: #eef2f8;
+	background-image: var(--services-bg-image);
 	background-size: cover;
-	background-position: center;
+	background-position: right center;
 	background-repeat: no-repeat;
-	opacity: 0;
-	transition: opacity 0.75s var(--ease-out);
-	will-change: opacity;
-}
-
-.landing-services__bg-layer.is-active {
-	opacity: 1;
-}
-
-/* Fallback when JS sets data-active-service on the section */
-.landing-services[data-active-service='0'] .landing-services__bg-layer[data-service-bg='0'],
-.landing-services[data-active-service='1'] .landing-services__bg-layer[data-service-bg='1'],
-.landing-services[data-active-service='2'] .landing-services__bg-layer[data-service-bg='2'],
-.landing-services[data-active-service='3'] .landing-services__bg-layer[data-service-bg='3'] {
-	opacity: 1;
-}
-
-.landing-services__bg-scrim {
-	position: absolute;
-	inset: 0;
-	z-index: 1;
-	background:
-		linear-gradient(
-			180deg,
-			rgba(248, 250, 255, 0.88) 0%,
-			rgba(240, 244, 255, 0.82) 35%,
-			rgba(238, 242, 248, 0.9) 100%
-		),
-		radial-gradient(
-			ellipse 90% 60% at 50% 0%,
-			rgba(255, 255, 255, 0.5) 0%,
-			transparent 70%
-		);
 	pointer-events: none;
+}
+
+@media (max-width: 899.98px) {
+	.landing-services__bg {
+		background-image: none;
+		background-color: #fff;
+		background: linear-gradient(180deg, #fff 0%, #f8faff 48%, #fff 100%);
+	}
 }
 
 .landing-services__content {
@@ -433,17 +403,24 @@ main.landing {
 .landing-services .landing-head {
 	position: relative;
 	z-index: 1;
+	max-width: var(--services-content-max);
+	margin-inline: 0;
+	text-align: left;
+}
+
+.landing-services .landing-head__title {
+	margin-inline: 0;
 }
 
 .landing-services .landing-head__title,
 .landing-services .eyebrow {
-	text-shadow: 0 1px 12px rgba(255, 255, 255, 0.85);
+	text-shadow: 0 1px 10px rgba(255, 255, 255, 0.9);
 }
 
 .services-stack {
 	position: relative;
-	max-width: 40rem;
-	margin-inline: auto;
+	max-width: var(--services-content-max);
+	margin-inline: 0;
 	padding-bottom: 0.5rem;
 }
 
@@ -499,16 +476,16 @@ main.landing {
 		0 12px 32px rgba(15, 23, 42, 0.08);
 }
 
-/* Stronger frost on top-right for title legibility */
+/* Frost bias on the left for title legibility over the photo */
 .service-card__glass::before {
 	content: '';
 	position: absolute;
 	inset: 0;
 	border-radius: inherit;
 	background: radial-gradient(
-		ellipse 75% 55% at 100% 0%,
-		rgba(255, 255, 255, 0.55) 0%,
-		rgba(255, 255, 255, 0.2) 50%,
+		ellipse 85% 70% at 0% 20%,
+		rgba(255, 255, 255, 0.5) 0%,
+		rgba(255, 255, 255, 0.15) 55%,
 		transparent 100%
 	);
 	pointer-events: none;
@@ -525,11 +502,8 @@ main.landing {
 }
 
 @media (min-width: 768px) {
-	.services-stack {
-		max-width: 44rem;
-	}
-
 	.landing-services {
+		--services-content-max: min(40rem, 52%);
 		--stack-step: 3rem;
 	}
 
@@ -553,9 +527,6 @@ main.landing {
 		display: none;
 	}
 
-	.landing-services__bg-layer {
-		transition: none;
-	}
 }
 
 .service-card__header {
@@ -1687,46 +1658,112 @@ main.landing {
 	color: var(--accent-strong) !important;
 }
 
-/* Contact */
+/* Contact — two-column booking (styles global so React island hydrates reliably) */
 .landing-contact {
-	background: #fff;
+	padding: 0 !important;
+	overflow-x: clip;
+	background: #0c1f3a;
 }
 
-.landing-contact__intro {
-	margin-bottom: clamp(2rem, 4vw, 2.75rem);
-}
-
-.landing-contact__intro-lede {
-	margin: 0.75rem auto 0;
-	max-width: 36rem;
-	font-size: 1.05rem;
-	line-height: 1.6;
-	color: var(--text-muted);
-}
-
-.landing-contact__grid {
+.landing-contact__layout {
 	display: grid;
-	gap: clamp(1.5rem, 4vw, 2rem);
-	align-items: start;
+	grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+	min-height: min(720px, 100svh);
+	width: 100%;
+	align-items: stretch;
 }
 
-@media (min-width: 960px) {
-	.landing-contact__grid {
-		grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
-		gap: clamp(2rem, 4vw, 3rem);
-	}
+.landing-contact__hero {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-height: min(720px, 100svh);
+	overflow: hidden;
+	color: #fff;
+	background: linear-gradient(165deg, #122a4f 0%, #0c1f3a 50%, #071525 100%);
 }
 
-.landing-contact__info,
-.landing-contact__booking {
-	min-width: 0;
+.landing-contact__hero-bg {
+	position: absolute;
+	inset: 0;
+	background-size: cover;
+	background-position: center 30%;
+	opacity: 0.35;
+	filter: saturate(0.7) brightness(0.65);
 }
 
-.landing-contact__info {
-	background: var(--bg-subtle);
-	border: 1px solid var(--border);
-	border-radius: var(--radius-lg);
-	padding: 1.5rem;
+.landing-contact__hero-overlay {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: linear-gradient(
+		145deg,
+		rgba(12, 31, 58, 0.92) 0%,
+		rgba(10, 26, 48, 0.94) 45%,
+		rgba(7, 21, 37, 0.96) 100%
+	);
+}
+
+.landing-contact__hero-content {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex: 1;
+	gap: clamp(1.5rem, 3vw, 2rem);
+	padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 2.75rem);
+	text-shadow:
+		0 1px 3px rgba(0, 12, 32, 0.65),
+		0 0 24px rgba(0, 12, 32, 0.35);
+}
+
+.landing-contact__eyebrow,
+.landing-contact__schedule-eyebrow {
+	margin: 0 0 0.5rem;
+	font-size: 0.68rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #6eb4ff;
+}
+
+.landing-contact__title {
+	margin: 0 0 0.75rem;
+	font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+	font-weight: 800;
+	line-height: 1.12;
+	letter-spacing: -0.03em;
+	max-width: 16ch;
+}
+
+.landing-contact__lede {
+	margin: 0;
+	font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+	line-height: 1.65;
+	color: rgba(255, 255, 255, 0.92);
+	max-width: 28rem;
+}
+
+.landing-contact__schedule-copy {
+	padding-top: 0.25rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.landing-contact__schedule-title {
+	margin: 0 0 0.4rem;
+	font-size: clamp(1.15rem, 2vw, 1.35rem);
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	line-height: 1.25;
+}
+
+.landing-contact__schedule-lede {
+	margin: 0;
+	font-size: 0.92rem;
+	line-height: 1.55;
+	color: rgba(255, 255, 255, 0.82);
+	max-width: 26rem;
 }
 
 .landing-contact__details {
@@ -1735,65 +1772,225 @@ main.landing {
 	padding: 0;
 	display: flex;
 	flex-direction: column;
-	gap: 1.25rem;
+	gap: 1.1rem;
 }
 
-.landing-contact__details li {
+.landing-contact__detail {
 	display: flex;
-	flex-direction: column;
-	gap: 0.2rem;
+	align-items: flex-start;
+	gap: 0.85rem;
+}
+
+.landing-contact__detail-icon {
+	flex-shrink: 0;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: rgba(0, 85, 255, 0.35);
+	border: 1px solid rgba(110, 180, 255, 0.35);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #8ec5ff;
 }
 
 .landing-contact__label {
+	display: block;
 	font-size: 0.72rem;
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.06em;
-	color: var(--text-muted);
+	color: rgba(255, 255, 255, 0.65);
+	margin-bottom: 0.15rem;
 }
 
-.landing-contact__details a,
-.landing-contact__details li > span:not(.landing-contact__label) {
-	font-weight: 600;
+.landing-contact__value {
 	font-size: 0.95rem;
-	color: var(--text);
-	line-height: 1.4;
-}
-
-.landing-contact__details a {
+	font-weight: 600;
+	color: #fff !important;
 	text-decoration: none;
+	line-height: 1.4;
 	word-break: break-word;
 }
 
-.landing-contact__details a:hover {
-	color: var(--accent);
+a.landing-contact__value:hover {
+	color: #8ec5ff !important;
 	text-decoration: underline;
 }
 
-.landing-contact__booking-label {
-	margin: 0 0 0.35rem;
-	font-size: 1.1rem;
-	font-weight: 800;
-	letter-spacing: -0.02em;
-	color: var(--text);
+.landing-contact__booking {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+	align-self: stretch;
+	min-height: min(720px, 100svh);
+	padding: clamp(2rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.5rem);
+	background: linear-gradient(165deg, #122a4f 0%, #0c1f3a 50%, #071525 100%);
+	border-left: 1px solid rgba(110, 180, 255, 0.14);
 }
 
-.landing-contact__booking-lede {
-	margin: 0 0 1rem;
-	font-size: 0.92rem;
-	color: var(--text-muted);
-	line-height: 1.55;
-	max-width: 40rem;
+.landing-contact__booking::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: radial-gradient(
+		ellipse 90% 55% at 50% 0%,
+		rgba(37, 99, 235, 0.14) 0%,
+		transparent 62%
+	);
 }
 
-.landing-contact__scheduler {
-	min-width: 0;
+.consultation-booking {
+	position: relative;
+	z-index: 1;
 	width: 100%;
+	max-width: 720px;
+	margin-inline: auto;
+	min-width: 0;
+	min-height: 380px;
+	flex: 0 0 auto;
 }
 
-.landing-contact__scheduler > * {
-	max-width: 100%;
-	min-width: 0;
+.consultation-booking astro-island {
+	display: block !important;
+	width: 100% !important;
+	min-height: 380px;
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+/* Shown until React calendar mounts (client:only) */
+.scheduler-fallback {
+	width: 100%;
+	min-height: 380px;
+}
+
+.scheduler-fallback__card {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+	gap: 1.25rem;
+	padding: 1.25rem;
+	background: #fff;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-lg, 12px);
+	box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+}
+
+.scheduler-fallback__meeting,
+.scheduler-fallback__calendar {
+	display: flex;
+	flex-direction: column;
+	gap: 0.65rem;
+}
+
+.scheduler-fallback__icon {
+	width: 44px;
+	height: 44px;
+	border-radius: 10px;
+	background: linear-gradient(110deg, #e8eef5 25%, #f4f7fb 50%, #e8eef5 75%);
+	background-size: 200% 100%;
+	animation: scheduler-shimmer 1.4s ease-in-out infinite;
+}
+
+.scheduler-fallback__line {
+	height: 12px;
+	border-radius: 6px;
+	background: linear-gradient(110deg, #e8eef5 25%, #f4f7fb 50%, #e8eef5 75%);
+	background-size: 200% 100%;
+	animation: scheduler-shimmer 1.4s ease-in-out infinite;
+}
+
+.scheduler-fallback__line--title {
+	width: 72%;
+	height: 16px;
+}
+
+.scheduler-fallback__line--short {
+	width: 45%;
+}
+
+.scheduler-fallback__steps {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.scheduler-fallback__steps span {
+	flex: 1;
+	height: 28px;
+	border-radius: 6px;
+	background: linear-gradient(110deg, #e8eef5 25%, #f4f7fb 50%, #e8eef5 75%);
+	background-size: 200% 100%;
+	animation: scheduler-shimmer 1.4s ease-in-out infinite;
+}
+
+.scheduler-fallback__grid {
+	flex: 1;
+	min-height: 200px;
+	border-radius: 8px;
+	background: linear-gradient(110deg, #e8eef5 25%, #f4f7fb 50%, #e8eef5 75%);
+	background-size: 200% 100%;
+	animation: scheduler-shimmer 1.4s ease-in-out infinite;
+}
+
+.scheduler-fallback__label {
+	margin: 0.75rem 0 0;
+	text-align: center;
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: var(--muted, #64748b);
+}
+
+.landing-contact__booking .scheduler-fallback__label {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.landing-contact__booking .scheduler-fallback__line,
+.landing-contact__booking .scheduler-fallback__icon,
+.landing-contact__booking .scheduler-fallback__steps span,
+.landing-contact__booking .scheduler-fallback__grid {
+	background: linear-gradient(
+		110deg,
+		rgba(255, 255, 255, 0.06) 25%,
+		rgba(255, 255, 255, 0.14) 50%,
+		rgba(255, 255, 255, 0.06) 75%
+	);
+	background-size: 200% 100%;
+}
+
+@keyframes scheduler-shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+@media (max-width: 640px) {
+	.scheduler-fallback__card {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 959.98px) {
+	.landing-contact__layout {
+		grid-template-columns: 1fr;
+		min-height: auto;
+	}
+
+	.landing-contact__hero {
+		min-height: min(68vh, 520px);
+	}
+
+	.landing-contact__booking {
+		min-height: auto;
+		border-left: 0;
+		border-top: 1px solid rgba(110, 180, 255, 0.14);
+	}
 }
 
 /* Footer */

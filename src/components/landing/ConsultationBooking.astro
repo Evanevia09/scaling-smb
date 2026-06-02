@@ -1,0 +1,40 @@
+---
+import ConsultationScheduler from '../react/ConsultationScheduler.tsx';
+import type { ConsultationSchedulerProps } from '../react/ConsultationScheduler.tsx';
+
+type Props = Omit<ConsultationSchedulerProps, 'apiBaseUrl' | 'useBookingApi'>;
+
+const apiBaseUrl = import.meta.env.PUBLIC_BOOKING_API_BASE ?? '/api/booking';
+const useBookingApi = import.meta.env.PUBLIC_BOOKING_API_ENABLED !== 'false';
+
+const props = Astro.props;
+---
+
+<div class="consultation-booking">
+	<ConsultationScheduler
+		client:only="react"
+		{...props}
+		apiBaseUrl={apiBaseUrl}
+		useBookingApi={useBookingApi}
+	>
+		<div slot="fallback" class="scheduler-fallback" aria-hidden="true">
+			<div class="scheduler-fallback__card">
+				<aside class="scheduler-fallback__meeting">
+					<div class="scheduler-fallback__icon" />
+					<div class="scheduler-fallback__line scheduler-fallback__line--title" />
+					<div class="scheduler-fallback__line scheduler-fallback__line--short" />
+					<div class="scheduler-fallback__line" />
+					<div class="scheduler-fallback__line" />
+				</aside>
+				<div class="scheduler-fallback__calendar">
+					<div class="scheduler-fallback__steps">
+						<span /><span /><span />
+					</div>
+					<div class="scheduler-fallback__line scheduler-fallback__line--title" />
+					<div class="scheduler-fallback__grid" />
+				</div>
+			</div>
+			<p class="scheduler-fallback__label">Loading booking calendar…</p>
+		</div>
+	</ConsultationScheduler>
+</div>

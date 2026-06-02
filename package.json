@@ -9,6 +9,7 @@
 		"dev": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
+		"dev:pages": "npm run build && wrangler pages dev dist",
 		"astro": "astro"
 	},
 	"dependencies": {

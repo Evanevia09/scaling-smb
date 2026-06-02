@@ -1,60 +1,105 @@
 ---
 import { contact, contactFormServiceOptions } from '../../content/site';
-import ConsultationScheduler from '../react/ConsultationScheduler.tsx';
+import ConsultationBooking from './ConsultationBooking.astro';
+import bookNowBg from '../../Images/book-now-bg.jpeg';
 
 const { scheduling } = contact;
 ---
 
 <section class="landing-section landing-contact" id="contact" aria-labelledby="contact-title">
-	<div class="landing-wrap">
-		<header class="landing-head landing-head--center landing-contact__intro" data-reveal>
-			<p class="eyebrow">{contact.eyebrow}</p>
-			<h2 id="contact-title" class="landing-head__title">{contact.title}</h2>
-			<p class="landing-contact__intro-lede">{contact.lede}</p>
-		</header>
+	<div class="landing-contact__layout">
+		<aside class="landing-contact__hero" aria-label="Contact information">
+			<div
+				class="landing-contact__hero-bg"
+				style={`background-image: url('${bookNowBg.src}')`}
+				role="presentation"
+			/>
+			<div class="landing-contact__hero-overlay" aria-hidden="true" />
 
-		<div class="landing-contact__grid">
-			<aside class="landing-contact__info" data-reveal aria-label="Contact details">
-				<ul class="landing-contact__details">
-					<li>
-						<span class="landing-contact__label">Email</span>
-						<a href={`mailto:${contact.email}`}>{contact.email}</a>
+			<div class="landing-contact__hero-content">
+				<div class="landing-contact__copy" data-reveal>
+					<p class="landing-contact__eyebrow">{contact.eyebrow}</p>
+					<h2 id="contact-title" class="landing-contact__title">{contact.title}</h2>
+					<p class="landing-contact__lede">{contact.lede}</p>
+				</div>
+
+				<div class="landing-contact__schedule-copy" data-reveal>
+					<p class="landing-contact__schedule-eyebrow">{contact.scheduleEyebrow}</p>
+					<h3 class="landing-contact__schedule-title">{contact.scheduleTitle}</h3>
+					<p class="landing-contact__schedule-lede">{contact.scheduleLede}</p>
+				</div>
+
+				<ul class="landing-contact__details" data-reveal>
+					<li class="landing-contact__detail">
+						<span class="landing-contact__detail-icon" aria-hidden="true">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+								<path d="M4 6h16v12H4z" />
+								<path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</span>
+						<div>
+							<span class="landing-contact__label">Email</span>
+							<a class="landing-contact__value" href={`mailto:${contact.email}`}>{contact.email}</a>
+						</div>
 					</li>
-					<li>
-						<span class="landing-contact__label">Phone</span>
-						<a href={`tel:${contact.phoneTel}`}>{contact.phoneDisplay}</a>
+					<li class="landing-contact__detail">
+						<span class="landing-contact__detail-icon" aria-hidden="true">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+								<path
+									d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+							</svg>
+						</span>
+						<div>
+							<span class="landing-contact__label">Phone</span>
+							<a class="landing-contact__value" href={`tel:${contact.phoneTel}`}>{contact.phoneDisplay}</a>
+						</div>
 					</li>
-					<li>
-						<span class="landing-contact__label">Location</span>
-						<span>{contact.location}</span>
+					<li class="landing-contact__detail">
+						<span class="landing-contact__detail-icon" aria-hidden="true">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+								<path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" />
+								<circle cx="12" cy="10" r="2.2" />
+							</svg>
+						</span>
+						<div>
+							<span class="landing-contact__label">Location</span>
+							<span class="landing-contact__value">{contact.location}</span>
+						</div>
 					</li>
-					<li>
-						<span class="landing-contact__label">Hours</span>
-						<span>{contact.businessHours}</span>
+					<li class="landing-contact__detail">
+						<span class="landing-contact__detail-icon" aria-hidden="true">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+								<circle cx="12" cy="12" r="9" />
+								<path d="M12 7v5l3 2" stroke-linecap="round" />
+							</svg>
+						</span>
+						<div>
+							<span class="landing-contact__label">Hours</span>
+							<span class="landing-contact__value">{contact.businessHours}</span>
+						</div>
 					</li>
 				</ul>
-			</aside>
-
-			<div class="landing-contact__booking" data-reveal>
-				<p class="landing-contact__booking-label">{contact.scheduleTitle}</p>
-				<p class="landing-contact__booking-lede">{contact.scheduleLede}</p>
-				<div class="landing-contact__scheduler">
-					<ConsultationScheduler
-						client:visible
-						meetingTitle={scheduling.meetingTitle}
-						duration={scheduling.duration}
-						description={scheduling.description}
-						features={[...scheduling.features]}
-						timeSlots={[...scheduling.timeSlots]}
-						timezones={[...scheduling.timezones]}
-						serviceOptions={contactFormServiceOptions}
-						stepLabels={[...scheduling.steps]}
-						stepTitles={scheduling.stepTitles}
-						success={scheduling.success}
-						contactEmail={contact.email}
-					/>
-				</div>
 			</div>
+		</aside>
+
+		<div class="landing-contact__booking">
+			<ConsultationBooking
+				meetingTitle={scheduling.meetingTitle}
+				duration={scheduling.duration}
+				description={scheduling.description}
+				features={[...scheduling.features]}
+				timeSlots={[...scheduling.timeSlots]}
+				blockedTimeSlots={[...scheduling.blockedTimeSlots]}
+				timezones={[...scheduling.timezones]}
+				serviceOptions={contactFormServiceOptions}
+				stepLabels={[...scheduling.steps]}
+				stepTitles={scheduling.stepTitles}
+				success={scheduling.success}
+				contactEmail={contact.email}
+			/>
 		</div>
 	</div>
 </section>

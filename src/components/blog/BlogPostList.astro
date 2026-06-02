@@ -1,0 +1,51 @@
+---
+import type { BlogPost } from '../../lib/blog';
+import { categoryHref, formatDate, postHref } from '../../lib/blog';
+import BlogFeaturedImage from './BlogFeaturedImage.astro';
+
+type Props = {
+	posts: BlogPost[];
+};
+
+const { posts } = Astro.props;
+---
+
+<ul class="blog-card-list">
+	{
+		posts.map((post) => (
+			<li>
+				<article class="blog-index-card">
+					<a class="blog-index-card__media" href={postHref(post.id)} tabindex="-1" aria-hidden="true">
+						<BlogFeaturedImage post={post} variant="card" />
+					</a>
+					<div class="blog-index-card__body">
+					<div class="blog-index-card__meta">
+						<a class="blog-index-card__category" href={categoryHref(post.data.category)}>
+							{post.data.category}
+						</a>
+						<span class="blog-index-card__dot" aria-hidden="true">
+							·
+						</span>
+						<time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+						{post.data.readTime && (
+							<>
+								<span class="blog-index-card__dot" aria-hidden="true">
+									·
+								</span>
+								<span>{post.data.readTime}</span>
+							</>
+						)}
+					</div>
+					<h2 class="blog-index-card__title">
+						<a class="blog-index-card__link" href={postHref(post.id)}>
+							{post.data.title}
+						</a>
+					</h2>
+					<p class="blog-index-card__excerpt">{post.data.description}</p>
+					{post.data.readTime && <p class="blog-index-card__read">{post.data.readTime}</p>}
+					</div>
+				</article>
+			</li>
+		))
+	}
+</ul>

@@ -1,0 +1,32 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogPagination from '../../components/blog/BlogPagination.astro';
+import BlogPostList from '../../components/blog/BlogPostList.astro';
+import { blogIndex } from '../../content/site';
+import { BLOG_LIST_PAGE_SIZE, getPublishedPosts, paginate } from '../../lib/blog';
+
+const posts = await getPublishedPosts();
+const totalPages = Math.max(1, Math.ceil(posts.length / BLOG_LIST_PAGE_SIZE));
+const { items } = paginate(posts, 1, BLOG_LIST_PAGE_SIZE);
+const title = `${blogIndex.title} | Scaling SMB`;
+const description = blogIndex.description;
+---
+
+<BlogLayout title={title} description={description} posts={posts}>
+	<header class="blog-index-head">
+		<p class="eyebrow">{blogIndex.eyebrow}</p>
+		<h1 class="blog-index-head__title">{blogIndex.title}</h1>
+		<p class="blog-index-head__lede">{blogIndex.lede}</p>
+	</header>
+
+	{
+		posts.length === 0 ? (
+			<p class="blog-empty">No posts yet. Add markdown files to <code>src/content/blog/</code>.</p>
+		) : (
+			<>
+				<BlogPostList posts={items} />
+				<BlogPagination page={1} totalPages={totalPages} />
+			</>
+		)
+	}
+</BlogLayout>

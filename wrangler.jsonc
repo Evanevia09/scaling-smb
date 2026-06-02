@@ -1,5 +1,13 @@
 {
 	"name": "scaling-smb",
 	"compatibility_date": "2025-06-01",
-	"pages_build_output_dir": "./dist"
+	"pages_build_output_dir": "./dist",
+	// Uncomment when wiring D1 for bookings:
+	// "d1_databases": [
+	// 	{
+	// 		"binding": "BOOKINGS_D1",
+	// 		"database_name": "scaling-smb-bookings",
+	// 		"database_id": "<YOUR_D1_ID>"
+	// 	}
+	// ]
 }

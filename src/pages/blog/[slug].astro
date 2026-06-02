@@ -1,0 +1,97 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogPostCta from '../../components/blog/BlogPostCta.astro';
+import BlogFeaturedImage from '../../components/blog/BlogFeaturedImage.astro';
+import BlogShare from '../../components/blog/BlogShare.astro';
+import {
+	categoryHref,
+	formatDate,
+	getFeaturedImageOgUrl,
+	getPostCanonicalUrl,
+	getPublishedPosts,
+	postHref,
+} from '../../lib/blog';
+
+export async function getStaticPaths() {
+	const entries = await getCollection('blog', ({ data }) => data.draft !== true);
+	return entries.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const posts = await getPublishedPosts();
+const { title, description, pubDate, updatedDate, category, readTime } = entry.data;
+const pageTitle = `${title} | Scaling SMB`;
+const canonicalUrl = getPostCanonicalUrl(entry.id, Astro.site);
+const ogImage = getFeaturedImageOgUrl(entry, Astro.site);
+---
+
+<BlogLayout
+	title={pageTitle}
+	description={description}
+	posts={posts}
+	sidebar="article"
+	currentPost={entry}
+	ogImage={ogImage}
+>
+	<article class="blog-article">
+		<nav class="blog-article__breadcrumb" aria-label="Breadcrumb">
+			<a href="/blog/">Blog</a>
+			<span aria-hidden="true"> / </span>
+			<a href={categoryHref(category)}>{category}</a>
+		</nav>
+
+		<BlogFeaturedImage post={entry} variant="hero" />
+
+		<header class="blog-article__header">
+			<div class="blog-article__meta">
+				<a class="blog-article__category" href={categoryHref(category)}>{category}</a>
+				<span aria-hidden="true">·</span>
+				<time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+				{readTime && (
+					<>
+						<span aria-hidden="true">·</span>
+						<span>{readTime}</span>
+					</>
+				)}
+				{updatedDate && (
+					<>
+						<span aria-hidden="true">·</span>
+						<span>Updated {formatDate(updatedDate)}</span>
+					</>
+				)}
+			</div>
+			<h1 class="blog-article__title">{title}</h1>
+			<p class="blog-article__description">{description}</p>
+			<BlogShare title={title} url={canonicalUrl} />
+		</header>
+
+		<div class="blog-article__body">
+			<Content />
+		</div>
+
+		<BlogPostCta />
+	</article>
+</BlogLayout>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: title,
+	description,
+	datePublished: pubDate.toISOString(),
+	...(updatedDate && { dateModified: updatedDate.toISOString() }),
+	mainEntityOfPage: {
+		'@type': 'WebPage',
+		'@id': canonicalUrl,
+	},
+	image: ogImage,
+	publisher: {
+		'@type': 'Organization',
+		name: 'Scaling SMB',
+	},
+})} />

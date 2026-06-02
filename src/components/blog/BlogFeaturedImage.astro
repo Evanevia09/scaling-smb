@@ -1,0 +1,25 @@
+---
+import type { BlogPost } from '../../lib/blog';
+import { getFeaturedImageAlt, getFeaturedImageSrc } from '../../lib/blog';
+
+type Props = {
+	post: BlogPost;
+	variant?: 'hero' | 'card';
+};
+
+const { post, variant = 'hero' } = Astro.props;
+const src = getFeaturedImageSrc(post);
+const alt = getFeaturedImageAlt(post);
+---
+
+<figure class:list={['blog-featured-image', `blog-featured-image--${variant}`]}>
+	<img
+		class="blog-featured-image__img"
+		src={src}
+		alt={alt}
+		width={1200}
+		height={630}
+		loading={variant === 'hero' ? 'eager' : 'lazy'}
+		decoding="async"
+	/>
+</figure>

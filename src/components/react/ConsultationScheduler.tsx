@@ -1,4 +1,6 @@
-import { useMemo, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { toDateKey } from '../../lib/booking/dates';
+import { useBookingApi } from '../../lib/booking/react';
 import styles from './ConsultationScheduler.module.css';
 
 export type TimezoneOption = { value: string; label: string };
@@ -9,6 +11,7 @@ export type ConsultationSchedulerProps = {
 	description: string;
 	features: string[];
 	timeSlots: string[];
+	blockedTimeSlots?: string[];
 	timezones: TimezoneOption[];
 	serviceOptions: string[];
 	stepLabels: string[];
@@ -22,6 +25,10 @@ export type ConsultationSchedulerProps = {
 		message: string;
 	};
 	contactEmail: string;
+	/** Base URL for booking API, e.g. `/api/booking` */
+	apiBaseUrl?: string;
+	/** When false, uses props + mailto only (no API calls) */
+	useBookingApi?: boolean;
 };
 
 const WEEKDAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'] as const;
@@ -50,16 +57,27 @@ export default function ConsultationScheduler({
 	description,
 	features,
 	timeSlots,
+	blockedTimeSlots = [],
 	timezones,
 	serviceOptions,
 	stepLabels,
 	stepTitles,
 	success,
 	contactEmail,
+	apiBaseUrl = '/api/booking',
+	useBookingApi: useBookingApiProp = true,
 }: ConsultationSchedulerProps) {
-	const today = useMemo(() => startOfDay(new Date()), []);
+	// Anchor calendar on the client so SSR/build timezone never mismatches hydration.
+	const [today, setToday] = useState<Date | null>(null);
+	useEffect(() => {
+		setToday(startOfDay(new Date()));
+	}, []);
+
 	const [step, setStep] = useState(1);
-	const [viewDate, setViewDate] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
+	const [viewDate, setViewDate] = useState(() => {
+		const now = new Date();
+		return new Date(now.getFullYear(), now.getMonth(), 1);
+	});
 	const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 	const [selectedTime, setSelectedTime] = useState<string | null>(null);
 	const [timezone, setTimezone] = useState(timezones[0]?.value ?? 'Asia/Macau');
@@ -70,6 +88,22 @@ export default function ConsultationScheduler({
 	const [message, setMessage] = useState('');
 	const [submitted, setSubmitted] = useState(false);
 	const [formError, setFormError] = useState<string | null>(null);
+	const [submitting, setSubmitting] = useState(false);
+
+	const bookingApi = useBookingApi({
+		baseUrl: apiBaseUrl,
+		enabled: useBookingApiProp,
+	});
+
+	useEffect(() => {
+		if (!selectedDate) return;
+		void bookingApi.refreshAvailability(selectedDate, timezone);
+	}, [selectedDate, timezone, bookingApi.ready]);
+
+	const effectiveBlocked = useMemo(() => {
+		if (bookingApi.config) return [...bookingApi.config.blockedTimeSlots];
+		return [...blockedTimeSlots];
+	}, [bookingApi.config, blockedTimeSlots]);
 
 	const monthLabel = viewDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
@@ -99,8 +133,35 @@ export default function ConsultationScheduler({
 
 	const timezoneLabel = timezones.find((t) => t.value === timezone)?.label ?? timezone;
 
+	const blockedSet = useMemo(() => new Set(effectiveBlocked), [effectiveBlocked]);
+
+	function isTimeSlotBookable(slot: string): boolean {
+		if (bookingApi.ready && selectedDate) {
+			return bookingApi.isSlotBookable(slot);
+		}
+		return !blockedSet.has(slot);
+	}
+
 	function isAvailable(date: Date): boolean {
+		if (!today) return false;
 		return date >= today && isWeekday(date);
+	}
+
+	if (!today) {
+		return (
+			<div className={styles.card} aria-busy="true" aria-label="Loading booking calendar">
+				<div className={styles.cardInner}>
+					<aside className={styles.meeting}>
+						<div className={styles.meetingIcon} aria-hidden />
+						<h3 className={styles.meetingTitle}>{meetingTitle}</h3>
+						<p className={styles.meetingDuration}>{duration}</p>
+					</aside>
+					<div className={styles.calendarPane}>
+						<p className={styles.calendarTitle}>Loading calendar…</p>
+					</div>
+				</div>
+			</div>
+		);
 	}
 
 	function goMonth(delta: number): void {
@@ -115,7 +176,7 @@ export default function ConsultationScheduler({
 
 	function canAdvance(): boolean {
 		if (step === 1) return selectedDate !== null;
-		if (step === 2) return selectedTime !== null;
+		if (step === 2) return selectedTime !== null && isTimeSlotBookable(selectedTime);
 		return false;
 	}
 
@@ -129,12 +190,17 @@ export default function ConsultationScheduler({
 		if (step > 1) setStep((s) => s - 1);
 	}
 
-	function handleSubmit(e: FormEvent): void {
+	async function handleSubmit(e: FormEvent): Promise<void> {
 		e.preventDefault();
 		setFormError(null);
 
 		if (!selectedDate || !selectedTime) {
 			setFormError('Please complete date and time selection.');
+			return;
+		}
+
+		if (!isTimeSlotBookable(selectedTime)) {
+			setFormError('That time is unavailable. Please choose another slot.');
 			return;
 		}
 
@@ -153,6 +219,31 @@ export default function ConsultationScheduler({
 		if (!service) {
 			setFormError('Please select a service.');
 			return;
+		}
+
+		const payload = {
+			date: toDateKey(selectedDate),
+			time: selectedTime,
+			timezone,
+			name: trimmedName,
+			email: trimmedEmail,
+			phone: phone.trim() || undefined,
+			service,
+			message: message.trim() || undefined,
+		};
+
+		if (bookingApi.ready) {
+			setSubmitting(true);
+			try {
+				await bookingApi.createBooking(payload);
+				setSubmitted(true);
+				return;
+			} catch (err) {
+				const msg = err instanceof Error ? err.message : 'Could not submit booking';
+				setFormError(msg);
+				setSubmitting(false);
+				return;
+			}
 		}
 
 		const subject = encodeURIComponent(
@@ -347,18 +438,30 @@ export default function ConsultationScheduler({
 									<div className={styles.times}>
 										<p className={styles.timesLabel}>Available times</p>
 										<div className={styles.timeGrid}>
-											{timeSlots.map((slot) => (
-												<button
-													key={slot}
-													type="button"
-													className={
-														selectedTime === slot ? styles.timeSlotActive : styles.timeSlot
-													}
-													onClick={() => setSelectedTime(slot)}
-												>
-													{slot}
-												</button>
-											))}
+											{(bookingApi.config?.timeSlots ?? timeSlots).map((slot) => {
+												const blocked = !isTimeSlotBookable(slot);
+												const selected = selectedTime === slot;
+												return (
+													<button
+														key={slot}
+														type="button"
+														className={[
+															blocked
+																? styles.timeSlotBlocked
+																: selected
+																	? styles.timeSlotActive
+																	: styles.timeSlot,
+														]
+															.filter(Boolean)
+															.join(' ')}
+														disabled={blocked || bookingApi.loading}
+														aria-disabled={blocked}
+														onClick={() => setSelectedTime(slot)}
+													>
+														{slot}
+													</button>
+												);
+											})}
 										</div>
 									</div>
 								</div>
@@ -443,8 +546,8 @@ export default function ConsultationScheduler({
 										<button type="button" className={styles.backBtn} onClick={goBack}>
 											Back
 										</button>
-										<button type="submit" className={styles.confirmBtn}>
-											Submit booking
+										<button type="submit" className={styles.confirmBtn} disabled={submitting}>
+											{submitting ? 'Submitting…' : 'Submit booking'}
 										</button>
 									</div>
 								</form>
