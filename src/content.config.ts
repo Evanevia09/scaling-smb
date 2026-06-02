@@ -13,7 +13,7 @@ const blog = defineCollection({
 		tags: z.array(z.string()).default([]),
 		draft: z.boolean().default(false),
 		readTime: z.string().optional(),
-		/** Public path e.g. /images/blog/featured/local-seo.svg — omit to use category placeholder */
+		/** Public path e.g. /images/blog/featured/ai-employees.jpeg — omit to use category default (see src/Images/blog-featured-images/) */
 		featuredImage: z.string().optional(),
 		featuredImageAlt: z.string().optional(),
 	}),

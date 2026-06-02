@@ -78,12 +78,44 @@ docs/
   BOOKING_API.md    # endpoint reference + Cloudflare wiring
 public/
   _redirects        # /blog → /blog/ 301
+  images/blog/featured/  # built JPEGs + SVG placeholders served to the site
+src/Images/blog-featured-images/  # source photos for blog featured images (see below)
 ```
 
 ## Content
 
 - **Site copy** — `src/content/site.ts` (nav, services, contact, scheduling, blocked time slots)
 - **Blog posts** — `src/content/blog/*.md` (frontmatter: title, description, category, date, etc.)
+
+### Blog featured images
+
+**Source files (add new photos here):**
+
+```
+src/Images/blog-featured-images/
+  AI Employees.jpeg
+  Business Growth.jpeg
+  software-development.jpeg   # source filename: sofware-development.jpeg
+```
+
+**Published paths** (copy into `public/` so Astro can serve them):
+
+| Source | Public URL | Used for category |
+|--------|------------|-------------------|
+| `AI Employees.jpeg` | `/images/blog/featured/ai-employees.jpeg` | AI Employees |
+| `Business Growth.jpeg` | `/images/blog/featured/business-growth.jpeg` | Business Growth |
+| `sofware-development.jpeg` | `/images/blog/featured/software-development.jpeg` | Web Application |
+
+Other categories (Local SEO, Website) still use SVG placeholders in `public/images/blog/featured/` until you add photos.
+
+**Wire-up** is in `src/lib/blog.ts` (`CATEGORY_FEATURED_IMAGES`). Override per post in frontmatter:
+
+```yaml
+featuredImage: /images/blog/featured/ai-employees.jpeg
+featuredImageAlt: Optional custom alt text
+```
+
+After adding or replacing a source JPEG, copy it to `public/images/blog/featured/` with a URL-safe name, then update `blog.ts` or the post frontmatter.
 
 ## Booking API
 
