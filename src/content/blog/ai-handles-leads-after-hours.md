@@ -42,4 +42,4 @@ The best setups flag conversations that need a person: angry tone, custom reques
 - % of chats resolved without human intervention
 - Booked calls from after-hours conversations
 
-Speed builds trust. AI gives local businesses enterprise-level responsiveness without enterprise-level headcount.
+Speed builds trust. AI gives local businesses enterprise-level responsiveness without enterprise-level headcount — but only when deployed as a dedicated employee with real access to your systems. [Here is why that distinction matters](/blog/dedicated-ai-employee-vs-chatbot/).

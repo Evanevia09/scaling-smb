@@ -144,7 +144,7 @@ Most businesses see meaningful movement in **60–90 days** when fundamentals ar
 
 ## How Scaling SMB approaches Local SEO
 
-At Scaling SMB, **Local SEO** is built for businesses that need more calls and visits from nearby customers—not vanity rankings. We align Google Business Profile, on-site location pages, citations, and review systems with how you actually operate, then measure calls, directions, and booked work.
+At Scaling SMB, **Local SEO** is built for businesses that need more calls and visits from nearby customers—not vanity rankings. For a real-world look at how these fundamentals shift in a hyper-dense market, read our [Hong Kong Local SEO case study](/blog/local-seo-hong-kong-hyper-dense-market/). We align Google Business Profile, on-site location pages, citations, and review systems with how you actually operate, then measure calls, directions, and booked work.
 
 If you are invisible on Maps while competitors fill the top three spots, that is usually a fixable foundation problem—not a reason to pour money into ads alone.
 

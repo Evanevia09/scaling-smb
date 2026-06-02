@@ -36,4 +36,4 @@ Watch these weekly:
 2. Calls and direction requests from GBP
 3. Website clicks from your profile
 
-Small improvements compound. Most businesses see movement within 60–90 days when the basics are done consistently.
+Small improvements compound. Most businesses see movement within 60–90 days when the basics are done consistently. In hyper-dense markets, the ranking factors change — see our [Hong Kong Local SEO breakdown](/blog/local-seo-hong-kong-hyper-dense-market/) for how.

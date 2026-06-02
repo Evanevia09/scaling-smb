@@ -17,7 +17,7 @@ featuredImageAlt: 'Night view of Hong Kong skyline from a high-rise office, with
 
 I have optimized Google Business Profiles for over 30 Hong Kong businesses — dental clinics in Central, plumbers covering Kowloon, real estate agents in Causeway Bay, law firms in Admiralty. And I can tell you with confidence: most Local SEO advice you find online was written for a different market.
 
-The standard playbook — "fill out your GBP completely, get reviews, build citations" — assumes you compete in a market where the map pack shows 3 results and the next closest competitor is 2 kilometres away. In Hong Kong, a search for "plumber Tsim Sha Tsui" returns 15 results within a 500-metre radius. The top 3 are not the most "optimized." They are the ones that survived a much more specific set of signals.
+The standard playbook — covering [GBP, citations, and reviews in detail](/blog/complete-local-seo-guide-small-business/) — assumes you compete in a market where the map pack shows 3 results and the next closest competitor is 2 kilometres away. In Hong Kong, a search for "plumber Tsim Sha Tsui" returns 15 results within a 500-metre radius. The top 3 are not the most "optimized." They are the ones that survived a much more specific set of signals.
 
 Here is what I have actually seen move rankings in Hong Kong — and what the generic checklist misses.
 
@@ -25,7 +25,7 @@ Here is what I have actually seen move rankings in Hong Kong — and what the ge
 
 Hong Kong is one of the most physically dense markets on Google Maps. In Tsim Sha Tsui alone, there are more registered businesses per square kilometre than in most US city centres. Google's local algorithm weights distance heavily, but when every competitor is within walking distance of the searcher, distance stops being a differentiator.
 
-That means the standard "proximity is king" advice becomes useless. When distance is equal, Google falls back to:
+That means the standard [Google Maps ranking advice](/blog/google-maps-ranking-local-business/) — built on basics like GBP completion and proximity — becomes useless. When distance is equal, Google falls back to:
 
 1. Relevance precision — How exactly does your profile match the query?
 2. Engagement velocity — How recently are people interacting with your profile?
