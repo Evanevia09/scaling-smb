@@ -11,7 +11,8 @@
  *   COMPOSIO_GMAIL_ID          — connected account ID for Gmail
  */
 
-const COMPOSIO_BASE = 'https://backend.composio.dev/api/v1/actions/execute';
+const COMPOSIO_BASE = 'https://backend.composio.dev/api/v3.1';
+const COMPOSIO_USER_ID = 'scaling-smb-evan';
 
 interface ComposioEnv {
   COMPOSIO_API_KEY: string;
@@ -19,7 +20,7 @@ interface ComposioEnv {
   COMPOSIO_GMAIL_ID: string;
 }
 
-function requireEnv(env: Record<string, unknown>): ComposioEnv {
+function requireEnv(env: Record<string, unknown>): ComposioEnv & { apiKey: string } {
   const apiKey = env.COMPOSIO_API_KEY as string | undefined;
   const gcalId = env.COMPOSIO_GCAL_ID as string | undefined;
   const gmailId = env.COMPOSIO_GMAIL_ID as string | undefined;
@@ -28,28 +29,32 @@ function requireEnv(env: Record<string, unknown>): ComposioEnv {
   if (!gcalId) throw new Error('Missing COMPOSIO_GCAL_ID env var');
   if (!gmailId) throw new Error('Missing COMPOSIO_GMAIL_ID env var');
 
-  return { COMPOSIO_API_KEY: apiKey, COMPOSIO_GCAL_ID: gcalId, COMPOSIO_GMAIL_ID: gmailId };
+  return { COMPOSIO_API_KEY: apiKey, COMPOSIO_GCAL_ID: gcalId, COMPOSIO_GMAIL_ID: gmailId, apiKey };
 }
 
 async function callComposio(
-  actionName: string,
+  toolSlug: string,
   params: Record<string, unknown>,
   connectedAccountId: string,
   apiKey: string,
 ): Promise<unknown> {
-  const url = `${COMPOSIO_BASE}?actionName=${actionName}&connectedAccountId=${connectedAccountId}`;
+  const url = `${COMPOSIO_BASE}/tools/execute/${toolSlug}`;
   const res = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'x-api-key': apiKey,
     },
-    body: JSON.stringify({ input: params }),
+    body: JSON.stringify({
+      connected_account_id: connectedAccountId,
+      user_id: COMPOSIO_USER_ID,
+      arguments: params,
+    }),
   });
 
   if (!res.ok) {
     const err = await res.text().catch(() => `${res.status} ${res.statusText}`);
-    throw new Error(`Composio ${actionName} failed (${res.status}): ${err}`);
+    throw new Error(`Composio ${toolSlug} failed (${res.status}): ${err}`);
   }
 
   const json: unknown = await res.json();
@@ -62,24 +67,22 @@ function extractMeetLink(response: unknown): string | null {
   const data = (response as Record<string, unknown>).data as Record<string, unknown> | undefined;
   const responseData = data?.response_data as Record<string, unknown> | undefined;
 
-  // Try hangoutLink first (simpler when it's a personal Gmail)
+  // Try conferenceData.entryPoints[0].uri (v3.1 API)
+  const confData = responseData?.conferenceData as Record<string, unknown> | undefined;
+  const entryPoints = confData?.entryPoints as Array<Record<string, unknown>> | undefined;
+  const uri = entryPoints?.[0]?.uri;
+  if (typeof uri === 'string') return uri;
+
+  // Fallback: hangoutLink
   const hangoutLink =
     typeof responseData?.hangoutLink === 'string'
       ? responseData.hangoutLink
       : typeof data?.hangoutLink === 'string'
         ? data.hangoutLink
         : null;
-
   if (hangoutLink) return hangoutLink;
 
-  // Fall back to conferenceData.entryPoints[0].uri (Workspace accounts)
-  const confData = (responseData?.conferenceData ?? data?.conferenceData) as
-    | Record<string, unknown>
-    | undefined;
-  const entryPoints = confData?.entryPoints as Array<Record<string, unknown>> | undefined;
-  const meetLink = entryPoints?.[0]?.uri;
-
-  return typeof meetLink === 'string' ? meetLink : null;
+  return null;
 }
 
 function toNaiveDatetime(dateStr: string, timeStr: string): string {
@@ -121,7 +124,7 @@ export async function createBookingEvent(
     message?: string;
   },
 ): Promise<ComposioResult> {
-  const { COMPOSIO_API_KEY, COMPOSIO_GCAL_ID, COMPOSIO_GMAIL_ID } = requireEnv(env);
+  const { COMPOSIO_API_KEY, COMPOSIO_GCAL_ID, COMPOSIO_GMAIL_ID, apiKey } = requireEnv(env);
 
   const startDateTime = toNaiveDatetime(params.date, params.time);
   const endDateTime = addMinutes(startDateTime, 30);
@@ -171,14 +174,14 @@ export async function createBookingEvent(
 
     meetLink = extractMeetLink(calResponse);
 
-    // Extract event ID from response
-    const data = (calResponse as Record<string, unknown>).data as Record<string, unknown> | undefined;
-    const responseData = data?.response_data as Record<string, unknown> | undefined;
+    // Extract event ID from response — v3.1 API puts it in data.response_data
+    const responseData = (calResponse as Record<string, unknown>).data as Record<string, unknown> | undefined;
+    const respData = responseData?.response_data as Record<string, unknown> | undefined;
     calendarEventId =
-      typeof responseData?.id === 'string'
-        ? responseData.id
-        : typeof data?.id === 'string'
-          ? data.id
+      typeof respData?.id === 'string'
+        ? respData.id
+        : typeof responseData?.id === 'string'
+          ? responseData.id
           : null;
   } catch (err) {
     calendarError = err;
