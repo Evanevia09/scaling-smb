@@ -127,7 +127,7 @@ export function getFeaturedImageAlt(post: BlogPost): string {
 }
 
 export function getAbsoluteUrl(path: string, site: URL | string | undefined): string {
-	const base = site ?? 'https://scaling-smb.pages.dev';
+	const base = site ?? 'https://scalingsmb.com';
 	return new URL(path, base).href;
 }
 

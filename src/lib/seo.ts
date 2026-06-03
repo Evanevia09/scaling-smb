@@ -8,7 +8,7 @@ import {
 import { brand, contact, seo as seoDefaults, services } from '../content/site';
 
 export function getSiteOrigin(site: URL | string | undefined): string {
-	const base = site ?? 'https://scaling-smb.pages.dev';
+	const base = site ?? 'https://scalingsmb.com';
 	return typeof base === 'string' ? base.replace(/\/$/, '') : base.origin;
 }
 

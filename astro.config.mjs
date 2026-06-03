@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // Set SITE in Cloudflare Pages env vars (or .env) to your production URL for canonicals/OG/sitemap.
 export default defineConfig({
-  site: process.env.SITE ?? 'https://scaling-smb.pages.dev',
+  site: process.env.SITE ?? 'https://scalingsmb.com',
   // Static site; `/api/booking/*` is served via `functions/` on Cloudflare (see docs/BOOKING_API.md).
   output: 'static',
   trailingSlash: 'always',

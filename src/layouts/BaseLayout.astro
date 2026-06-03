@@ -37,7 +37,7 @@ const twitterCard = ogImage ? 'summary_large_image' : 'summary';
 const ogImageAbsolute = ogImage
 	? ogImage.startsWith('http')
 		? ogImage
-		: new URL(ogImage, Astro.site ?? 'https://scaling-smb.pages.dev').href
+		: new URL(ogImage, Astro.site ?? 'https://scalingsmb.com').href
 	: undefined;
 ---
 
