@@ -28,12 +28,12 @@ const report = {
 			<div class="wrapper">
 				<h2><span class="section-icon">📋</span> Executive Summary</h2>
 				<div class="alert alert-high">
-					<strong>⚠️ Critical Finding:</strong> Your Google Ads account is spending approximately <strong>${report.monthlyAdSpend.toLocaleString()} ${report.currency}/month</strong> with <strong>zero tracked conversions</strong>. The active campaign targets travel logistics queries (ferry schedules, bus fares) instead of premium chauffeur/limousine searches. Combined with likely missing conversion tracking, every dollar spent is currently unmeasurable.
+					<strong>⚠️ Critical Finding:</strong> Your Google Ads account is spending approximately <strong>{report.monthlyAdSpend.toLocaleString()} {report.currency}/month</strong> with <strong>zero tracked conversions</strong>. The active campaign targets travel logistics queries (ferry schedules, bus fares) instead of premium chauffeur/limousine searches. Combined with likely missing conversion tracking, every dollar spent is currently unmeasurable.
 				</div>
 				<div class="kpi-grid">
-					<div class="kpi-card warn"><span class="kpi-value">${report.monthlyAdSpend.toLocaleString()}HKD<small>/mo</small></span><span class="kpi-label">Estimated Monthly Ad Spend (HKD)</span></div>
+					<div class="kpi-card warn"><span class="kpi-value">{report.monthlyAdSpend.toLocaleString()} HKD<small>/mo</small></span><span class="kpi-label">Monthly Ad Spend (HKD)</span></div>
 					<div class="kpi-card danger"><span class="kpi-value">0</span><span class="kpi-label">Tracked Conversions</span></div>
-					<div class="kpi-card neutral"><span class="kpi-value">${report.monthlyAdAvgCpc}</span><span class="kpi-label">Avg Cost Per Click (HKD)</span></div>
+					<div class="kpi-card neutral"><span class="kpi-value">{report.monthlyAdAvgCpc} HKD</span><span class="kpi-label">Avg Cost Per Click</span></div>
 					<div class="kpi-card good"><span class="kpi-value">${report.organicClicks}</span><span class="kpi-label">Organic Clicks (90 days)</span></div>
 				</div>
 			</div>
