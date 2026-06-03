@@ -38,10 +38,10 @@ export const hero = {
 
 export const servicesSection = {
 	eyebrow: 'What we do',
-	title: 'Four ways we grow your local business',
+	title: 'Five ways we grow your local business',
 } as const;
 
-export type ServiceIconId = 'seo' | 'web' | 'app' | 'ai';
+export type ServiceIconId = 'seo' | 'web' | 'app' | 'ai' | 'ads';
 
 export const services = [
 	{
@@ -102,6 +102,21 @@ export const services = [
 			'Handle customer questions 24/7 — even outside business hours',
 			'Free your team to focus on delivery, not admin',
 			'Trained on your business, your tone, and your customers',
+		],
+	},
+	{
+		id: 'google-ads',
+		icon: 'ads' as ServiceIconId,
+		number: '05',
+		title: 'Google Ads',
+		tagline: 'Get found instantly when customers are searching',
+		description:
+			'Organic SEO takes time. Google Ads puts your business in front of ready-to-buy customers the same day — with campaigns built around what makes your business unique.',
+		bullets: [
+			'Show up at the exact moment someone searches for what you offer',
+			'Pay only for clicks from real, qualified local customers',
+			'Outbid competitors on their own brand terms',
+			'Start seeing results within days, not months',
 		],
 	},
 ] as const;

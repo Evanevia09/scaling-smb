@@ -1,0 +1,480 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { brand, contact } from '../../content/site';
+import CtaBand from '../../components/landing/CtaBand.astro';
+import Footer from '../../components/landing/Footer.astro';
+import Header from '../../components/Header.astro';
+// --- data ---
+const pageTitle = 'Google Ads Management — Paid Search for Local SMBs | Scaling SMB';
+const pageDesc =
+	'Get found instantly when customers search. Scalable Google Ads campaigns built with non-commodity ad copy, real keyword data, and transparent pricing. Setup from 5,000 HKD.';
+const pricing = [
+	{
+		tier: 'Small Business',
+		revenue: '100k – 200k HKD / month',
+		setup: '5,000 HKD',
+		retainer: '25% of ads budget',
+	},
+	{
+		tier: 'Medium Business',
+		revenue: '300k – 500k HKD / month',
+		setup: '10,000 HKD',
+		retainer: '25% of ads budget',
+	},
+];
+const processSteps = [
+	{
+		step: '01',
+		title: 'Discovery',
+		desc: 'We learn your business, goals, budget, and competition. Then map the keywords and audiences that matter most.',
+	},
+	{
+		step: '02',
+		title: 'Campaign Build',
+		desc: 'We structure campaigns by intent — brand, commercial, competitor, and retargeting. Ad copy is built around your unique value, not generic templates.',
+	},
+	{
+		step: '03',
+		title: 'Conversion Setup',
+		desc: 'We install and verify conversion tracking so every click is tied to a real business outcome — calls, bookings, or sales.',
+	},
+	{
+		step: '04',
+		title: 'Launch & Optimize',
+		desc: 'Campaigns go live. We monitor weekly, optimize bi-weekly, and report monthly — with clear next steps and data-backed recommendations.',
+	},
+];
+const includedItems = [
+	'Keyword research using Google Search Console + competitor data',
+	'Campaign structure by search intent (brand, commercial, competitor)',
+	'Responsive search ads with non-commodity ad copy',
+	'Ad extensions (sitelinks, callouts, structured snippets, call)',
+	'Conversion tracking setup & verification',
+	'Negative keyword management to eliminate wasted spend',
+	'Weekly performance monitoring',
+	'Bi-weekly optimization (bids, ads, keywords, audiences)',
+	'Monthly report with insights and recommendations',
+	'Quarterly strategy review',
+];
+---
+<BaseLayout title={pageTitle} description={pageDesc}>
+	<Header />
+	<main id="main" class="service-page">
+		<!-- Hero -->
+		<section class="hero-inner">
+			<div class="hero-inner__bg" aria-hidden="true"></div>
+			<div class="content-wrap hero-inner__body">
+				<p class="eyebrow hero-inner__eyebrow">Service</p>
+				<h1 class="hero-inner__title">
+					Google Ads Management
+				</h1>
+				<p class="hero-inner__subtitle">
+					Get found the same day — not in six months. We build paid search campaigns around what makes your
+					business unique, so you attract qualified leads without burning through your budget.
+				</p>
+				<a class="btn btn--primary hero-inner__cta" href="#pricing">See pricing →</a>
+			</div>
+		</section>
+
+		<!-- Why Google Ads -->
+		<section class="section section--light">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">Why paid search?</p>
+					<h2>When SEO isn't fast enough</h2>
+					<p class="section-header__lede">
+						Organic SEO is the long game. Google Ads puts you in front of ready-to-buy customers today —
+						with full control over budget, targeting, and messaging.
+					</p>
+				</header>
+				<div class="cols-3">
+					<article class="card-tagline">
+						<h3 class="card-tagline__title">🎯 Intent-based targeting</h3>
+						<p class="card-tagline__desc">
+							Your ads appear only when someone searches for exactly what you offer — not to window
+							shoppers, not to tire-kickers.
+						</p>
+					</article>
+					<article class="card-tagline">
+						<h3 class="card-tagline__title">📊 Full budget control</h3>
+						<p class="card-tagline__desc">
+							Set your own daily budget. No minimums. Every dollar is tracked back to a click, a call, or a
+							booking.
+						</p>
+					</article>
+					<article class="card-tagline">
+						<h3 class="card-tagline__title">🔥 Outrank competitors faster</h3>
+						<p class="card-tagline__desc">
+							While competitors wait for organic rankings, you can appear above them — even on their own
+							brand searches.
+						</p>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- Pricing -->
+		<section class="section section--dark" id="pricing">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">Pricing</p>
+					<h2>Simple, transparent, no surprises</h2>
+					<p class="section-header__lede">
+						One-time setup fee + 25% monthly retainer on ad spend. The ads budget itself goes directly to
+						Google — you control it.
+					</p>
+				</header>
+				<div class="pricing-grid">
+					{
+						pricing.map((p) => (
+							<article class="pricing-card">
+								<h3 class="pricing-card__tier">{p.tier}</h3>
+								<p class="pricing-card__revenue">Monthly revenue: {p.revenue}</p>
+								<div class="pricing-card__value">
+									<span class="pricing-card__amount">{p.setup}</span>
+									<span class="pricing-card__label">one-time setup</span>
+								</div>
+								<div class="pricing-card__value">
+									<span class="pricing-card__amount">{p.retainer}</span>
+									<span class="pricing-card__label">monthly retainer</span>
+								</div>
+								<p class="pricing-card__note">No minimum ad budget. Campaigns start from any budget size.</p>
+								<a class="btn btn--primary pricing-card__btn" href="/#contact">Book a free call →</a>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- What's included -->
+		<section class="section section--light">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">Full-service management</p>
+					<h2>Everything included</h2>
+					<p class="section-header__lede">
+						From keyword research to monthly reporting — we manage the entire campaign so you don't have to.
+					</p>
+				</header>
+				<ul class="checklist">
+					{includedItems.map((item) => (
+						<li class="checklist__item">{item}</li>
+					))}
+				</ul>
+			</div>
+		</section>
+
+		<!-- Process -->
+		<section class="section section--dark">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">How it works</p>
+					<h2>From hello to live campaigns</h2>
+				</header>
+				<div class="process-simple">
+					{
+						processSteps.map((s) => (
+							<article class="process-step">
+								<span class="process-step__number">{s.step}</span>
+								<div class="process-step__body">
+									<h3 class="process-step__title">{s.title}</h3>
+									<p class="process-step__desc">{s.desc}</p>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- The non-commodity difference -->
+		<section class="section section--light">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">Our edge</p>
+					<h2>Non-commodity ad copy</h2>
+					<p class="section-header__lede">
+						Most Google Ads use generic templates that look and sound the same. We write ads that can't be
+						replicated — because they're built on your actual business data.
+					</p>
+				</header>
+				<div class="cols-2">
+					<div>
+						<h3>Typical Google Ads agency</h3>
+						<ul class="checklist checklist--muted">
+							<li class="checklist__item checklist__item--cross">Generic ad copy anyone could write</li>
+							<li class="checklist__item checklist__item--cross">Broad keywords with wasted spend</li>
+							<li class="checklist__item checklist__item--cross">Sends all traffic to homepage</li>
+							<li class="checklist__item checklist__item--cross">Monthly report, no real insights</li>
+						</ul>
+					</div>
+					<div>
+						<h3>Scaling SMB approach</h3>
+						<ul class="checklist">
+							<li class="checklist__item checklist__item--check">Ads built on your lived experience &amp; data</li>
+							<li class="checklist__item checklist__item--check">Intent-based keyword grouping</li>
+							<li class="checklist__item checklist__item--check">Dedicated landing pages per ad group</li>
+							<li class="checklist__item checklist__item--check">Weekly monitoring + monthly deep-dive reports</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA -->
+		<section class="section section--accent">
+			<div class="content-wrap" style="text-align:center">
+				<h2>Ready to get found faster?</h2>
+				<p style="max-width:36rem;margin:1rem auto 1.5rem;color:rgba(255,255,255,0.85)">
+					Book a free strategy call. We'll review your business, your competitors, and whether Google Ads is
+					the right move for you — no obligation.
+				</p>
+				<a class="btn btn--white" href="/#contact">Book your free call →</a>
+			</div>
+		</section>
+	</main>
+	<CtaBand />
+	<Footer />
+</BaseLayout>
+
+<style is:global>
+	/* --- page layout --- */
+	.service-page {
+		padding-top: var(--header-height);
+	}
+
+	/* --- hero inner --- */
+	.hero-inner {
+		position: relative;
+		padding: clamp(4rem, 8vw, 6rem) 0 clamp(3rem, 5vw, 5rem);
+		overflow: hidden;
+	}
+	.hero-inner__bg {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(135deg, #0b1628 0%, #1a2a4a 50%, #0d1f3c 100%);
+	}
+	.hero-inner__body {
+		position: relative;
+		z-index: 1;
+	}
+	.hero-inner__eyebrow {
+		color: var(--accent);
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		font-size: 0.85rem;
+		margin-bottom: 0.5rem;
+	}
+	.hero-inner__title {
+		font-size: clamp(2rem, 5vw, 3.2rem);
+		font-weight: 800;
+		line-height: 1.08;
+		letter-spacing: -0.03em;
+		color: #fff;
+		margin: 0 0 1rem;
+		max-width: 22ch;
+	}
+	.hero-inner__subtitle {
+		font-size: clamp(1rem, 2vw, 1.15rem);
+		line-height: 1.55;
+		color: rgba(255, 255, 255, 0.75);
+		max-width: 52ch;
+		margin: 0 0 1.5rem;
+	}
+	.hero-inner__cta {
+		display: inline-flex;
+	}
+
+	/* --- section --- */
+	.section {
+		padding: clamp(3rem, 6vw, 5rem) 0;
+	}
+	.section--light {
+		background: #fff;
+	}
+	.section--dark {
+		background: #f5f7fa;
+	}
+	.section--accent {
+		background: linear-gradient(135deg, #003d99, #0055ff);
+		color: #fff;
+	}
+	.section-header {
+		text-align: center;
+		margin-bottom: clamp(2rem, 4vw, 3rem);
+	}
+	.section-header__lede {
+		max-width: 44rem;
+		margin: 0.65rem auto 0;
+		color: #64748b;
+		font-size: 1.02rem;
+		line-height: 1.55;
+	}
+	.section--dark .section-header__lede {
+		color: #64748b;
+	}
+
+	/* --- grid helpers --- */
+	.cols-3 {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: clamp(1rem, 2vw, 1.5rem);
+	}
+	.cols-2 {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: clamp(1.5rem, 3vw, 2.5rem);
+	}
+	@media (max-width: 720px) {
+		.cols-3,
+		.cols-2 {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* --- card tagline --- */
+	.card-tagline {
+		background: #f8fafc;
+		border: 1px solid #e2e8f0;
+		border-radius: 12px;
+		padding: clamp(1.25rem, 2.5vw, 1.75rem);
+	}
+	.card-tagline__title {
+		margin: 0 0 0.5rem;
+		font-size: 1.05rem;
+		font-weight: 700;
+	}
+	.card-tagline__desc {
+		margin: 0;
+		font-size: 0.92rem;
+		line-height: 1.5;
+		color: #475569;
+	}
+
+	/* --- pricing --- */
+	.pricing-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+		gap: clamp(1rem, 2vw, 1.5rem);
+		max-width: 54rem;
+		margin: 0 auto;
+	}
+	.pricing-card {
+		background: #fff;
+		border: 1px solid #e2e8f0;
+		border-radius: 16px;
+		padding: clamp(1.5rem, 3vw, 2rem);
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+	.pricing-card__tier {
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin: 0;
+	}
+	.pricing-card__revenue {
+		font-size: 0.88rem;
+		color: #64748b;
+		margin: -0.25rem 0 0;
+	}
+	.pricing-card__value {
+		display: flex;
+		flex-direction: column;
+	}
+	.pricing-card__amount {
+		font-size: 1.75rem;
+		font-weight: 800;
+		color: var(--accent);
+		line-height: 1.1;
+	}
+	.pricing-card__label {
+		font-size: 0.82rem;
+		color: #64748b;
+	}
+	.pricing-card__note {
+		font-size: 0.82rem;
+		color: #64748b;
+		line-height: 1.4;
+		margin: 0;
+	}
+	.pricing-card__btn {
+		align-self: flex-start;
+		margin-top: auto;
+	}
+
+	/* --- checklist --- */
+	.checklist {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.65rem;
+		max-width: 40rem;
+	}
+	.checklist__item {
+		padding: 0.5rem 0 0.5rem 2rem;
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%230055ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") left center / 1.1rem no-repeat;
+		font-size: 0.95rem;
+		line-height: 1.45;
+	}
+	.checklist--muted .checklist__item {
+		opacity: 0.55;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
+	}
+	.checklist__item--cross {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
+	}
+	.checklist__item--check {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%230055ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+	}
+
+	/* --- process --- */
+	.process-simple {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		max-width: 42rem;
+		margin: 0 auto;
+	}
+	.process-step {
+		display: flex;
+		gap: 1rem;
+		align-items: flex-start;
+		background: #fff;
+		border: 1px solid #e2e8f0;
+		border-radius: 12px;
+		padding: clamp(1rem, 2vw, 1.25rem);
+	}
+	.process-step__number {
+		flex-shrink: 0;
+		width: 2.5rem;
+		height: 2.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 8px;
+		background: var(--accent-soft);
+		color: var(--accent);
+		font-weight: 700;
+		font-size: 0.95rem;
+	}
+	.process-step__body {
+		flex: 1;
+		min-width: 0;
+	}
+	.process-step__title {
+		margin: 0 0 0.25rem;
+		font-size: 1rem;
+		font-weight: 700;
+	}
+	.process-step__desc {
+		margin: 0;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		color: #475569;
+	}
+</style>
