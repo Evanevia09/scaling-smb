@@ -14,6 +14,7 @@ const report = {
 	monthlyAdClicks: 1164,
 	monthlyAdConversions: 0,
 	monthlyAdAvgCpc: 4.32,
+	currency: 'HKD',
 	organicClicks: 87,
 	organicImpressions: 2986,
 };
@@ -27,12 +28,12 @@ const report = {
 			<div class="wrapper">
 				<h2><span class="section-icon">📋</span> Executive Summary</h2>
 				<div class="alert alert-high">
-					<strong>⚠️ Critical Finding:</strong> Your Google Ads account is spending approximately <strong>${report.monthlyAdSpend.toLocaleString()}/month</strong> with <strong>zero tracked conversions</strong>. The active campaign targets travel logistics queries (ferry schedules, bus fares) instead of premium chauffeur/limousine searches. Combined with likely missing conversion tracking, every dollar spent is currently unmeasurable.
+					<strong>⚠️ Critical Finding:</strong> Your Google Ads account is spending approximately <strong>${report.monthlyAdSpend.toLocaleString()} ${report.currency}/month</strong> with <strong>zero tracked conversions</strong>. The active campaign targets travel logistics queries (ferry schedules, bus fares) instead of premium chauffeur/limousine searches. Combined with likely missing conversion tracking, every dollar spent is currently unmeasurable.
 				</div>
 				<div class="kpi-grid">
-					<div class="kpi-card warn"><span class="kpi-value">${report.monthlyAdSpend.toLocaleString()}<small>/mo</small></span><span class="kpi-label">Estimated Monthly Ad Spend</span></div>
+					<div class="kpi-card warn"><span class="kpi-value">${report.monthlyAdSpend.toLocaleString()}HKD<small>/mo</small></span><span class="kpi-label">Estimated Monthly Ad Spend (HKD)</span></div>
 					<div class="kpi-card danger"><span class="kpi-value">0</span><span class="kpi-label">Tracked Conversions</span></div>
-					<div class="kpi-card neutral"><span class="kpi-value">${report.monthlyAdAvgCpc}</span><span class="kpi-label">Average Cost Per Click</span></div>
+					<div class="kpi-card neutral"><span class="kpi-value">${report.monthlyAdAvgCpc}</span><span class="kpi-label">Avg Cost Per Click (HKD)</span></div>
 					<div class="kpi-card good"><span class="kpi-value">${report.organicClicks}</span><span class="kpi-label">Organic Clicks (90 days)</span></div>
 				</div>
 			</div>
@@ -86,13 +87,13 @@ const report = {
 							<td>Search Transpolink Page<br /><small>(Dani ChatGPT Recommendations)</small></td>
 							<td>Search</td>
 							<td><span class="badge badge-enabled">Enabled</span></td>
-							<td>$1,174.14</td><td>272</td><td><strong>0</strong></td><td>$4.32</td>
+							<td>HKD 1,174.14</td><td>272</td><td><strong>0</strong></td><td>HKD 4.32</td>
 						</tr>
 						<tr class="row-paused">
 							<td>WEBSITE KEYWORDS MACAU AND HK ONLY<br /><small>(From Evan)</small></td>
 							<td>Search</td>
 							<td><span class="badge badge-paused">Paused</span></td>
-							<td>$0</td><td>0</td><td>0</td><td>&mdash;</td>
+							<td>HKD 0</td><td>0</td><td>0</td><td>&mdash;</td>
 						</tr>
 						<tr class="row-removed">
 							<td>TranspoLink Limo Services</td><td>PMax</td>
@@ -104,24 +105,24 @@ const report = {
 						</tr>
 					</tbody>
 				</table>
-				<div class="alert alert-danger"><strong>🚨 $1,174/week with 0 conversions.</strong> Only 1 of 4 campaigns active, and it's driving traffic to the wrong search intent.</div>
+				<div class="alert alert-danger"><strong>🚨 HKD 1,174/week with 0 conversions.</strong> Only 1 of 4 campaigns active, and it's driving traffic to the wrong search intent.</div>
 
 				<h3>Top Search Terms (Last 30 Days) — Wasted Spend</h3>
 				<table class="data-table">
 					<thead><tr><th>Search Term</th><th>Spend</th><th>Clicks</th><th>CPC</th><th>Conv.</th><th>Verdict</th></tr></thead>
 					<tbody>
-						<tr class="row-danger"><td>macau tour from hong kong</td><td>$110.11</td><td>3</td><td>$36.70</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
-						<tr class="row-danger"><td>hong kong to macau</td><td>$62.57</td><td>3</td><td>$19.97</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
-						<tr class="row-danger"><td>direct bus from hong kong to macau</td><td>$53.05</td><td>1</td><td>$53.05</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
-						<tr class="row-danger"><td>macau to hong kong car</td><td>$52.24</td><td>1</td><td>$52.24</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
-						<tr class="row-danger"><td>hong kong to macau ferry</td><td>$52.18</td><td>1</td><td>$52.18</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
-						<tr class="row-danger"><td>how to go to macau from hong kong</td><td>$51.18</td><td>1</td><td>$51.18</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
-						<tr class="row-danger"><td>macau package tour</td><td>$36.20</td><td>1</td><td>$36.20</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
-						<tr class="row-danger"><td>hk to macau bus schedule</td><td>$33.22</td><td>1</td><td>$33.22</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
-						<tr class="row-good"><td>macau airport limousine service</td><td>$3.95</td><td>1</td><td>$3.95</td><td>0</td><td><span class="tag tag-good">✅ Relevant</span></td></tr>
+						<tr class="row-danger"><td>macau tour from hong kong</td><td>HKD 110.11</td><td>3</td><td>HKD 36.70</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>hong kong to macau</td><td>HKD 62.57</td><td>3</td><td>HKD 19.97</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>direct bus from hong kong to macau</td><td>HKD 53.05</td><td>1</td><td>HKD 53.05</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>macau to hong kong car</td><td>HKD 52.24</td><td>1</td><td>HKD 52.24</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>hong kong to macau ferry</td><td>HKD 52.18</td><td>1</td><td>HKD 52.18</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>how to go to macau from hong kong</td><td>HKD 51.18</td><td>1</td><td>HKD 51.18</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>macau package tour</td><td>HKD 36.20</td><td>1</td><td>HKD 36.20</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>hk to macau bus schedule</td><td>HKD 33.22</td><td>1</td><td>HKD 33.22</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-good"><td>macau airport limousine service</td><td>HKD 3.95</td><td>1</td><td>HKD 3.95</td><td>0</td><td><span class="tag tag-good">✅ Relevant</span></td></tr>
 					</tbody>
 				</table>
-				<div class="alert alert-warn"><strong>💰 Estimated wasted spend:</strong> ~$350–$450/month on completely irrelevant travel logistics queries.</div>
+				<div class="alert alert-warn"><strong>💰 Estimated wasted spend:</strong> ~HKD 350–450/month on completely irrelevant travel logistics queries.</div>
 
 				<h3>Missed High-Intent Keywords</h3>
 				<table class="data-table">
@@ -279,7 +280,7 @@ const report = {
 			<div class="wrapper">
 				<h2><span class="section-icon">📈</span> Projected Impact</h2>
 				<div class="impact-grid">
-					<div class="impact-card"><h4>Waste Elimination</h4><p class="impact-number">$4,200<span>/year</span></p><p>From blocking irrelevant search terms</p></div>
+					<div class="impact-card"><h4>Waste Elimination</h4><p class="impact-number">HKD 4,200<span>/year</span></p><p>From blocking irrelevant search terms</p></div>
 					<div class="impact-card"><h4>CPA Reduction</h4><p class="impact-number">50–70%<span></span></p><p>By targeting high-intent keywords</p></div>
 					<div class="impact-card"><h4>Conversion Uplift</h4><p class="impact-number">8–15x<span></span></p><p>From 0/month to measurable pipeline</p></div>
 					<div class="impact-card"><h4>Organic Growth</h4><p class="impact-number">3–5x<span></span></p><p>From fixing indexing + schema</p></div>
