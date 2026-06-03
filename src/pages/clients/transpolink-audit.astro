@@ -91,12 +91,12 @@ const productivePct = 100 - wastePct;
 						<div class="bar-chart">
 							<div class="bar-row">
 								<span class="bar-label">Wasted spend</span>
-								<div class="bar-track"><div class="bar-fill b--red" style="width:{wastePct}%"><span class="bar-fill-text">~{wastePct}%</span></div></div>
+								<div class="bar-track"><div class="bar-fill b--red" style={"width:" + wastePct + "%"}><span class="bar-fill-text">~{wastePct}%</span></div></div>
 								<span class="bar-right">~{r.ccy} {Math.round(wasteTotal)}/mo</span>
 							</div>
 							<div class="bar-row">
 								<span class="bar-label">Potentially productive</span>
-								<div class="bar-track"><div class="bar-fill b--green" style="width:{productivePct}%"><span class="bar-fill-text">{productivePct}%</span></div></div>
+								<div class="bar-track"><div class="bar-fill b--green" style={"width:" + productivePct + "%"}><span class="bar-fill-text">{productivePct}%</span></div></div>
 								<span class="bar-right">~{r.ccy} {Math.round(r.spend/4.3 - wasteTotal)}/mo</span>
 							</div>
 						</div>
@@ -104,8 +104,8 @@ const productivePct = 100 - wastePct;
 					<div class="pie-wrap">
 						<svg class="pie-svg" viewBox="0 0 200 200">
 							<circle cx="100" cy="100" r="90" fill="none" stroke="#e2e8f0" stroke-width="20" />
-							<circle cx="100" cy="100" r="90" fill="none" stroke="#ef4444" stroke-width="20" stroke-dasharray="{wastePct * 5.65} {565 - wastePct * 5.65}" stroke-dashoffset="141.4" />
-							<circle cx="100" cy="100" r="90" fill="none" stroke="#10b981" stroke-width="20" stroke-dasharray="{productivePct * 5.65} {565 - productivePct * 5.65}" stroke-dashoffset="{141.4 + wastePct * 5.65}" />
+							<circle cx="100" cy="100" r="90" fill="none" stroke="#ef4444" stroke-width="20" stroke-dasharray={wastePct * 5.65 + " " + (565 - wastePct * 5.65)} stroke-dashoffset="141.4" />
+							<circle cx="100" cy="100" r="90" fill="none" stroke="#10b981" stroke-width="20" stroke-dasharray={productivePct * 5.65 + " " + (565 - productivePct * 5.65)} stroke-dashoffset={141.4 + wastePct * 5.65} />
 						</svg>
 					</div>
 				</div>
@@ -144,7 +144,7 @@ const productivePct = 100 - wastePct;
 					{searchTerms.map(t => (
 						<div class="bar-row">
 							<span class="bar-label" style="font-size:0.78rem">{t.term}</span>
-							<div class="bar-track"><div class={"bar-fill " + (t.verdict === 'bad' ? 'b--red' : 'b--green')} style="width:{(t.spend / maxSearchTermSpend * 100).toFixed(0)}%"><span class="bar-fill-text">{r.ccy} {t.spend.toFixed(0)}</span></div></div>
+							<div class="bar-track"><div class={"bar-fill " + (t.verdict === 'bad' ? 'b--red' : 'b--green')} style={"width:" + (t.spend / maxSearchTermSpend * 100).toFixed(0) + "%"}><span class="bar-fill-text">{r.ccy} {t.spend.toFixed(0)}</span></div></div>
 							<span class="bar-right" style="font-size:0.8rem">{t.clicks} clicks</span>
 						</div>
 					))}
