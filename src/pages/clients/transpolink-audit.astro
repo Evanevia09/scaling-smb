@@ -1,0 +1,291 @@
+---
+import AuditLayout from '../../layouts/AuditLayout.astro';
+
+const client = {
+	name: 'TranspoLink',
+	url: 'https://transpolink.net',
+	tagline: 'Premier Chauffeur Service in Greater Bay Area',
+	service: 'Executive limousine & cross-border chauffeur services (Macau, HK, Mainland China)',
+};
+
+const report = {
+	period: 'March 1 – June 3, 2026',
+	monthlyAdSpend: 5020,
+	monthlyAdClicks: 1164,
+	monthlyAdConversions: 0,
+	monthlyAdAvgCpc: 4.32,
+	organicClicks: 87,
+	organicImpressions: 2986,
+};
+---
+
+<AuditLayout client={client} period={report.period}>
+
+	<section slot="content">
+		<!-- Executive Summary -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">📋</span> Executive Summary</h2>
+				<div class="alert alert-high">
+					<strong>⚠️ Critical Finding:</strong> Your Google Ads account is spending approximately <strong>${report.monthlyAdSpend.toLocaleString()}/month</strong> with <strong>zero tracked conversions</strong>. The active campaign targets travel logistics queries (ferry schedules, bus fares) instead of premium chauffeur/limousine searches. Combined with likely missing conversion tracking, every dollar spent is currently unmeasurable.
+				</div>
+				<div class="kpi-grid">
+					<div class="kpi-card warn"><span class="kpi-value">${report.monthlyAdSpend.toLocaleString()}<small>/mo</small></span><span class="kpi-label">Estimated Monthly Ad Spend</span></div>
+					<div class="kpi-card danger"><span class="kpi-value">0</span><span class="kpi-label">Tracked Conversions</span></div>
+					<div class="kpi-card neutral"><span class="kpi-value">${report.monthlyAdAvgCpc}</span><span class="kpi-label">Average Cost Per Click</span></div>
+					<div class="kpi-card good"><span class="kpi-value">${report.organicClicks}</span><span class="kpi-label">Organic Clicks (90 days)</span></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- About -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🏢</span> About TranspoLink</h2>
+				<div class="content-card">
+					<p><strong>TranspoLink</strong> is a Macau-based premium chauffeur service operating across the Greater Bay Area (Macau, Hong Kong, Mainland China). Fleet consists of Toyota Alphard and Vellfire MPVs with 5G Wi-Fi, premium leather seating, and privacy features. Target segments: executive business, VIP leisure, diplomatic delegations.</p>
+					<div class="info-grid">
+						<div><strong>Service:</strong> {client.service}</div>
+						<div><strong>Fleet:</strong> Toyota Alphard / Vellfire MPV fleet</div>
+						<div><strong>Differentiator:</strong> Cross-border HKZM Bridge logistics, multilingual chauffeurs (EN, PT, CN)</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Methodology -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🔬</span> Audit Methodology</h2>
+				<p>This audit uses the <strong>Scaling SMB 9-Phase Client Onboarding Audit</strong> methodology:</p>
+				<div class="methodology-steps">
+					<div class="step"><span class="step-num">1</span> Conversion Tracking</div>
+					<div class="step"><span class="step-num">2</span> Account Structure</div>
+					<div class="step"><span class="step-num">3</span> Keywords &amp; Search Terms</div>
+					<div class="step"><span class="step-num">4</span> Ad Copy &amp; Creative</div>
+					<div class="step"><span class="step-num">5</span> Bidding &amp; Budget</div>
+					<div class="step"><span class="step-num">6</span> Audience Targeting</div>
+					<div class="step"><span class="step-num">7</span> Landing Pages / SEO</div>
+					<div class="step"><span class="step-num">8</span> PMax Health</div>
+					<div class="step"><span class="step-num">9</span> Roadmap &amp; Recommendations</div>
+				</div>
+				<p class="methodology-note" style="font-size:0.85rem;color:#888;font-style:italic">Data sourced from Google Ads API, Google Search Console, and live website review.</p>
+			</div>
+		</section>
+
+		<!-- Google Ads -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">📊</span> Google Ads Account Analysis</h2>
+
+				<h3>Account Structure</h3>
+				<table class="data-table">
+					<thead><tr><th>Campaign</th><th>Type</th><th>Status</th><th>7-Day Spend</th><th>Clicks</th><th>Conv.</th><th>Avg CPC</th></tr></thead>
+					<tbody>
+						<tr class="row-danger">
+							<td>Search Transpolink Page<br /><small>(Dani ChatGPT Recommendations)</small></td>
+							<td>Search</td>
+							<td><span class="badge badge-enabled">Enabled</span></td>
+							<td>$1,174.14</td><td>272</td><td><strong>0</strong></td><td>$4.32</td>
+						</tr>
+						<tr class="row-paused">
+							<td>WEBSITE KEYWORDS MACAU AND HK ONLY<br /><small>(From Evan)</small></td>
+							<td>Search</td>
+							<td><span class="badge badge-paused">Paused</span></td>
+							<td>$0</td><td>0</td><td>0</td><td>&mdash;</td>
+						</tr>
+						<tr class="row-removed">
+							<td>TranspoLink Limo Services</td><td>PMax</td>
+							<td><span class="badge badge-removed">Removed</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+						</tr>
+						<tr class="row-removed">
+							<td>Macau car rental</td><td>Search</td>
+							<td><span class="badge badge-removed">Removed</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="alert alert-danger"><strong>🚨 $1,174/week with 0 conversions.</strong> Only 1 of 4 campaigns active, and it's driving traffic to the wrong search intent.</div>
+
+				<h3>Top Search Terms (Last 30 Days) — Wasted Spend</h3>
+				<table class="data-table">
+					<thead><tr><th>Search Term</th><th>Spend</th><th>Clicks</th><th>CPC</th><th>Conv.</th><th>Verdict</th></tr></thead>
+					<tbody>
+						<tr class="row-danger"><td>macau tour from hong kong</td><td>$110.11</td><td>3</td><td>$36.70</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>hong kong to macau</td><td>$62.57</td><td>3</td><td>$19.97</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>direct bus from hong kong to macau</td><td>$53.05</td><td>1</td><td>$53.05</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>macau to hong kong car</td><td>$52.24</td><td>1</td><td>$52.24</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>hong kong to macau ferry</td><td>$52.18</td><td>1</td><td>$52.18</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>how to go to macau from hong kong</td><td>$51.18</td><td>1</td><td>$51.18</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>macau package tour</td><td>$36.20</td><td>1</td><td>$36.20</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-danger"><td>hk to macau bus schedule</td><td>$33.22</td><td>1</td><td>$33.22</td><td>0</td><td><span class="tag tag-bad">🚫 Negative</span></td></tr>
+						<tr class="row-good"><td>macau airport limousine service</td><td>$3.95</td><td>1</td><td>$3.95</td><td>0</td><td><span class="tag tag-good">✅ Relevant</span></td></tr>
+					</tbody>
+				</table>
+				<div class="alert alert-warn"><strong>💰 Estimated wasted spend:</strong> ~$350–$450/month on completely irrelevant travel logistics queries.</div>
+
+				<h3>Missed High-Intent Keywords</h3>
+				<table class="data-table">
+					<thead><tr><th>Keyword Opportunity</th><th>Intent</th><th>Action</th></tr></thead>
+					<tbody>
+						<tr><td>macau airport transfer</td><td>Transactional</td><td><span class="tag tag-good">Add exact match</span></td></tr>
+						<tr><td>macau limousine service</td><td>Commercial</td><td><span class="tag tag-good">Add exact match</span></td></tr>
+						<tr><td>hong kong to macau limo</td><td>Transactional</td><td><span class="tag tag-good">Add exact match</span></td></tr>
+						<tr><td>private car macau airport</td><td>Transactional</td><td><span class="tag tag-good">Add exact match</span></td></tr>
+						<tr><td>cross border car service macau</td><td>Commercial</td><td><span class="tag tag-good">Add exact + phrase</span></td></tr>
+						<tr><td>chauffeur service macau</td><td>Commercial</td><td><span class="tag tag-good">Add exact match</span></td></tr>
+						<tr><td>macau executive car service</td><td>Commercial</td><td><span class="tag tag-good">Add exact match</span></td></tr>
+						<tr><td>vip transport macau</td><td>Commercial</td><td><span class="tag tag-good">Add exact match</span></td></tr>
+					</tbody>
+				</table>
+
+				<h3>Bidding & Budget</h3>
+				<ul class="findings-list">
+					<li><strong>Bid strategy:</strong> Broad match + 0 conversions = Smart Bidding has nothing to optimize toward</li>
+					<li><strong>Budget distribution:</strong> 100% of spend to one wrong-intent campaign. Paused "MACAU AND HK" campaign had better structure.</li>
+					<li><strong>Low QS risk:</strong> Broad match + irrelevant terms inflates CPCs artificially.</li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- Conversion Tracking -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🎯</span> Conversion Tracking Audit</h2>
+				<div class="alert alert-high"><strong>Critical: 272 clicks, 0 conversions.</strong> Either tracking is not installed, broken, or the landing page has no measurable conversion action.</div>
+				<table class="data-table">
+					<thead><tr><th>Check</th><th>Status</th><th>Notes</th></tr></thead>
+					<tbody>
+						<tr class="row-danger"><td>Google Ads tag installed</td><td><span class="badge badge-fail">Unknown / Missing</span></td><td>No conversions recorded</td></tr>
+						<tr class="row-danger"><td>Enhanced conversions</td><td><span class="badge badge-fail">Likely Not Set Up</span></td><td>No first-party data matching</td></tr>
+						<tr class="row-danger"><td>Call tracking</td><td><span class="badge badge-fail">Unknown</span></td><td>Critical for a phone-booking business</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<!-- SEO -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🔍</span> Organic Search (Google Search Console)</h2>
+				<h3>90-Day Performance</h3>
+				<div class="kpi-grid">
+					<div class="kpi-card good"><span class="kpi-value">87</span><span class="kpi-label">Organic Clicks</span></div>
+					<div class="kpi-card neutral"><span class="kpi-value">2,986</span><span class="kpi-label">Impressions</span></div>
+					<div class="kpi-card warn"><span class="kpi-value">2.9%</span><span class="kpi-label">CTR</span></div>
+					<div class="kpi-card warn"><span class="kpi-value">5.2</span><span class="kpi-label">Avg Position</span></div>
+				</div>
+
+				<h3>Top Performing Queries</h3>
+				<table class="data-table">
+					<thead><tr><th>Query</th><th>Clicks</th><th>Impressions</th><th>Avg Position</th></tr></thead>
+					<tbody>
+						<tr><td>transpolink</td><td>5</td><td>25</td><td>1.1</td></tr>
+						<tr><td>limo service macau</td><td>2</td><td>20</td><td>1.0</td></tr>
+						<tr><td>macau limousine service</td><td>2</td><td>91</td><td>1.4 (mob) / 8.8 (desk)</td></tr>
+						<tr><td>transpolink limo services</td><td>2</td><td>20</td><td>1.2</td></tr>
+						<tr><td>limousine service macau</td><td>1</td><td>5</td><td>1.0</td></tr>
+					</tbody>
+				</table>
+
+				<h3>Missed Organic Opportunities</h3>
+				<table class="data-table">
+					<thead><tr><th>Query</th><th>Impressions</th><th>Clicks</th><th>Issue</th></tr></thead>
+					<tbody>
+						<tr><td>limo</td><td>282</td><td>0</td><td>Rank 2.7–5.3. Title & snippet need optimization</td></tr>
+						<tr><td>limousine</td><td>117</td><td>0</td><td>Rank 3.3–3.9. Meta description needs work</td></tr>
+						<tr><td>macau limo</td><td>49</td><td>0</td><td>Rank 11.4–14.3. Needs SEO improvement</td></tr>
+						<tr><td>chauffeur</td><td>20</td><td>0</td><td>Rank 4.8. Strong commercial intent</td></tr>
+					</tbody>
+				</table>
+
+				<h3>Sitemap & Indexing</h3>
+				<div class="alert alert-high"><strong>⚠️ Sitemap Issue:</strong> <strong>24 pages submitted, 0 indexed.</strong> Google knows about your pages but hasn't indexed any. Likely causes: low content depth, no internal linking, missing structured data.</div>
+			</div>
+		</section>
+
+		<!-- Landing Page -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🖥️</span> Website & Landing Page Review</h2>
+				<ul class="findings-list">
+					<li><strong>First impression:</strong> Clean, professional design. Strong brand positioning.</li>
+					<li><strong>Mobile:</strong> Responsive. ~70% of traffic is mobile — good.</li>
+					<li><strong>Booking flow:</strong> "Book Now" page exists but only 2 organic clicks in 90 days. Form needs CRO audit.</li>
+					<li><strong>Call tracking:</strong> Not detected. Critical gap for a chauffeur service.</li>
+					<li><strong>Ad-to-page:</strong> Ad copy mismatch with landing pages hurts Quality Score.</li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- Recommendations -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🎯</span> Prioritized Recommendations</h2>
+
+				<div class="priority-block priority-p0">
+					<h3><span class="priority-tag">P0</span> Immediate — This Week</h3>
+					<div class="rec-card">
+						<h4>1. Fix Conversion Tracking</h4>
+						<p><strong>Problem:</strong> 272 clicks, 0 conversions. No tracking installed or broken.</p>
+						<p><strong>Fix:</strong> Install Google Ads tag via GTM. Track: booking form submission, phone calls, WhatsApp clicks. Enable Enhanced Conversions.</p>
+						<p><span class="effort effort-easy">⏱ 2–4 hrs</span> <span class="impact impact-high">💰 High impact</span></p>
+					</div>
+					<div class="rec-card">
+						<h4>2. Add Negative Keywords</h4>
+						<p><strong>Fix:</strong> Block ferry*, bus*, tour*, schedule, fare, ticket, package, cheap, free, how to at account level.</p>
+						<p><span class="effort effort-easy">⏱ 15 min</span> <span class="impact impact-high">💰 High impact</span></p>
+					</div>
+				</div>
+
+				<div class="priority-block priority-p1">
+					<h3><span class="priority-tag">P1</span> Week 1–2</h3>
+					<div class="rec-card">
+						<h4>3. Restructure Campaigns</h4>
+						<p>Pause the Dani ChatGPT campaign (wrong intent). Reactivate MACAU AND HK campaign. Build tight ad groups by service: Airport Transfers, Cross-Border, Chauffeur, Brand.</p>
+						<p><span class="effort effort-medium">⏱ 3–4 hrs</span> <span class="impact impact-high">💰 High impact</span></p>
+					</div>
+					<div class="rec-card">
+						<h4>4. Build High-Intent Keywords</h4>
+						<p>Add 10+ commercial keywords: macau airport transfer, hong kong to macau limo, chauffeur service macau, cross border car service. Use 60% exact, 30% phrase, 10% broad.</p>
+						<p><span class="effort effort-easy">⏱ 1–2 hrs</span> <span class="impact impact-high">💰 High impact</span></p>
+					</div>
+				</div>
+
+				<div class="priority-block priority-p2">
+					<h3><span class="priority-tag">P2</span> Week 3–4</h3>
+					<div class="rec-card">
+						<h4>5. Fix Sitemap Indexing</h4>
+						<p>24 submitted, 0 indexed. Review robots.txt, check for noindex tags, add LocalBusiness schema, submit key pages manually.</p>
+						<p><span class="effort effort-medium">⏱ 2–4 hrs</span> <span class="impact impact-medium">📈 Medium impact</span></p>
+					</div>
+					<div class="rec-card">
+						<h4>6. Optimize Landing Pages</h4>
+						<p>Dedicated landing pages per service type. Each ad group → specific landing page. Add call tracking, simplify booking form.</p>
+						<p><span class="effort effort-hard">⏱ 4–8 hrs</span> <span class="impact impact-medium">📈 Medium impact</span></p>
+					</div>
+				</div>
+
+				<div class="priority-block priority-p3">
+					<h3><span class="priority-tag">P3</span> Month 2+</h3>
+					<div class="rec-card"><h4>7. PMax Campaign</h4><p>Once 50+ conversions/month stable, launch PMax for YouTube + Display reach.</p></div>
+					<div class="rec-card"><h4>8. Remarketing</h4><p>Build website visitor audiences. Retarget booking page visitors who didn't convert.</p></div>
+					<div class="rec-card"><h4>9. Weekly Optimization</h4><p>Search terms review, negative keyword mining, budget pacing, QS monitoring.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Projected Impact -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">📈</span> Projected Impact</h2>
+				<div class="impact-grid">
+					<div class="impact-card"><h4>Waste Elimination</h4><p class="impact-number">$4,200<span>/year</span></p><p>From blocking irrelevant search terms</p></div>
+					<div class="impact-card"><h4>CPA Reduction</h4><p class="impact-number">50–70%<span></span></p><p>By targeting high-intent keywords</p></div>
+					<div class="impact-card"><h4>Conversion Uplift</h4><p class="impact-number">8–15x<span></span></p><p>From 0/month to measurable pipeline</p></div>
+					<div class="impact-card"><h4>Organic Growth</h4><p class="impact-number">3–5x<span></span></p><p>From fixing indexing + schema</p></div>
+				</div>
+			</div>
+		</section>
+	</section>
+
+</AuditLayout>

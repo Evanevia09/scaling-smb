@@ -1,0 +1,170 @@
+---
+// ═══════════════════════════════════════════════════
+// CLIENT AUDIT REPORT — BLANK TEMPLATE
+// ═══════════════════════════════════════════════════
+// 1. Duplicate this file: cp clients/_template.astro clients/client-name.astro
+// 2. Fill in the client and report data below
+// 3. Add sections as needed (copy from existing audits)
+// 4. Build: npm run build
+// 5. Push to main → auto-deploys to scalingsmb.com/clients/client-name/
+// ═══════════════════════════════════════════════════
+
+import AuditLayout from '../../layouts/AuditLayout.astro';
+
+// ── Client Information ──
+const client = {
+	name: 'Client Name',
+	url: 'https://clientwebsite.com',
+	tagline: 'Their business tagline',
+	service: 'Description of their service',
+};
+
+// ── Key Metrics ──
+const report = {
+	period: 'Month 1 – Month DD, YYYY',
+	monthlyAdSpend: 0,
+	monthlyAdConversions: 0,
+	monthlyAdAvgCpc: 0,
+	organicClicks: 0,
+	organicImpressions: 0,
+};
+---
+
+<AuditLayout client={client} period={report.period}>
+
+	<section slot="content">
+		<!-- Executive Summary -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">📋</span> Executive Summary</h2>
+				<div class="alert alert-high">
+					<strong>⚠️ Key Finding:</strong> Write the headline finding here — something specific and quantified.
+				</div>
+				<div class="kpi-grid">
+					<div class="kpi-card warn"><span class="kpi-value">$X</span><span class="kpi-label">Monthly Ad Spend</span></div>
+					<div class="kpi-card danger"><span class="kpi-value">X</span><span class="kpi-label">Tracked Conversions</span></div>
+					<div class="kpi-card neutral"><span class="kpi-value">$X</span><span class="kpi-label">Avg Cost Per Click</span></div>
+					<div class="kpi-card good"><span class="kpi-value">X</span><span class="kpi-label">Organic Clicks</span></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- About the Client -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🏢</span> About {client.name}</h2>
+				<div class="content-card">
+					<p>Describe the client's business — what they do, who they serve, what makes them unique.</p>
+					<div class="info-grid">
+						<div><strong>Service:</strong> {client.service}</div>
+						<div><strong>Website:</strong> <a href={client.url} target="_blank">{client.url}</a></div>
+						<div><strong>Differentiator:</strong> Key competitive advantage</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Methodology -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🔬</span> Audit Methodology</h2>
+				<p>This audit uses the <strong>Scaling SMB 9-Phase Client Onboarding Audit</strong> methodology:</p>
+				<div class="methodology-steps">
+					<div class="step"><span class="step-num">1</span> Conversion Tracking</div>
+					<div class="step"><span class="step-num">2</span> Account Structure</div>
+					<div class="step"><span class="step-num">3</span> Keywords &amp; Search Terms</div>
+					<div class="step"><span class="step-num">4</span> Ad Copy &amp; Creative</div>
+					<div class="step"><span class="step-num">5</span> Bidding &amp; Budget</div>
+					<div class="step"><span class="step-num">6</span> Audience Targeting</div>
+					<div class="step"><span class="step-num">7</span> Landing Pages / SEO</div>
+					<div class="step"><span class="step-num">8</span> PMax Health</div>
+					<div class="step"><span class="step-num">9</span> Roadmap &amp; Recommendations</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Google Ads Analysis -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">📊</span> Google Ads Account Analysis</h2>
+
+				<h3>Account Structure</h3>
+				<table class="data-table">
+					<thead><tr><th>Campaign</th><th>Type</th><th>Status</th><th>Spend</th><th>Clicks</th><th>Conv.</th><th>Avg CPC</th></tr></thead>
+					<tbody>
+						<tr><td colspan="7" style="text-align:center;color:#999">Add campaign data here</td></tr>
+					</tbody>
+				</table>
+
+				<h3>Key Search Terms</h3>
+				<table class="data-table">
+					<thead><tr><th>Search Term</th><th>Spend</th><th>Clicks</th><th>CPC</th><th>Conv.</th><th>Verdict</th></tr></thead>
+					<tbody>
+						<tr><td colspan="6" style="text-align:center;color:#999">Import from search terms report</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<!-- Conversion Tracking -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🎯</span> Conversion Tracking Audit</h2>
+				<table class="data-table">
+					<thead><tr><th>Check</th><th>Status</th><th>Notes</th></tr></thead>
+					<tbody>
+						<tr class="row-neutral"><td>Google Ads tag installed</td><td><span class="badge badge-neutral">Check</span></td><td>Verify via Tag Assistant</td></tr>
+						<tr class="row-neutral"><td>Enhanced conversions</td><td><span class="badge badge-neutral">Check</span></td><td>First-party data matching</td></tr>
+						<tr class="row-neutral"><td>Offline conversions</td><td><span class="badge badge-neutral">Check</span></td><td>CRM → Google Ads</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<!-- SEO -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🔍</span> Organic Search (Google Search Console)</h2>
+				<div class="kpi-grid">
+					<div class="kpi-card good"><span class="kpi-value">{report.organicClicks}</span><span class="kpi-label">Organic Clicks</span></div>
+					<div class="kpi-card neutral"><span class="kpi-value">{report.organicImpressions.toLocaleString()}</span><span class="kpi-label">Impressions</span></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Recommendations -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🎯</span> Prioritized Recommendations</h2>
+
+				<div class="priority-block priority-p0">
+					<h3><span class="priority-tag">P0</span> Immediate — This Week</h3>
+					<div class="rec-card">
+						<h4>1. [High-Impact Fix]</h4>
+						<p><strong>Problem:</strong> Describe the issue.</p>
+						<p><strong>Fix:</strong> Describe the solution with specifics.</p>
+						<p><span class="effort effort-easy">⏱ X hrs</span> <span class="impact impact-high">💰 High impact</span></p>
+					</div>
+				</div>
+
+				<div class="priority-block priority-p1">
+					<h3><span class="priority-tag">P1</span> Week 1–2</h3>
+					<div class="rec-card">
+						<h4>2. [Medium-Term Fix]</h4>
+						<p><strong>Fix:</strong> Describe the approach.</p>
+						<p><span class="effort effort-medium">⏱ X hrs</span> <span class="impact impact-high">💰 High impact</span></p>
+					</div>
+				</div>
+
+				<div class="priority-block priority-p2">
+					<h3><span class="priority-tag">P2</span> Week 3–4</h3>
+					<div class="rec-card">
+						<h4>3. [Structural Improvement]</h4>
+						<p><span class="effort effort-hard">⏱ X hrs</span> <span class="impact impact-medium">📈 Medium impact</span></p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</section>
+
+</AuditLayout>
