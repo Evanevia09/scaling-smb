@@ -215,7 +215,7 @@ export const contact = {
 	phoneDisplay: '+853 6275 0705',
 	phoneTel: '+85362750705',
 	whatsappWa: 'https://wa.me/85362750705',
-	email: 'hello@scalingsmb.com',
+	email: 'scalingsmb@gmail.com',
 	location: 'Macau · APAC (Remote worldwide)',
 	businessHours: 'Mon – Fri, 9:00 AM – 6:00 PM (HKT)',
 	scheduling: {

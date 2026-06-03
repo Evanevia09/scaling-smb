@@ -164,7 +164,7 @@ export async function createBookingEvent(
         start_datetime: startDateTime,
         end_datetime: endDateTime,
         timezone: params.timezone,
-        attendees: [params.email, 'hello@scalingsmb.com'],
+        attendees: [params.email, 'scalingsmb@gmail.com'],
         create_meeting_room: true,
         send_updates: 'all',
       },
@@ -209,7 +209,7 @@ export async function createBookingEvent(
       ``,
       `Best regards,`,
       `The Scaling SMB Team`,
-      `hello@scalingsmb.com`,
+      `scalingsmb@gmail.com`,
     ]
       .filter(Boolean)
       .join('\n');
@@ -218,7 +218,7 @@ export async function createBookingEvent(
       'GMAIL_SEND_EMAIL',
       {
         recipient_email: params.email,
-        cc: ['hello@scalingsmb.com'],
+        cc: ['scalingsmb@gmail.com'],
         subject: `✅ Strategy Call Confirmed — ${formattedDate} at ${params.time}`,
         body: emailBody,
         is_html: false,
