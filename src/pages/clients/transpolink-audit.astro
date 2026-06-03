@@ -1,53 +1,65 @@
 ---
 import AuditLayout from '../../layouts/AuditLayout.astro';
 
-const client = {
+const c = {
 	name: 'TranspoLink',
 	url: 'https://transpolink.net',
 	tagline: 'Premier Chauffeur Service in Greater Bay Area',
 	service: 'Executive limousine & cross-border chauffeur services (Macau, HK, Mainland China)',
 };
 
-const report = {
+const r = {
 	period: 'March 1 – June 3, 2026',
-	monthlyAdSpend: 5020,
-	monthlyAdClicks: 1164,
-	monthlyAdConversions: 0,
-	monthlyAdAvgCpc: 4.32,
-	currency: 'HKD',
-	organicClicks: 87,
-	organicImpressions: 2986,
+	spend: 5020, clicks: 1164, conv: 0, cpc: 4.32,
+	ccy: 'HKD',
+	organicClicks: 87, organicImpressions: 2986,
 };
+
+// Pie chart SVG arc helper
+function pieSegment(pct, offset, color) {
+	const r = 90, cx = 100, cy = 100;
+	const ang = (pct / 100) * 360;
+	const rad = (ang - 90) * Math.PI / 180;
+	const x = cx + r * Math.cos(rad);
+	const y = cy + r * Math.sin(rad);
+	const ang2 = (-90) * Math.PI / 180;
+	const x2 = cx + r * Math.cos(ang2);
+	const y2 = cy + r * Math.sin(ang2);
+	const large = ang > 180 ? 1 : 0;
+	return `<path d="M${cx},${cy} L${x2},${y2} A${r},${r} 0 ${large},1 ${x},${y} Z" fill="${color}" />`;
+}
 
 const maxSearchTermSpend = 110.11;
 const searchTerms = [
-	{ term: 'macau tour from hong kong', spend: 110.11, clicks: 3, cpc: 36.70, verdict: 'bad' },
-	{ term: 'hong kong to macau', spend: 62.57, clicks: 3, cpc: 19.97, verdict: 'bad' },
-	{ term: 'direct bus from hong kong to macau', spend: 53.05, clicks: 1, cpc: 53.05, verdict: 'bad' },
-	{ term: 'macau to hong kong car', spend: 52.24, clicks: 1, cpc: 52.24, verdict: 'bad' },
-	{ term: 'hong kong to macau ferry', spend: 52.18, clicks: 1, cpc: 52.18, verdict: 'bad' },
-	{ term: 'how to go to macau from hong kong', spend: 51.18, clicks: 1, cpc: 51.18, verdict: 'bad' },
-	{ term: 'macau package tour', spend: 36.20, clicks: 1, cpc: 36.20, verdict: 'bad' },
-	{ term: 'hk to macau bus schedule', spend: 33.22, clicks: 1, cpc: 33.22, verdict: 'bad' },
-	{ term: 'macau airport limousine service', spend: 3.95, clicks: 1, cpc: 3.95, verdict: 'good' },
+	{ term: 'macau tour from hong kong', spend: 110.11, clicks: 3, verdict: 'bad' },
+	{ term: 'hong kong to macau', spend: 62.57, clicks: 3, verdict: 'bad' },
+	{ term: 'direct bus hk to macau', spend: 53.05, clicks: 1, verdict: 'bad' },
+	{ term: 'macau to hong kong car', spend: 52.24, clicks: 1, verdict: 'bad' },
+	{ term: 'hong kong to macau ferry', spend: 52.18, clicks: 1, verdict: 'bad' },
+	{ term: 'how to go macau from hk', spend: 51.18, clicks: 1, verdict: 'bad' },
+	{ term: 'macau airport limousine service', spend: 3.95, clicks: 1, verdict: 'good' },
 ];
+const wasteTotal = searchTerms.filter(t => t.verdict === 'bad').reduce((s, t) => s + t.spend, 0);
+const wastePct = Math.round(wasteTotal / (r.spend / 4.3) * 100);
+const productivePct = 100 - wastePct;
 ---
 
-<AuditLayout client={client} period={report.period}>
+<AuditLayout client={{name: c.name, url: c.url, tagline: c.tagline}} period={r.period}>
 
 	<section slot="content">
 		<!-- Executive Summary -->
 		<section class="section">
 			<div class="wrapper">
-				<h2><span class="section-icon">📋</span> Executive Summary</h2>
+				<h2><span class="section-icon">📋</span> What We Found</h2>
 				<div class="alert alert-critical">
-					<strong>Critical Finding:</strong> Your Google Ads account is spending approximately <strong>{report.monthlyAdSpend.toLocaleString()} {report.currency}/month</strong> with <strong>zero tracked conversions</strong>. The active campaign targets travel logistics queries (ferry schedules, bus fares) instead of premium chauffeur/limousine searches. Combined with likely missing conversion tracking, every dollar spent is currently unmeasurable.
+					<strong>Your ads are running, but nobody is booking.</strong> You're spending about {r.spend.toLocaleString()} {r.ccy}/month on Google Ads, and getting <strong>zero tracked bookings</strong> in return. The main reason: your campaign is showing up for people searching for ferry schedules and bus fares — not people looking for a premium chauffeur service. Conversion tracking also needs to be set up so we can actually measure what's working.
 				</div>
-				<div class="kpi-grid">
-					<div class="kpi-card"><span class="kpi-value">{report.monthlyAdSpend.toLocaleString()} {report.currency}<small>/mo</small></span><span class="kpi-label">Monthly Ad Spend</span></div>
-					<div class="kpi-card"><span class="kpi-value">0</span><span class="kpi-label">Tracked Conversions</span></div>
-					<div class="kpi-card"><span class="kpi-value">{report.monthlyAdAvgCpc} {report.currency}</span><span class="kpi-label">Avg Cost Per Click</span></div>
-					<div class="kpi-card"><span class="kpi-value">{report.organicClicks}</span><span class="kpi-label">Organic Clicks (90 days)</span></div>
+
+				<div class="kpi-row">
+					<div class="kpi-item"><span class="kpi-num">{r.spend.toLocaleString()} {r.ccy}<small>/mo</small></span><span class="kpi-label">Monthly ad spend</span></div>
+					<div class="kpi-item"><span class="kpi-num">0</span><span class="kpi-label">Bookings tracked</span></div>
+					<div class="kpi-item"><span class="kpi-num">{r.cpc} {r.ccy}</span><span class="kpi-label">Average cost per click</span></div>
+					<div class="kpi-item"><span class="kpi-num">{r.organicClicks}</span><span class="kpi-label">Free clicks (90 days)</span></div>
 				</div>
 			</div>
 		</section>
@@ -55,248 +67,179 @@ const searchTerms = [
 		<!-- About -->
 		<section class="section">
 			<div class="wrapper">
-				<h2><span class="section-icon">🏢</span> About TranspoLink</h2>
+				<h2><span class="section-icon">🏢</span> About {c.name}</h2>
 				<div class="content-card">
-					<p><strong>TranspoLink</strong> is a Macau-based premium chauffeur service operating across the Greater Bay Area (Macau, Hong Kong, Mainland China). Fleet consists of Toyota Alphard and Vellfire MPVs with 5G Wi-Fi, premium leather seating, and privacy features. Target segments: executive business, VIP leisure, diplomatic delegations.</p>
+					<p><strong>{c.name}</strong> is a Macau-based premium chauffeur service operating across Macau, Hong Kong, and Mainland China. They provide Toyota Alphard/Vellfire MPVs with 5G Wi-Fi, leather seating, and privacy features. Their clients are executive business travellers, VIP leisure guests, and diplomatic delegations.</p>
 					<div class="info-grid">
-						<div><strong>Service:</strong> {client.service}</div>
+						<div><strong>Services:</strong> {c.service}</div>
 						<div><strong>Fleet:</strong> Toyota Alphard / Vellfire MPV fleet</div>
-						<div><strong>Differentiator:</strong> Cross-border HKZM Bridge logistics, multilingual chauffeurs (EN, PT, CN)</div>
+						<div><strong>Edge:</strong> Cross-border HKZM Bridge expertise, trilingual chauffeurs (EN, PT, CN)</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Methodology -->
+		<!-- Where Your Money Goes -->
 		<section class="section">
 			<div class="wrapper">
-				<h2><span class="section-icon">🔬</span> Audit Methodology</h2>
-				<p>This audit uses the <strong>Scaling SMB 9-Phase Client Onboarding Audit</strong> methodology:</p>
-				<div class="methodology-steps">
-					<div class="step"><span class="step-num">1</span> Conversion Tracking</div>
-					<div class="step"><span class="step-num">2</span> Account Structure</div>
-					<div class="step"><span class="step-num">3</span> Keywords &amp; Search Terms</div>
-					<div class="step"><span class="step-num">4</span> Ad Copy &amp; Creative</div>
-					<div class="step"><span class="step-num">5</span> Bidding &amp; Budget</div>
-					<div class="step"><span class="step-num">6</span> Audience Targeting</div>
-					<div class="step"><span class="step-num">7</span> Landing Pages / SEO</div>
-					<div class="step"><span class="step-num">8</span> PMax Health</div>
-					<div class="step"><span class="step-num">9</span> Roadmap &amp; Recommendations</div>
+				<h2><span class="section-icon">💰</span> Where Your Ad Budget Is Going</h2>
+
+				<div class="chart-two-col">
+					<div>
+						<h3 style="margin-top:0">Roughly 92% is reaching the wrong audience</h3>
+						<p>Your ads show up when someone searches for ferries, buses, and tour packages — not executive cars. These people want cheap public transport, not a premium chauffeur.</p>
+						<div class="bar-chart">
+							<div class="bar-row">
+								<span class="bar-label">Wasted spend</span>
+								<div class="bar-track"><div class="bar-fill b--red" style="width:{wastePct}%"><span class="bar-fill-text">~{wastePct}%</span></div></div>
+								<span class="bar-right">~{r.ccy} {Math.round(wasteTotal)}/mo</span>
+							</div>
+							<div class="bar-row">
+								<span class="bar-label">Potentially productive</span>
+								<div class="bar-track"><div class="bar-fill b--green" style="width:{productivePct}%"><span class="bar-fill-text">{productivePct}%</span></div></div>
+								<span class="bar-right">~{r.ccy} {Math.round(r.spend/4.3 - wasteTotal)}/mo</span>
+							</div>
+						</div>
+					</div>
+					<div class="pie-wrap">
+						<svg class="pie-svg" viewBox="0 0 200 200">
+							<circle cx="100" cy="100" r="90" fill="none" stroke="#e2e8f0" stroke-width="20" />
+							<circle cx="100" cy="100" r="90" fill="none" stroke="#ef4444" stroke-width="20" stroke-dasharray="{wastePct * 5.65} {565 - wastePct * 5.65}" stroke-dashoffset="141.4" />
+							<circle cx="100" cy="100" r="90" fill="none" stroke="#10b981" stroke-width="20" stroke-dasharray="{productivePct * 5.65} {565 - productivePct * 5.65}" stroke-dashoffset="{141.4 + wastePct * 5.65}" />
+						</svg>
+					</div>
 				</div>
-				<p class="methodology-note" style="font-size:0.85rem;color:var(--text-muted);font-style:italic">Data sourced from Google Ads API, Google Search Console, and live website review.</p>
+
+				<div class="alert alert-warn">
+					<strong>That's ~{r.ccy} {Math.round(wasteTotal)}/month</strong> going to clicks from people looking for ferries, buses, and budget travel. Fixing this alone saves over {r.ccy} 4,000/year.
+				</div>
 			</div>
 		</section>
 
-		<!-- Google Ads -->
+		<!-- Account -->
 		<section class="section">
 			<div class="wrapper">
-				<h2><span class="section-icon">📊</span> Google Ads Account Analysis</h2>
-
-				<h3>Account Structure</h3>
+				<h2><span class="section-icon">📊</span> Your Campaigns at a Glance</h2>
 				<table class="data-table">
-					<thead><tr><th>Campaign</th><th>Type</th><th>Status</th><th>7-Day Spend</th><th>Clicks</th><th>Conv.</th><th>Avg CPC</th></tr></thead>
+					<thead><tr><th>Campaign</th><th>Type</th><th>Status</th><th>Weekly Spend</th><th>Clicks</th><th>Bookings</th></tr></thead>
 					<tbody>
 						<tr class="row-danger">
-							<td>Search Transpolink Page<br /><small>(Dani ChatGPT Recommendations)</small></td>
+							<td>Search Transpolink Page<br /><small>(ChatGPT-built, wrong audience)</small></td>
 							<td>Search</td>
-							<td><span class="badge badge-enabled">Enabled</span></td>
-							<td>{report.currency} 1,174.14</td><td>272</td><td><strong>0</strong></td><td>{report.currency} 4.32</td>
+							<td><span class="badge badge-enabled">Running</span></td>
+							<td>{r.ccy} 1,174</td><td>272</td><td><strong>0</strong></td>
 						</tr>
 						<tr class="row-paused">
-							<td>WEBSITE KEYWORDS MACAU AND HK ONLY<br /><small>(From Evan)</small></td>
+							<td>WEBSITE KEYWORDS MACAU AND HK<br /><small>(Better structure — paused)</small></td>
 							<td>Search</td>
 							<td><span class="badge badge-paused">Paused</span></td>
-							<td>{report.currency} 0</td><td>0</td><td>0</td><td>&mdash;</td>
-						</tr>
-						<tr class="row-removed">
-							<td>TranspoLink Limo Services</td><td>PMax</td>
-							<td><span class="badge badge-removed">Removed</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
-						</tr>
-						<tr class="row-removed">
-							<td>Macau car rental</td><td>Search</td>
-							<td><span class="badge badge-removed">Removed</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+							<td>{r.ccy} 0</td><td>0</td><td>0</td>
 						</tr>
 					</tbody>
 				</table>
-				<div class="alert alert-critical"><strong>{report.currency} 1,174/week with 0 conversions.</strong> Only 1 of 4 campaigns active, and it's driving traffic to the wrong search intent.</div>
 
-				<h3>Spend Distribution by Campaign</h3>
-				<div class="kpi-charts">
-					<div class="kpi-chart-row">
-						<span class="kpi-chart-label">Search Transpolink</span>
-						<div class="kpi-chart-bar-wrap"><div class="kpi-chart-bar bar-red" style="width:100%"><span class="kpi-chart-bar-value">{report.currency} 1,174.14</span></div></div>
-						<span class="kpi-chart-val">100%</span>
-					</div>
-					<div class="kpi-chart-row">
-						<span class="kpi-chart-label">Other campaigns</span>
-						<div class="kpi-chart-bar-wrap"><div class="kpi-chart-bar bar-gray" style="width:0%"><span class="kpi-chart-bar-value">{report.currency} 0</span></div></div>
-						<span class="kpi-chart-val">0%</span>
-					</div>
-				</div>
-				<p style="font-size:0.85rem;color:var(--text-muted)">100% of budget goes to one campaign targeting the wrong search intent. The paused "MACAU AND HK" campaign had better structure but is inactive.</p>
-
-				<h3>Top Search Terms — Waste Breakdown</h3>
-				<p style="font-size:0.92rem">These are the queries your ad budget is actually paying for. Each bar represents real HKD spent in the last 30 days:</p>
-				<div class="kpi-charts">
-					{searchTerms.filter(t => t.verdict === 'bad').slice(0, 6).map(t => (
-						<div class="kpi-chart-row">
-							<span class="kpi-chart-label" style="font-size:0.78rem">{t.term}</span>
-							<div class="kpi-chart-bar-wrap"><div class="kpi-chart-bar bar-red" style="width:{(t.spend / maxSearchTermSpend * 100).toFixed(0)}%"><span class="kpi-chart-bar-value">{report.currency} {t.spend.toFixed(2)}</span></div></div>
-							<span class="kpi-chart-val" style="font-size:0.8rem">{t.clicks} clicks</span>
+				<h3>What People Are Clicking (Last 30 Days)</h3>
+				<p>These are the actual searches your ad budget paid for. The red ones are people looking for public transport — not limousines.</p>
+				<div class="bar-chart">
+					{searchTerms.map(t => (
+						<div class="bar-row">
+							<span class="bar-label" style="font-size:0.78rem">{t.term}</span>
+							<div class="bar-track"><div class={"bar-fill " + (t.verdict === 'bad' ? 'b--red' : 'b--green')} style="width:{(t.spend / maxSearchTermSpend * 100).toFixed(0)}%"><span class="bar-fill-text">{r.ccy} {t.spend.toFixed(0)}</span></div></div>
+							<span class="bar-right" style="font-size:0.8rem">{t.clicks} clicks</span>
 						</div>
 					))}
 				</div>
-				<div class="alert alert-warn"><strong>Estimated wasted spend:</strong> ~{report.currency} 350–450/month on completely irrelevant travel logistics queries. Every click on "hong kong to macau ferry" is a person looking for a $30 ticket, not a premium limousine.</div>
 
-				<h3>Missed High-Intent Keywords</h3>
-				<table class="data-table">
-					<thead><tr><th>Keyword Opportunity</th><th>Intent</th><th>Action</th></tr></thead>
-					<tbody>
-						<tr><td>macau airport transfer</td><td>Transactional</td><td><span class="tag tag-good">Add exact match</span></td></tr>
-						<tr><td>macau limousine service</td><td>Commercial</td><td><span class="tag tag-good">Add exact match</span></td></tr>
-						<tr><td>hong kong to macau limo</td><td>Transactional</td><td><span class="tag tag-good">Add exact match</span></td></tr>
-						<tr><td>private car macau airport</td><td>Transactional</td><td><span class="tag tag-good">Add exact match</span></td></tr>
-						<tr><td>cross border car service macau</td><td>Commercial</td><td><span class="tag tag-good">Add exact + phrase</span></td></tr>
-						<tr><td>chauffeur service macau</td><td>Commercial</td><td><span class="tag tag-good">Add exact match</span></td></tr>
-						<tr><td>macau executive car service</td><td>Commercial</td><td><span class="tag tag-good">Add exact match</span></td></tr>
-						<tr><td>vip transport macau</td><td>Commercial</td><td><span class="tag tag-good">Add exact match</span></td></tr>
-					</tbody>
-				</table>
+				<h3>Keywords You Should Target Instead</h3>
+				<p>These are the terms your ideal customers actually search for. None of them are in your campaign:</p>
+				<div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0">
+					<span class="tag tag-good">macau airport transfer</span>
+					<span class="tag tag-good">hong kong to macau limo</span>
+					<span class="tag tag-good">private car macau airport</span>
+					<span class="tag tag-good">chauffeur service macau</span>
+					<span class="tag tag-good">cross border car macau</span>
+					<span class="tag tag-good">executive car macau</span>
+					<span class="tag tag-good">vip transport macau</span>
+				</div>
+			</div>
+		</section>
 
-				<h3>Bidding & Budget</h3>
+		<!-- Tracking -->
+		<section class="section">
+			<div class="wrapper">
+				<h2><span class="section-icon">🎯</span> Why We Can't Measure Results</h2>
+				<div class="alert alert-critical"><strong>272 clicks, zero tracked bookings.</strong> For a chauffeur service where most bookings happen by phone or WhatsApp, we can't tell if anyone actually called or booked after seeing your ad. This needs to be fixed before we can optimize anything.</div>
 				<ul class="findings-list">
-					<li><strong>Bid strategy:</strong> Broad match + 0 conversions = Smart Bidding has nothing to optimize toward</li>
-					<li><strong>Budget distribution:</strong> 100% of spend to one wrong-intent campaign. Paused "MACAU AND HK" campaign had better structure.</li>
-					<li><strong>Low QS risk:</strong> Broad match + irrelevant terms inflates CPCs artificially.</li>
+					<li><strong>No booking tracking</strong> — we don't know if anyone submitted a form or called after clicking</li>
+					<li><strong>No call tracking</strong> — essential for a phone-booking business like yours</li>
+					<li><strong>No WhatsApp tracking</strong> — your customers reach you on WhatsApp, but ads can't see it</li>
 				</ul>
 			</div>
 		</section>
 
-		<!-- Conversion Tracking -->
+		<!-- Search Console -->
 		<section class="section">
 			<div class="wrapper">
-				<h2><span class="section-icon">🎯</span> Conversion Tracking Audit</h2>
-				<div class="alert alert-critical"><strong>272 clicks, 0 conversions.</strong> Either tracking is not installed, broken, or the landing page has no measurable conversion action.</div>
-				<table class="data-table">
-					<thead><tr><th>Check</th><th>Status</th><th>Notes</th></tr></thead>
-					<tbody>
-						<tr class="row-danger"><td>Google Ads tag installed</td><td><span class="badge badge-fail">Unknown / Missing</span></td><td>No conversions recorded</td></tr>
-						<tr class="row-danger"><td>Enhanced conversions</td><td><span class="badge badge-fail">Likely Not Set Up</span></td><td>No first-party data matching</td></tr>
-						<tr class="row-danger"><td>Call tracking</td><td><span class="badge badge-fail">Unknown</span></td><td>Critical for a phone-booking business</td></tr>
-					</tbody>
-				</table>
-			</div>
-		</section>
-
-		<!-- SEO -->
-		<section class="section">
-			<div class="wrapper">
-				<h2><span class="section-icon">🔍</span> Organic Search (Google Search Console)</h2>
-				<h3>90-Day Performance</h3>
-				<div class="kpi-grid">
-					<div class="kpi-card"><span class="kpi-value">87</span><span class="kpi-label">Organic Clicks</span></div>
-					<div class="kpi-card"><span class="kpi-value">2,986</span><span class="kpi-label">Impressions</span></div>
-					<div class="kpi-card"><span class="kpi-value">2.9%</span><span class="kpi-label">CTR</span></div>
-					<div class="kpi-card"><span class="kpi-value">5.2</span><span class="kpi-label">Avg Position</span></div>
+				<h2><span class="section-icon">🔍</span> Your Free Traffic (Google Search)</h2>
+				<div class="kpi-row">
+					<div class="kpi-item"><span class="kpi-num">87</span><span class="kpi-label">Free clicks (90 days)</span></div>
+					<div class="kpi-item"><span class="kpi-num">2,986</span><span class="kpi-label">Times shown in search</span></div>
+					<div class="kpi-item"><span class="kpi-num">2.9%</span><span class="kpi-label">Click-through rate</span></div>
+					<div class="kpi-item"><span class="kpi-num">5.2</span><span class="kpi-label">Average ranking position</span></div>
 				</div>
-
-				<h3>Top Performing Queries</h3>
-				<table class="data-table">
-					<thead><tr><th>Query</th><th>Clicks</th><th>Impressions</th><th>Avg Position</th></tr></thead>
-					<tbody>
-						<tr><td>transpolink</td><td>5</td><td>25</td><td>1.1</td></tr>
-						<tr><td>limo service macau</td><td>2</td><td>20</td><td>1.0</td></tr>
-						<tr><td>macau limousine service</td><td>2</td><td>91</td><td>1.4 (mob) / 8.8 (desk)</td></tr>
-						<tr><td>transpolink limo services</td><td>2</td><td>20</td><td>1.2</td></tr>
-						<tr><td>limousine service macau</td><td>1</td><td>5</td><td>1.0</td></tr>
-					</tbody>
-				</table>
-
-				<h3>Missed Organic Opportunities</h3>
-				<div class="kpi-charts">
-					<div class="kpi-chart-row">
-						<span class="kpi-chart-label" style="font-size:0.78rem">limo</span>
-						<div class="kpi-chart-bar-wrap"><div class="kpi-chart-bar bar-orange" style="width:100%"><span class="kpi-chart-bar-value">282 impressions</span></div></div>
-						<span class="kpi-chart-val" style="font-size:0.8rem">0 clicks</span>
-					</div>
-					<div class="kpi-chart-row">
-						<span class="kpi-chart-label" style="font-size:0.78rem">limousine</span>
-						<div class="kpi-chart-bar-wrap"><div class="kpi-chart-bar bar-orange" style="width:41%"><span class="kpi-chart-bar-value">117 impressions</span></div></div>
-						<span class="kpi-chart-val" style="font-size:0.8rem">0 clicks</span>
-					</div>
-					<div class="kpi-chart-row">
-						<span class="kpi-chart-label" style="font-size:0.78rem">limousine svc zhuhai</span>
-						<div class="kpi-chart-bar-wrap"><div class="kpi-chart-bar bar-orange" style="width:36%"><span class="kpi-chart-bar-value">102 impressions</span></div></div>
-						<span class="kpi-chart-val" style="font-size:0.8rem">0 clicks</span>
-					</div>
-					<div class="kpi-chart-row">
-						<span class="kpi-chart-label" style="font-size:0.78rem">macau limo</span>
-						<div class="kpi-chart-bar-wrap"><div class="kpi-chart-bar bar-orange" style="width:17%"><span class="kpi-chart-bar-value">49 impressions</span></div></div>
-						<span class="kpi-chart-val" style="font-size:0.8rem">0 clicks</span>
-					</div>
-				</div>
-
-				<h3>Sitemap & Indexing</h3>
-				<div class="alert alert-high"><strong>Sitemap Issue:</strong> <strong>24 pages submitted, 0 indexed.</strong> Google knows about your pages but hasn't indexed any. Likely causes: low content depth, no internal linking, missing structured data.</div>
+				<p>You rank #1 for "limo service macau" and "macau limousine service" — strong positions. But your website has <strong>24 pages that Google knows about and zero that it's actually showing in search results.</strong></p>
+				<div class="alert alert-high"><strong>Quick fix:</strong> Adding proper business schema (LocalBusiness markup) and fixing internal links can help Google index your pages and drive more free traffic.</div>
 			</div>
 		</section>
 
 		<!-- Website -->
 		<section class="section">
 			<div class="wrapper">
-				<h2><span class="section-icon">🖥️</span> Website & Landing Page Review</h2>
+				<h2><span class="section-icon">🖥️</span> Website Check</h2>
 				<ul class="findings-list">
-					<li><strong>First impression:</strong> Clean, professional design. Strong brand positioning.</li>
-					<li><strong>Mobile:</strong> Responsive. ~70% of traffic is mobile — good.</li>
-					<li><strong>Booking flow:</strong> "Book Now" page exists but only 2 organic clicks in 90 days. Form needs CRO audit.</li>
-					<li><strong>Call tracking:</strong> Not detected. Critical gap for a chauffeur service.</li>
-					<li><strong>Ad-to-page:</strong> Ad copy mismatch with landing pages hurts Quality Score.</li>
+					<li><strong>Look and feel:</strong> Clean, professional. Good first impression.</li>
+					<li><strong>Mobile-friendly:</strong> Yes — important since ~70% of your traffic is on phones.</li>
+					<li><strong>Booking page:</strong> Only got 2 free clicks in 90 days. The form might be hard to find or too long.</li>
+					<li><strong>Call tracking:</strong> Not detected — for a business where customers call to book, this is a big gap.</li>
+					<li><strong>Ad vs page:</strong> Your ads promise one thing, but the page they land on doesn't match. This hurts your Quality Score and raises your costs.</li>
 				</ul>
 			</div>
 		</section>
 
-		<!-- Recommendations (flat numbered list) -->
+		<!-- Recommendations -->
 		<section class="section">
 			<div class="wrapper">
-				<h2><span class="section-icon">🎯</span> Recommendations</h2>
+				<h2><span class="section-icon">🎯</span> What We Recommend</h2>
+				<p>Listed in order of impact. Start from the top and work down.</p>
 
 				<div class="rec-list">
 					<div class="rec-item">
-						<h4>Fix Conversion Tracking</h4>
-						<p><strong>Problem:</strong> 272 clicks, 0 conversions. No tracking installed or broken.</p>
-						<p><strong>Fix:</strong> Install Google Ads tag via GTM. Track booking form submissions, phone calls, and WhatsApp clicks. Enable Enhanced Conversions for +5–15% more attributed conversions.</p>
+						<h4>Set up tracking so we can measure results</h4>
+						<p>Install call tracking, WhatsApp click tracking, and a booking form tracker. Without this, we're flying blind. Once installed, we'll know exactly which ads are working.</p>
 					</div>
 					<div class="rec-item">
-						<h4>Add Negative Keywords</h4>
-						<p>Block ferry*, bus*, tour*, schedule, fare, ticket, package, cheap, free, how to at account level. This alone will stop ~{report.currency} 350–450/month in waste.</p>
+						<h4>Stop paying for ferry and bus searches</h4>
+						<p>Add roughly 20 negative keywords (ferry, bus, tour, schedule, fare, ticket, cheap, free, how to) at the account level. This.is a 15-minute fix that saves ~{r.ccy} 350-450/month immediately.</p>
 					</div>
 					<div class="rec-item">
-						<h4>Restructure Campaigns</h4>
-						<p>Pause the Dani ChatGPT campaign (wrong intent). Reactivate the "MACAU AND HK" campaign. Build tight ad groups by service: Airport Transfers, Cross-Border, Chauffeur, Brand. Use exact match for core terms.</p>
+						<h4>Rebuild the campaign to target the right people</h4>
+						<p>Pause the current campaign (it's targeting the wrong audience). Reactivate the paused "MACAU AND HK" campaign. Create ad groups for: Airport Transfers, Cross-Border Travel, Chauffeur Hire, and Brand Terms. Use exact-match keywords for the high-intent terms listed above.</p>
 					</div>
 					<div class="rec-item">
-						<h4>Build High-Intent Keywords</h4>
-						<p>Add commercial keywords: macau airport transfer, hong kong to macau limo, chauffeur service macau, cross border car service, vip transport macau. Use 60% exact, 30% phrase, 10% broad.</p>
+						<h4>Fix your website's search visibility</h4>
+						<p>Add LocalBusiness structured data (schema markup) to your site. Check why Google hasn't indexed any of your 24 pages. Submit key pages manually via Search Console. This will help more people find you for free.</p>
 					</div>
 					<div class="rec-item">
-						<h4>Fix Sitemap Indexing</h4>
-						<p>24 pages submitted, 0 indexed. Review robots.txt, check for noindex tags, add LocalBusiness schema markup, submit key pages manually via Search Console.</p>
+						<h4>Create dedicated landing pages for each service</h4>
+						<p>Instead of sending all ad traffic to your homepage, build separate pages for Airport Transfers, Cross-Border, and Chauffeur Hire. Each ad should point to a page that matches exactly what it promises.</p>
 					</div>
 					<div class="rec-item">
-						<h4>Optimize Landing Pages</h4>
-						<p>Dedicated landing pages per service type. Each ad group → specific landing page (not homepage). Add call tracking, simplify booking form, improve page speed.</p>
+						<h4>Set up retargeting for website visitors</h4>
+						<p>Once tracking is working, create a campaign that shows your ads to people who visited your booking page but didn't complete a reservation. This catches people who were interested but got distracted.</p>
 					</div>
 					<div class="rec-item">
-						<h4>Launch PMax Campaign</h4>
-						<p>Once 50+ conversions/month are stable, launch Performance Max to extend reach across YouTube, Display, and Discover. Use best-performing Search keywords as audience signals.</p>
-					</div>
-					<div class="rec-item">
-						<h4>Implement Remarketing</h4>
-						<p>Build website visitor audiences. Create a dedicated campaign to re-engage people who visited the booking page but didn't complete a reservation.</p>
-					</div>
-					<div class="rec-item">
-						<h4>Weekly Optimization Cadence</h4>
-						<p>Review search terms report weekly, add converting terms as keywords, add non-converting terms as negatives. Check budget pacing. Monitor Quality Score trends.</p>
+						<h4>Expand to Performance Max once stable</h4>
+						<p>After you're getting 50+ bookings per month, launch a Performance Max campaign to show ads across YouTube, Display networks, and Gmail — reaching potential clients who aren't actively searching yet.</p>
 					</div>
 				</div>
 			</div>
@@ -305,12 +248,29 @@ const searchTerms = [
 		<!-- Projected Impact -->
 		<section class="section">
 			<div class="wrapper">
-				<h2><span class="section-icon">📈</span> Projected Impact</h2>
+				<h2><span class="section-icon">📈</span> What We Expect to Achieve</h2>
+				<p>These estimates are based on fixing the issues found in this audit. Results will vary, but here's what similar campaigns achieve after restructuring:</p>
 				<div class="impact-grid">
-					<div class="impact-card"><h4>Waste Elimination</h4><p class="impact-number">{report.currency} 4,200<span>/year</span></p><p>From blocking irrelevant search terms</p></div>
-					<div class="impact-card"><h4>CPA Reduction</h4><p class="impact-number">50–70%<span></span></p><p>By targeting high-intent keywords</p></div>
-					<div class="impact-card"><h4>Conversion Uplift</h4><p class="impact-number">8–15x<span></span></p><p>From 0/month to measurable pipeline</p></div>
-					<div class="impact-card"><h4>Organic Growth</h4><p class="impact-number">3–5x<span></span></p><p>From fixing indexing + schema</p></div>
+					<div class="impact-card">
+						<h4>Immediate savings</h4>
+						<p class="impact-num">{r.ccy} 4,200<small>/year</small></p>
+						<p class="impact-desc">From stopping waste on ferry, bus, and tour keywords alone. This is money you're spending today that generates zero leads.</p>
+					</div>
+					<div class="impact-card">
+						<h4>Cost per booking</h4>
+						<p class="impact-num">{r.ccy} 80–150</p>
+						<p class="impact-desc">Expected cost per qualified lead once we target the right keywords. At {r.ccy} 5,020/month, that's 33–62 potential bookings per month.</p>
+					</div>
+					<div class="impact-card">
+						<h4>From zero to measurable</h4>
+						<p class="impact-num">15–30<small>/month</small></p>
+						<p class="impact-desc">Realistic first-month bookings after campaign restructure and tracking setup. Scales as we optimize and add more high-intent keywords.</p>
+					</div>
+					<div class="impact-card">
+						<h4>Free search traffic</h4>
+						<p class="impact-num">3–5x</p>
+						<p class="impact-desc">Expected organic traffic increase from fixing sitemap indexing and adding schema markup. More free visibility for your brand.</p>
+					</div>
 				</div>
 			</div>
 		</section>
