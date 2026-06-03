@@ -11,8 +11,8 @@ tags:
   - 'AI employee real experience'
 readTime: '12 min read'
 draft: false
-featuredImage: '/images/blog/featured/hermes-agent-journey.svg'
-featuredImageAlt: 'Split composition — left side shows a busy messy office and right side shows a clean modern dashboard with checkmarks, representing the transformation from busywork to AI-managed operations'
+featuredImage: '/images/blog/featured/hermes-agent-journey.jpg'
+featuredImageAlt: 'Evan (left) and James AI (right) — the human and AI co-founders of Scaling SMB, working side by side. James displays a holographic dashboard showing live calendar and incoming leads.'
 ---
 
 *I run a company that deploys AI employees for small and medium businesses. It would be strange if I did not use one myself. So I did. Here is the honest account of what working with an open-source AI agent actually looks like — not a demo, not a sales pitch, the real thing.*
