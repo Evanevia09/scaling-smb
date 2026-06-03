@@ -79,7 +79,7 @@ const productivePct = 100 - wastePct;
 			</div>
 		</section>
 
-		<!-- Where Your Money Goes -->
+		<!-- Where Your Money Goes + Conversions -->
 		<section class="section">
 			<div class="wrapper">
 				<h2><span class="section-icon">💰</span> Where Your Ad Budget Is Going</h2>
@@ -96,7 +96,7 @@ const productivePct = 100 - wastePct;
 							</div>
 							<div class="bar-row">
 								<span class="bar-label">Potentially productive</span>
-								<div class="bar-track"><div class="bar-fill b--green" style={"width:" + productivePct + "%"}><span class="bar-fill-text">{productivePct}%</span></div></div>
+								<div class="bar-track"><div class="bar-fill b--green" style={"width:" + productivePct + "%"}}><span class="bar-fill-text">{productivePct}%</span></div></div>
 								<span class="bar-right">~{r.ccy} {Math.round(r.spend/4.3 - wasteTotal)}/mo</span>
 							</div>
 						</div>
@@ -113,6 +113,16 @@ const productivePct = 100 - wastePct;
 				<div class="alert alert-warn">
 					<strong>That's ~{r.ccy} {Math.round(wasteTotal)}/month</strong> going to clicks from people looking for ferries, buses, and budget travel. Fixing this alone saves over {r.ccy} 4,000/year.
 				</div>
+
+				<!-- Conversions result right here next to budget -->
+				<div class="alert alert-critical" style="margin-top:20px">
+					<strong>272 clicks, zero tracked bookings.</strong> For a chauffeur service where most bookings happen by phone or WhatsApp, we can't tell if anyone actually called or booked after seeing your ad. This needs to be fixed before we can optimize anything.
+				</div>
+				<ul class="findings-list">
+					<li><strong>No booking tracking</strong> — we don't know if anyone submitted a form or called after clicking</li>
+					<li><strong>No call tracking</strong> — essential for a phone-booking business like yours</li>
+					<li><strong>No WhatsApp tracking</strong> — your customers reach you on WhatsApp, but ads can't see it</li>
+				</ul>
 			</div>
 		</section>
 
@@ -144,7 +154,7 @@ const productivePct = 100 - wastePct;
 					{searchTerms.map(t => (
 						<div class="bar-row">
 							<span class="bar-label" style="font-size:0.78rem">{t.term}</span>
-							<div class="bar-track"><div class={"bar-fill " + (t.verdict === 'bad' ? 'b--red' : 'b--green')} style={"width:" + (t.spend / maxSearchTermSpend * 100).toFixed(0) + "%"}><span class="bar-fill-text">{r.ccy} {t.spend.toFixed(0)}</span></div></div>
+							<div class="bar-track"><div class={"bar-fill " + (t.verdict === 'bad' ? 'b--red' : 'b--green')} style={"width:" + (t.spend / maxSearchTermSpend * 100).toFixed(0) + "%"}}><span class="bar-fill-text">{r.ccy} {t.spend.toFixed(0)}</span></div></div>
 							<span class="bar-right" style="font-size:0.8rem">{t.clicks} clicks</span>
 						</div>
 					))}
@@ -181,19 +191,111 @@ const productivePct = 100 - wastePct;
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
 
-		<!-- Tracking -->
-		<section class="section">
-			<div class="wrapper">
-				<h2><span class="section-icon">🎯</span> Why We Can't Measure Results</h2>
-				<div class="alert alert-critical"><strong>272 clicks, zero tracked bookings.</strong> For a chauffeur service where most bookings happen by phone or WhatsApp, we can't tell if anyone actually called or booked after seeing your ad. This needs to be fixed before we can optimize anything.</div>
-				<ul class="findings-list">
-					<li><strong>No booking tracking</strong> — we don't know if anyone submitted a form or called after clicking</li>
-					<li><strong>No call tracking</strong> — essential for a phone-booking business like yours</li>
-					<li><strong>No WhatsApp tracking</strong> — your customers reach you on WhatsApp, but ads can't see it</li>
-				</ul>
+				<!-- NEW: What Your Campaign Should Look Like -->
+				<h3 style="margin-top:48px">What Your Campaign Should Look Like</h3>
+				<p>Based on standard best practices for a premium chauffeur service in the GBA, here's the setup we recommend — built to reach people who book cars, not people who book ferries.</p>
+
+				<div class="campaign-blueprint">
+					<div class="bp-section">
+						<h4>📐 Campaign Structure</h4>
+						<table class="data-table">
+							<thead><tr><th>Campaign</th><th>Ad Group</th><th>Sample Keywords</th><th>Match Type</th></tr></thead>
+							<tbody>
+								<tr>
+									<td rowspan="3" style="border-right:1px solid var(--border)"><strong>Non-Brand Search</strong><br /><small>Main campaign for new customer acquisition</small></td>
+									<td>Airport Transfers</td>
+									<td><code>macau airport transfer</code>, <code>private car macau airport</code></td>
+									<td>Exact + Phrase</td>
+								</tr>
+								<tr>
+									<td>Cross-Border Travel</td>
+									<td><code>hong kong to macau car</code>, <code>cross border car macau</code></td>
+									<td>Exact + Phrase</td>
+								</tr>
+								<tr>
+									<td>Chauffeur Hire</td>
+									<td><code>chauffeur service macau</code>, <code>private driver macau</code></td>
+									<td>Exact + Phrase</td>
+								</tr>
+								<tr>
+									<td><strong>Brand Search</strong><br /><small>Protect your name</small></td>
+									<td>Brand Terms</td>
+									<td><code>transpolink</code>, <code>transpolink limo</code></td>
+									<td>Exact</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="bp-section">
+						<h4>⚙️ Settings</h4>
+						<div class="settings-grid">
+							<div class="setting-card">
+								<span class="setting-label">Network</span>
+								<span class="setting-val">Search only<br /><small>No Display Network. No Search Partners (they drain budget).</small></span>
+							</div>
+							<div class="setting-card">
+								<span class="setting-label">Location</span>
+								<span class="setting-val">Macau + Hong Kong<br /><small>"Presence" mode only — not "Presence or Interest".</small></span>
+							</div>
+							<div class="setting-card">
+								<span class="setting-label">Bidding</span>
+								<span class="setting-val">Maximize Conversions<br /><small>Start here (zero conversion data). Switch to Target CPA once you get 30+ bookings/month.</small></span>
+							</div>
+							<div class="setting-card">
+								<span class="setting-label">Ad Schedule</span>
+								<span class="setting-val">8 AM – 10 PM daily<br /><small>Aligns with when business travellers book cars.</small></span>
+							</div>
+							<div class="setting-card">
+								<span class="setting-label">Ad Rotation</span>
+								<span class="setting-val">Optimize<br /><small>Let Google show the best-performing headlines.</small></span>
+							</div>
+							<div class="setting-card">
+								<span class="setting-label">Device</span>
+								<span class="setting-val">Mobile bid +20%<br /><small>~70% of searches happen on phones — business travellers on the go.</small></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="bp-section">
+						<h4>📝 Your Ads (RSAs)</h4>
+						<p>Each ad group gets its own Responsive Search Ad with these three headline types pinned:</p>
+						<div class="ad-example">
+							<div class="ad-headline">🚗 <strong>Premium Chauffeur, Macau Airport</strong></div>
+							<div class="ad-headline">⭐ <strong>Toyota Alphard with 5G Wi-Fi</strong></div>
+							<div class="ad-headline">📞 <strong>Book Your Private Transfer Today</strong></div>
+							<div class="ad-desc">Executive MPV fleet with trilingual chauffeurs. Cross-border HKZM Bridge specialist. Fixed pricing, no surge. Book via WhatsApp or call now.</div>
+						</div>
+						<p style="margin-top:12px"><strong>Ad assets (extensions) to add:</strong> Call button (essential for phone bookings), Sitelinks (Airport Transfers, Chauffeur Hire, Contact), Location asset (linked to Google Business Profile), Callouts ("Trilingual Chauffeurs", "Fixed Pricing", "HKZM Bridge Expert", "5G Wi-Fi").</p>
+					</div>
+
+					<div class="bp-section">
+						<h4>🔑 Daily Budget</h4>
+						<p>Start at <strong>{r.ccy} 200/day</strong> (~{r.ccy} 6,000/month — slightly above current spend). This is enough for 5–8 clicks per day on high-intent keywords at current CPC levels. Once tracking shows which keywords actually convert, we can scale the winners and reduce on the rest.</p>
+					</div>
+
+					<div class="bp-section">
+						<h4>🚀 Prerequisites Before Launch</h4>
+						<p>Three things must be in place before turning on the new campaign:</p>
+						<ol class="findings-list" style="list-style:decimal;padding-left:20px">
+							<li><strong>Call tracking installed</strong> — every phone call from an ad gets logged as a conversion</li>
+							<li><strong>WhatsApp click tracking</strong> — so we know when someone messages you from the ad</li>
+							<li><strong>Dedicated landing pages</strong> — one page per service (Airport, Cross-Border, Chauffeur Hire) instead of sending everyone to the homepage</li>
+						</ol>
+					</div>
+
+					<div class="bp-section">
+						<h4>📈 After 30 Days (When We Have Data)</h4>
+						<p>Once the campaign collects 30–50+ bookings per month:</p>
+						<ul class="findings-list">
+							<li>Switch bidding to <strong>Target CPA</strong> at {r.ccy} 100–150 per booking (Google AI optimizes automatically)</li>
+							<li><strong>Expand keywords</strong> from search terms report — add converting terms as exact match</li>
+							<li><strong>Launch Performance Max</strong> campaign to show video ads on YouTube targeting business travellers planning GBA trips</li>
+							<li>Set up <strong>retargeting</strong> for people who visited the booking page but didn't complete a reservation</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</section>
 
@@ -239,11 +341,11 @@ const productivePct = 100 - wastePct;
 					</div>
 					<div class="rec-item">
 						<h4>Stop paying for ferry and bus searches</h4>
-						<p>Add roughly 20 negative keywords (ferry, bus, tour, schedule, fare, ticket, cheap, free, how to) at the account level. This.is a 15-minute fix that saves ~{r.ccy} 350-450/month immediately.</p>
+						<p>Add roughly 20 negative keywords (ferry, bus, tour, schedule, fare, ticket, cheap, free, how to) at the account level. This is a 15-minute fix that saves ~{r.ccy} 350-450/month immediately.</p>
 					</div>
 					<div class="rec-item">
 						<h4>Rebuild the campaign to target the right people</h4>
-						<p>Pause the current campaign (it's targeting the wrong audience). Reactivate the paused "MACAU AND HK" campaign. Create ad groups for: Airport Transfers, Cross-Border Travel, Chauffeur Hire, and Brand Terms. Use exact-match keywords for the high-intent terms listed above.</p>
+						<p>Pause the current campaign (it's targeting the wrong audience). Reactivate the paused "MACAU AND HK" campaign or start fresh. Create ad groups for: Airport Transfers, Cross-Border Travel, Chauffeur Hire, and Brand Terms. Use exact-match keywords for the high-intent terms listed above.</p>
 					</div>
 					<div class="rec-item">
 						<h4>Fix your website's search visibility</h4>
@@ -297,3 +399,35 @@ const productivePct = 100 - wastePct;
 	</section>
 
 </AuditLayout>
+
+<style is:global>
+	/* Campaign Blueprint */
+	.campaign-blueprint { margin: 24px 0; display: flex; flex-direction: column; gap: 28px; }
+	.bp-section { background: var(--bg-subtle, #f6f8fc); border-radius: var(--radius-md, 12px); padding: 24px; border: 1px solid var(--border, rgba(15,23,42,0.1)); }
+	.bp-section h4 { margin: 0 0 16px; font-size: 1rem; font-weight: 700; color: var(--text, #0f172a); }
+	.bp-section p { margin: 0 0 12px; font-size: 0.9rem; color: var(--text-muted, #525866); }
+	.bp-section p:last-child { margin-bottom: 0; }
+	.bp-section .data-table { margin: 0 0 8px; }
+	.bp-section .findings-list { margin: 8px 0 0; }
+
+	/* Settings grid */
+	.settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+	.setting-card { background: #fff; border-radius: 8px; padding: 14px 16px; border: 1px solid var(--border); }
+	.setting-label { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px; }
+	.setting-val { display: block; font-size: 0.92rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+	.setting-val small { font-weight: 400; font-size: 0.8rem; color: var(--text-muted); }
+
+	/* Ad preview */
+	.ad-example { background: #fff; border-radius: 8px; padding: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; }
+	.ad-headline { font-size: 0.92rem; color: var(--accent, #0055ff); }
+	.ad-headline strong { color: var(--text); }
+	.ad-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-top: 4px; }
+
+	/* Code tags in campaign table */
+	.data-table code { font-size: 0.78rem; background: var(--bg-subtle); padding: 1px 6px; border-radius: 4px; color: var(--text); }
+
+	@media (max-width: 768px) {
+		.settings-grid { grid-template-columns: 1fr; }
+		.bp-section { padding: 18px; }
+	}
+</style>
