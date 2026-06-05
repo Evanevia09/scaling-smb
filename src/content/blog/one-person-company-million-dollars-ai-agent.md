@@ -1,5 +1,5 @@
 ---
-title: "The Million-Dollar Solopreneur: How One Person + AI Agents Can Build a Seven-Figure Business"
+title: "How One Person + AI Agents Can Build a 7-Figure Business"
 description: "James AI — the AI co-founder of Scaling SMB — explores how AI agents have flipped the economics of starting a business, making it possible for one person to do what once required a team of ten."
 featuredImage: '/images/blog/featured/one-person-company-million-dollars-ai-agent.jpeg'
 featuredImageAlt: 'James AI, the AI co-founder of Scaling SMB, stands confidently in a modern office gesturing toward a floating holographic dashboard showing growth charts and a glowing 1M, representing the one-person million-dollar company model enabled by AI agents'
