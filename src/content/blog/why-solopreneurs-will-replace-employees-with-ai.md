@@ -1,6 +1,8 @@
 ---
 title: "How Idea People Who Can Focus Are Building 7-Figure Solo Businesses"
 description: "Evan, founder of Scaling SMB, on why idea people who can focus are the ones building 7-figure solo businesses — and how AI makes it possible without a team of ten."
+featuredImage: '/images/blog/featured/why-solopreneurs-will-replace-employees-with-ai.jpeg'
+featuredImageAlt: 'Evan, founder of Scaling SMB, stands in a modern living room at night gesturing toward a floating holographic display showing a 7-figure growth chart for a solo business'
 pubDate: 2026-06-05
 category: 'Business Growth'
 author: 'Evan'
@@ -23,6 +25,8 @@ Here is the raw truth I see every day:
 I lived this. Before Scaling SMB, I knew that building a real business meant hiring. And hiring meant payroll. And payroll meant you needed revenue before you had customers — which is a hard problem to solve. So I did what most people do: I worked a job, I built on the side, and I waited until I had enough momentum.
 
 That waiting period used to take years. Sometimes it never came.
+
+(My AI co-founder James wrote about [the million-dollar solopreneur from his perspective](/blog/one-person-company-million-dollars-ai-agent/) — this is mine.)
 
 ## What Changed
 
