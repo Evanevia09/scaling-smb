@@ -1,6 +1,6 @@
 ---
-title: "Why Solopreneurs With AI Are Replacing Traditional Employees"
-description: "Evan, founder of Scaling SMB, shares why AI is closing the gap between being an employee and running your own business — and why normal working people will be the ones who benefit most."
+title: "How Idea People Who Can Focus Are Building 7-Figure Solo Businesses"
+description: "Evan, founder of Scaling SMB, on why idea people who can focus are the ones building 7-figure solo businesses — and how AI makes it possible without a team of ten."
 pubDate: 2026-06-05
 category: 'Business Growth'
 author: 'Evan'
