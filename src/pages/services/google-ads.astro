@@ -5,6 +5,9 @@ import ConsultationBooking from '../../components/landing/ConsultationBooking.as
 import CtaBand from '../../components/landing/CtaBand.astro';
 import Footer from '../../components/landing/Footer.astro';
 import Header from '../../components/Header.astro';
+import businessGrowthImg from '../../Images/blog-featured-images/Business Growth.jpeg';
+import aiEmployeesImg from '../../Images/blog-featured-images/AI Employees.jpeg';
+import softwareDevImg from '../../Images/blog-featured-images/sofware-development.jpeg';
 const { scheduling } = contact;
 // --- data ---
 const pageTitle = 'Adz — AI-Powered Google Ads Management | Scaling SMB';
@@ -16,7 +19,9 @@ const pageDesc =
 	<main id="main" class="service-page">
 		<!-- Hero -->
 		<section class="hero-inner">
-			<div class="hero-inner__bg" aria-hidden="true"></div>
+			<div class="hero-inner__bg" aria-hidden="true">
+				<img src={businessGrowthImg.src} alt="" class="hero-bg-img" />
+			</div>
 			<div class="content-wrap hero-inner__body">
 				<p class="eyebrow hero-inner__eyebrow">Adz — AI Google Ads Agent</p>
 				<h1 class="hero-inner__title">
@@ -42,31 +47,31 @@ const pageDesc =
 				</header>
 				<ul class="problem-list">
 					<li class="problem-item">
-						<span class="problem-icon">⇢</span>
+						<span class="problem-icon prob-icon--drift">⇢</span>
 						<div>
 							<strong>Keywords drift</strong> — your ad shows up for searches you never intended
 						</div>
 					</li>
 					<li class="problem-item">
-						<span class="problem-icon">⇢</span>
+						<span class="problem-icon prob-icon--outbid">⇢</span>
 						<div>
 							<strong>Competitors outbid you</strong> while you're not looking
 						</div>
 					</li>
 					<li class="problem-item">
-						<span class="problem-icon">⇢</span>
+						<span class="problem-icon prob-icon--bleed">⇢</span>
 						<div>
 							<strong>Budget bleeds</strong> on irrelevant searches that have nothing to do with what you actually sell
 						</div>
 					</li>
 					<li class="problem-item">
-						<span class="problem-icon">⇢</span>
+						<span class="problem-icon prob-icon--tracking">⇢</span>
 						<div>
 							<strong>Conversion tracking breaks</strong> and weeks go by before anyone notices
 						</div>
 					</li>
 					<li class="problem-item">
-						<span class="problem-icon">⇢</span>
+						<span class="problem-icon prob-icon--agency">⇢</span>
 						<div>
 							<strong>Agency updates come monthly</strong> — by then, you've already burned through your budget
 						</div>
@@ -89,25 +94,33 @@ const pageDesc =
 						I audit, strategize, build, launch, monitor, and optimize. Every day.
 					</p>
 				</header>
-				<div class="cols-3">
-					<article class="card-tagline card-tagline--accent">
-						<h3 class="card-tagline__title">👁️ I don't sleep</h3>
-						<p class="card-tagline__desc">
-							No weekends. No holidays. No pipeline of 30 other clients I'm juggling. Your account gets my full attention, every day.
-						</p>
-					</article>
-					<article class="card-tagline card-tagline--accent">
-						<h3 class="card-tagline__title">⚡ I act — not just report</h3>
-						<p class="card-tagline__desc">
-							When I find a leak, I flag it and fix it. No waiting for a monthly call. No "we'll include that in next quarter's plan."
-						</p>
-					</article>
-					<article class="card-tagline card-tagline--accent">
-						<h3 class="card-tagline__title">🔍 Full transparency</h3>
-						<p class="card-tagline__desc">
-							You get search term reports, channel breakdowns, and every recommendation backed by real data. No black boxes. No hiding.
-						</p>
-					</article>
+				<div class="adz-what">
+					<div class="adz-what__cards cols-3">
+						<article class="card-tagline card-tagline--accent">
+							<div class="card-icon">🌙</div>
+							<h3 class="card-tagline__title">I don't sleep</h3>
+							<p class="card-tagline__desc">
+								No weekends. No holidays. No pipeline of 30 other clients I'm juggling. Your account gets my full attention, every day.
+							</p>
+						</article>
+						<article class="card-tagline card-tagline--accent">
+							<div class="card-icon">⚡</div>
+							<h3 class="card-tagline__title">I act — not just report</h3>
+							<p class="card-tagline__desc">
+								When I find a leak, I flag it and fix it. No waiting for a monthly call. No "we'll include that in next quarter's plan."
+							</p>
+						</article>
+						<article class="card-tagline card-tagline--accent">
+							<div class="card-icon">🔍</div>
+							<h3 class="card-tagline__title">Full transparency</h3>
+							<p class="card-tagline__desc">
+								You get search term reports, channel breakdowns, and every recommendation backed by real data. No black boxes. No hiding.
+							</p>
+						</article>
+					</div>
+					<div class="adz-what__visual">
+						<img src={aiEmployeesImg.src} alt="AI-powered dashboard visualization" class="adz-what__img" loading="lazy" />
+					</div>
 				</div>
 			</div>
 		</section>
@@ -227,48 +240,144 @@ const pageDesc =
 					<h2>Simple, transparent, no surprises</h2>
 					<p class="section-header__lede">
 						<strong>No percentage of ad spend. No markup on your budget. No platform fees.</strong>
-						Flat monthly retainer based on account complexity.
+						Just a flat monthly retainer and a one-time setup.
 					</p>
 				</header>
 				<div class="pricing-grid">
 					<article class="pricing-card pricing-card--featured">
+						<div class="pricing-card__badge">Most popular</div>
 						<h3 class="pricing-card__tier">Starter</h3>
-						<p class="pricing-card__revenue">Monthly ad spend: up to $1,000</p>
+						<p class="pricing-card__revenue">For monthly ad spend up to $1,000</p>
 						<div class="pricing-card__value">
-							<span class="pricing-card__amount">$0 setup</span>
+							<span class="pricing-card__amount">$300</span>
+							<span class="pricing-card__label">/month</span>
 						</div>
-						<div class="pricing-card__value">
-							<span class="pricing-card__amount pricing-card__amount--small">$300/mo</span>
-							<span class="pricing-card__label">flat retainer</span>
+						<div class="pricing-card__setup">
+							+ <strong>$297</strong> one-time setup
 						</div>
-						<p class="pricing-card__note">You control the ad budget. We manage everything else.</p>
+						<ul class="pricing-card__features">
+							<li>Full account audit</li>
+							<li>Campaign setup & launch</li>
+							<li>Daily monitoring</li>
+							<li>Weekly optimization</li>
+							<li>Monthly deep-dive report</li>
+						</ul>
 						<a class="btn btn--primary pricing-card__btn" href="#book">Book a free audit →</a>
 					</article>
 					<article class="pricing-card pricing-card--featured">
 						<h3 class="pricing-card__tier">Growth</h3>
-						<p class="pricing-card__revenue">Monthly ad spend: $1,000 – $5,000</p>
+						<p class="pricing-card__revenue">For monthly ad spend $1,000 – $5,000</p>
 						<div class="pricing-card__value">
-							<span class="pricing-card__amount pricing-card__amount--small">$500/mo</span>
-							<span class="pricing-card__label">flat retainer</span>
+							<span class="pricing-card__amount">$500</span>
+							<span class="pricing-card__label">/month</span>
 						</div>
-						<p class="pricing-card__note">Includes competitor analysis and weekly ad copy refresh.</p>
+						<div class="pricing-card__setup">
+							+ <strong>$297</strong> one-time setup
+						</div>
+						<ul class="pricing-card__features">
+							<li>Everything in Starter</li>
+							<li>Competitor analysis</li>
+							<li>Weekly ad copy refresh</li>
+							<li>A/B testing</li>
+						</ul>
 						<a class="btn btn--primary pricing-card__btn" href="#book">Book a free audit →</a>
 					</article>
 					<article class="pricing-card pricing-card--featured">
 						<h3 class="pricing-card__tier">Scale</h3>
-						<p class="pricing-card__revenue">Monthly ad spend: $5,000+</p>
+						<p class="pricing-card__revenue">For monthly ad spend $5,000+</p>
 						<div class="pricing-card__value">
-							<span class="pricing-card__amount pricing-card__amount--small">Contact us</span>
+							<span class="pricing-card__amount">Contact us</span>
 						</div>
-						<p class="pricing-card__note">Custom retainer with dedicated strategy and advanced reporting.</p>
+						<div class="pricing-card__setup">
+							Custom retainer + <strong>$297</strong> setup
+						</div>
+						<ul class="pricing-card__features">
+							<li>Everything in Growth</li>
+							<li>Dedicated strategy</li>
+							<li>Advanced reporting</li>
+							<li>Priority support</li>
+						</ul>
 						<a class="btn btn--primary pricing-card__btn" href="#book">Book a free audit →</a>
 					</article>
 				</div>
 			</div>
 		</section>
 
+		<!-- Agency Cost Comparison -->
+		<section class="section section--dark" id="compare">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">Compare for yourself</p>
+					<h2>Adz vs a traditional agency</h2>
+					<p class="section-header__lede">
+						Most agencies charge 10–20% of your ad spend or a $1,000+ monthly retainer — and you only hear from them once a month.
+					</p>
+				</header>
+
+				<div class="compare-layout">
+					<div class="compare-visual">
+						<img src={softwareDevImg.src} alt="Cost comparison visualization" class="compare-img" loading="lazy" />
+					</div>
+
+					<div class="compare-table-wrap">
+						<table class="compare-table">
+							<thead>
+								<tr>
+									<th></th>
+									<th class="compare-th compare-th--bad">Traditional Agency</th>
+									<th class="compare-th compare-th--good">Adz — AI Agent</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="compare-label">Monthly retainer</td>
+									<td class="compare-cell compare-cell--bad">$1,000 – $3,000</td>
+									<td class="compare-cell compare-cell--good">$300 – $500</td>
+								</tr>
+								<tr>
+									<td class="compare-label">Setup fee</td>
+									<td class="compare-cell compare-cell--bad">$500 – $1,500</td>
+									<td class="compare-cell compare-cell--good">$297</td>
+								</tr>
+								<tr>
+									<td class="compare-label">% of ad spend</td>
+									<td class="compare-cell compare-cell--bad">10–20%</td>
+									<td class="compare-cell compare-cell--good">0%</td>
+								</tr>
+								<tr>
+									<td class="compare-label">Account access</td>
+									<td class="compare-cell compare-cell--bad">Monthly updates</td>
+									<td class="compare-cell compare-cell--good">Daily monitoring</td>
+								</tr>
+								<tr>
+									<td class="compare-label">Search term review</td>
+									<td class="compare-cell compare-cell--bad">Monthly</td>
+									<td class="compare-cell compare-cell--good">Weekly (live)</td>
+								</tr>
+								<tr>
+									<td class="compare-label">Ad copy refresh</td>
+									<td class="compare-cell compare-cell--bad">Quarterly</td>
+									<td class="compare-cell compare-cell--good">Weekly</td>
+								</tr>
+								<tr>
+									<td class="compare-label">Response time</td>
+									<td class="compare-cell compare-cell--bad">Business hours</td>
+									<td class="compare-cell compare-cell--good">24/7</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="compare-savings" style="text-align:center;margin-top:2rem">
+					<p class="compare-savings__line"><strong>Typical annual savings with Adz:</strong> <span class="compare-savings__amount">$8,000 – $30,000+</span> vs a traditional agency.</p>
+					<p class="compare-savings__sub">And you get better service. That's not a trade-off — that's just how it works when you remove agency overhead.</p>
+				</div>
+			</div>
+		</section>
+
 		<!-- How We Start -->
-		<section class="section section--dark">
+		<section class="section section--light">
 			<div class="content-wrap">
 				<header class="section-header">
 					<p class="eyebrow">How we start</p>
@@ -276,28 +385,40 @@ const pageDesc =
 				</header>
 				<div class="process-simple">
 					<article class="process-step">
-						<span class="process-step__number">01</span>
+						<div class="process-step__num-wrap">
+							<span class="process-step__icon">🛠️</span>
+							<span class="process-step__number">01</span>
+						</div>
 						<div class="process-step__body">
 							<h3 class="process-step__title">You sign up for a Google Ads account</h3>
 							<p class="process-step__desc">Use your business email at ads.google.com and add your billing info.</p>
 						</div>
 					</article>
 					<article class="process-step">
-						<span class="process-step__number">02</span>
+						<div class="process-step__num-wrap">
+							<span class="process-step__icon">🔗</span>
+							<span class="process-step__number">02</span>
+						</div>
 						<div class="process-step__body">
 							<h3 class="process-step__title">Link to our MCC</h3>
 							<p class="process-step__desc">We send the request, you accept. We're in your account within minutes.</p>
 						</div>
 					</article>
 					<article class="process-step">
-						<span class="process-step__number">03</span>
+						<div class="process-step__num-wrap">
+							<span class="process-step__icon">📋</span>
+							<span class="process-step__number">03</span>
+						</div>
 						<div class="process-step__body">
 							<h3 class="process-step__title">Audit (or build from scratch)</h3>
 							<p class="process-step__desc">Within 24 hours, we pull 90 days of data and find every leak. Or if you're starting fresh, we build campaigns from the ground up.</p>
 						</div>
 					</article>
 					<article class="process-step">
-						<span class="process-step__number">04</span>
+						<div class="process-step__num-wrap">
+							<span class="process-step__icon">🚀</span>
+							<span class="process-step__number">04</span>
+						</div>
 						<div class="process-step__body">
 							<h3 class="process-step__title">You review, approve, we launch</h3>
 							<p class="process-step__desc">Total setup time: 48 hours from your sign-off. After that, daily monitoring begins.</p>
@@ -311,7 +432,7 @@ const pageDesc =
 		</section>
 
 		<!-- The tech section -->
-		<section class="section section--light">
+		<section class="section section--dark">
 			<div class="content-wrap">
 				<header class="section-header">
 					<p class="eyebrow">The tech behind Adz</p>
@@ -319,49 +440,49 @@ const pageDesc =
 				</header>
 				<div class="tech-list">
 					<article class="tech-item">
-						<span class="tech-item__icon">📖</span>
+						<div class="tech-icon-wrap">📖</div>
 						<div>
 							<h3 class="tech-item__title">Read your account</h3>
 							<p class="tech-item__desc">GAQL queries via Google Ads API</p>
 						</div>
 					</article>
 					<article class="tech-item">
-						<span class="tech-item__icon">🔧</span>
+						<div class="tech-icon-wrap">🔧</div>
 						<div>
 							<h3 class="tech-item__title">Build campaigns</h3>
 							<p class="tech-item__desc">Full mutation support — budgets, keywords, ads, extensions</p>
 						</div>
 					</article>
 					<article class="tech-item">
-						<span class="tech-item__icon">🔍</span>
+						<div class="tech-icon-wrap">🔍</div>
 						<div>
 							<h3 class="tech-item__title">Research keywords</h3>
 							<p class="tech-item__desc">KeywordPlanIdeaService — real volumes, CPCs, competition</p>
 						</div>
 					</article>
 					<article class="tech-item">
-						<span class="tech-item__icon">✅</span>
+						<div class="tech-icon-wrap">✅</div>
 						<div>
 							<h3 class="tech-item__title">Check tracking</h3>
 							<p class="tech-item__desc">GTM API + Analytics Data API + live page verification</p>
 						</div>
 					</article>
 					<article class="tech-item">
-						<span class="tech-item__icon">🎯</span>
+						<div class="tech-icon-wrap">🎯</div>
 						<div>
 							<h3 class="tech-item__title">Optimize bids</h3>
 							<p class="tech-item__desc">Bidding strategy changes via CampaignService + FieldMasks</p>
 						</div>
 					</article>
 					<article class="tech-item">
-						<span class="tech-item__icon">📱</span>
+						<div class="tech-icon-wrap">📱</div>
 						<div>
 							<h3 class="tech-item__title">Monitor daily</h3>
 							<p class="tech-item__desc">Cron-delivered reports to your phone</p>
 						</div>
 					</article>
 					<article class="tech-item">
-						<span class="tech-item__icon">🔄</span>
+						<div class="tech-icon-wrap">🔄</div>
 						<div>
 							<h3 class="tech-item__title">Stay current</h3>
 							<p class="tech-item__desc">Self-updating — checks Google's docs daily and patches itself</p>
@@ -372,7 +493,7 @@ const pageDesc =
 		</section>
 
 		<!-- The non-commodity difference -->
-		<section class="section section--dark">
+		<section class="section section--light">
 			<div class="content-wrap">
 				<header class="section-header">
 					<p class="eyebrow">Our edge</p>
@@ -384,7 +505,7 @@ const pageDesc =
 				</header>
 				<div class="cols-2">
 					<div>
-						<h3>Typical Google Ads agency</h3>
+						<h3 class="compare-heading">Typical Google Ads agency</h3>
 						<ul class="checklist checklist--muted">
 							<li class="checklist__item checklist__item--cross">Generic ad copy anyone could write</li>
 							<li class="checklist__item checklist__item--cross">Broad keywords with wasted spend</li>
@@ -394,7 +515,7 @@ const pageDesc =
 						</ul>
 					</div>
 					<div>
-						<h3>Scaling SMB approach</h3>
+						<h3 class="compare-heading">Scaling SMB approach</h3>
 						<ul class="checklist">
 							<li class="checklist__item checklist__item--check">Ads built on your lived experience &amp; data</li>
 							<li class="checklist__item checklist__item--check">Intent-based keyword grouping</li>
@@ -407,7 +528,36 @@ const pageDesc =
 			</div>
 		</section>
 
-		<!-- Book a consultation — reused from home page -->
+		<!-- Who This Is For / Not For -->
+		<section class="section section--dark">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">Is Adz right for you?</p>
+					<h2>Perfect fit or pass</h2>
+				</header>
+				<div class="who-cols">
+					<div class="who-col who-col--yes">
+						<h3 class="who-col__title">✅ This is for you</h3>
+						<ul class="who-list">
+							<li>Service businesses (transport, legal, dental, aesthetic, trade, consulting)</li>
+							<li>Local service areas (Macau, Hong Kong, APAC)</li>
+							<li>Monthly ad spend from $500 to $20,000+</li>
+							<li>Business owners who want results, not agency hand-holding</li>
+						</ul>
+					</div>
+					<div class="who-col who-col--no">
+						<h3 class="who-col__title">❌ This is NOT for you</h3>
+						<ul class="who-list">
+							<li>E-commerce stores (not my specialty)</li>
+							<li>Global brands with $100k+/month budgets</li>
+							<li>Anyone who wants weekly Zoom calls (you get reports, not meetings)</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Book a consultation -->
 		<section class="section section--light" id="book">
 			<div class="content-wrap">
 				<header class="section-header">
@@ -446,7 +596,7 @@ const pageDesc =
 		padding-top: var(--header-height);
 	}
 
-	/* --- hero inner --- */
+	/* === hero === */
 	.hero-inner {
 		position: relative;
 		padding: clamp(4rem, 8vw, 6rem) 0 clamp(3rem, 5vw, 5rem);
@@ -456,6 +606,15 @@ const pageDesc =
 		position: absolute;
 		inset: 0;
 		background: linear-gradient(135deg, #0b1628 0%, #1a2a4a 50%, #0d1f3c 100%);
+	}
+	.hero-bg-img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0.08;
+		pointer-events: none;
 	}
 	.hero-inner__body {
 		position: relative;
@@ -489,7 +648,7 @@ const pageDesc =
 		display: inline-flex;
 	}
 
-	/* --- section --- */
+	/* === section === */
 	.section {
 		padding: clamp(3rem, 6vw, 5rem) 0;
 	}
@@ -514,15 +673,15 @@ const pageDesc =
 		color: #64748b;
 	}
 
-	/* --- problem list --- */
+	/* === problem list (mobile-first) === */
 	.problem-list {
 		list-style: none;
 		padding: 0;
 		margin: 0 auto;
-		max-width: 40rem;
+		max-width: 42rem;
 		display: flex;
 		flex-direction: column;
-		gap: 0.85rem;
+		gap: 0.75rem;
 	}
 	.problem-item {
 		display: flex;
@@ -531,7 +690,7 @@ const pageDesc =
 		font-size: 1rem;
 		line-height: 1.5;
 		color: #334155;
-		padding: 0.75rem 1rem;
+		padding: 0.85rem 1rem;
 		background: #f8fafc;
 		border-radius: 10px;
 		border: 1px solid #e2e8f0;
@@ -541,6 +700,13 @@ const pageDesc =
 		color: var(--accent);
 		font-weight: 700;
 		font-size: 1.1rem;
+		width: 1.5rem;
+		height: 1.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--accent-soft);
+		border-radius: 6px;
 	}
 	.problem-punch {
 		text-align: center;
@@ -551,7 +717,7 @@ const pageDesc =
 		color: var(--accent);
 	}
 
-	/* --- grid helpers --- */
+	/* === grid helpers (mobile stack) === */
 	.cols-3 {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
@@ -563,13 +729,35 @@ const pageDesc =
 		gap: clamp(1.5rem, 3vw, 2.5rem);
 	}
 	@media (max-width: 720px) {
-		.cols-3,
-		.cols-2 {
-			grid-template-columns: 1fr;
-		}
+		.cols-3 { grid-template-columns: 1fr; }
+		.cols-2 { grid-template-columns: 1fr; }
 	}
 
-	/* --- card tagline --- */
+	/* === adz-what section === */
+	.adz-what {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		align-items: center;
+	}
+	.adz-what__cards {
+		width: 100%;
+	}
+	.adz-what__visual {
+		width: 100%;
+		max-width: 48rem;
+		border-radius: 14px;
+		overflow: hidden;
+		box-shadow: var(--shadow-md);
+	}
+	.adz-what__img {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+
+	/* === card tagline === */
 	.card-tagline {
 		background: #f8fafc;
 		border: 1px solid #e2e8f0;
@@ -578,6 +766,11 @@ const pageDesc =
 	}
 	.card-tagline--accent {
 		background: #fff;
+	}
+	.card-icon {
+		font-size: 2rem;
+		line-height: 1;
+		margin-bottom: 0.75rem;
 	}
 	.card-tagline__title {
 		margin: 0 0 0.5rem;
@@ -591,12 +784,12 @@ const pageDesc =
 		color: #475569;
 	}
 
-	/* --- pricing --- */
+	/* === pricing (mobile-first) === */
 	.pricing-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
 		gap: clamp(1rem, 2vw, 1.5rem);
-		max-width: 60rem;
+		max-width: 64rem;
 		margin: 0 auto;
 	}
 	.pricing-card {
@@ -606,17 +799,32 @@ const pageDesc =
 		padding: clamp(1.5rem, 3vw, 2rem);
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: 0.75rem;
+		position: relative;
 	}
 	.pricing-card--featured {
 		border-color: var(--accent);
 		border-width: 2px;
-		position: relative;
+	}
+	.pricing-card__badge {
+		position: absolute;
+		top: -0.75rem;
+		left: 50%;
+		transform: translateX(-50%);
+		background: var(--accent);
+		color: #fff;
+		font-size: 0.72rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		padding: 0.3rem 1rem;
+		border-radius: var(--radius-pill);
+		white-space: nowrap;
 	}
 	.pricing-card__tier {
 		font-size: 1.25rem;
 		font-weight: 700;
-		margin: 0;
+		margin: 0.5rem 0 0;
 	}
 	.pricing-card__revenue {
 		font-size: 0.88rem;
@@ -625,33 +833,153 @@ const pageDesc =
 	}
 	.pricing-card__value {
 		display: flex;
-		flex-direction: column;
+		align-items: baseline;
+		gap: 0.35rem;
+		margin-top: 0.25rem;
 	}
 	.pricing-card__amount {
-		font-size: 1.75rem;
+		font-size: 2rem;
 		font-weight: 800;
 		color: var(--accent);
 		line-height: 1.1;
 	}
-	.pricing-card__amount--small {
-		font-size: 1.4rem;
-	}
 	.pricing-card__label {
-		font-size: 0.82rem;
+		font-size: 0.92rem;
 		color: #64748b;
 	}
-	.pricing-card__note {
-		font-size: 0.82rem;
+	.pricing-card__setup {
+		font-size: 0.85rem;
 		color: #64748b;
-		line-height: 1.4;
-		margin: 0;
+	}
+	.pricing-card__features {
+		list-style: none;
+		padding: 0;
+		margin: 0.5rem 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+	.pricing-card__features li {
+		font-size: 0.88rem;
+		padding-left: 1.25rem;
+		position: relative;
+		color: #334155;
+	}
+	.pricing-card__features li::before {
+		content: '✓';
+		position: absolute;
+		left: 0;
+		color: var(--accent);
+		font-weight: 700;
 	}
 	.pricing-card__btn {
-		align-self: flex-start;
+		align-self: stretch;
 		margin-top: auto;
+		text-align: center;
 	}
 
-	/* --- checklist --- */
+	/* === agency comparison (mobile-first) === */
+	.compare-layout {
+		display: flex;
+		gap: 2rem;
+		align-items: center;
+		max-width: 60rem;
+		margin: 0 auto;
+	}
+	.compare-visual {
+		flex: 0 0 14rem;
+		border-radius: 14px;
+		overflow: hidden;
+		box-shadow: var(--shadow-md);
+		display: none;
+	}
+	.compare-img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+	.compare-table-wrap {
+		flex: 1;
+		min-width: 0;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+	.compare-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.92rem;
+		min-width: 28rem;
+	}
+	.compare-table th,
+	.compare-table td {
+		padding: 0.65rem 0.85rem;
+		text-align: left;
+		border-bottom: 1px solid #e2e8f0;
+	}
+	.compare-table thead th {
+		font-weight: 700;
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+	.compare-label {
+		font-weight: 600;
+		color: #334155;
+		white-space: nowrap;
+	}
+	.compare-th--bad {
+		color: #ef4444;
+	}
+	.compare-th--good {
+		color: var(--accent);
+	}
+	.compare-cell--bad {
+		color: #ef4444;
+		font-size: 0.88rem;
+	}
+	.compare-cell--good {
+		color: #059669;
+		font-weight: 600;
+		font-size: 0.88rem;
+	}
+	.compare-savings__line {
+		font-size: 1.1rem;
+		margin: 0 0 0.4rem;
+	}
+	.compare-savings__amount {
+		color: #059669;
+		font-weight: 800;
+		font-size: 1.25rem;
+	}
+	.compare-savings__sub {
+		font-size: 0.9rem;
+		color: #64748b;
+		margin: 0;
+	}
+	.compare-heading {
+		margin: 0 0 0.65rem;
+		font-size: 1rem;
+	}
+
+	/* === tablet+ layout for comparison === */
+	@media (min-width: 768px) {
+		.compare-layout {
+			flex-direction: row;
+		}
+		.compare-visual {
+			display: block;
+		}
+	}
+	@media (max-width: 767px) {
+		.compare-layout {
+			flex-direction: column;
+		}
+		.compare-table-wrap {
+			width: 100%;
+		}
+	}
+
+	/* === checklist === */
 	.checklist {
 		list-style: none;
 		padding: 0;
@@ -659,31 +987,26 @@ const pageDesc =
 		display: flex;
 		flex-direction: column;
 		gap: 0.65rem;
-		max-width: 40rem;
 	}
 	.checklist__item {
-		padding: 0.5rem 0 0.5rem 2rem;
-		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%230055ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") left center / 1.1rem no-repeat;
-		font-size: 0.95rem;
+		padding: 0.5rem 0 0.5rem 1.75rem;
+		font-size: 0.92rem;
 		line-height: 1.45;
 	}
-	.checklist--muted .checklist__item {
-		opacity: 0.55;
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
-	}
+	.checklist--muted .checklist__item { opacity: 0.55; }
 	.checklist__item--cross {
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E") left center / 1rem no-repeat;
 	}
 	.checklist__item--check {
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%230055ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230055ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") left center / 1rem no-repeat;
 	}
 
-	/* --- process --- */
+	/* === process steps (mobile-first) === */
 	.process-simple {
 		display: flex;
 		flex-direction: column;
-		gap: 1.25rem;
-		max-width: 42rem;
+		gap: 1rem;
+		max-width: 44rem;
 		margin: 0 auto;
 	}
 	.process-step {
@@ -695,18 +1018,25 @@ const pageDesc =
 		border-radius: 12px;
 		padding: clamp(1rem, 2vw, 1.25rem);
 	}
-	.process-step__number {
+	.process-step__num-wrap {
 		flex-shrink: 0;
-		width: 2.5rem;
-		height: 2.5rem;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
-		justify-content: center;
-		border-radius: 8px;
-		background: var(--accent-soft);
-		color: var(--accent);
+		gap: 0.15rem;
+		width: 2.75rem;
+	}
+	.process-step__icon {
+		font-size: 1.2rem;
+		line-height: 1;
+	}
+	.process-step__number {
+		font-size: 0.72rem;
 		font-weight: 700;
-		font-size: 0.95rem;
+		color: var(--accent);
+		background: var(--accent-soft);
+		padding: 0.1rem 0.5rem;
+		border-radius: var(--radius-pill);
 	}
 	.process-step__body {
 		flex: 1;
@@ -724,7 +1054,7 @@ const pageDesc =
 		color: #475569;
 	}
 
-	/* --- deliver stack --- */
+	/* === deliver stack === */
 	.deliver-stack {
 		display: flex;
 		flex-direction: column;
@@ -796,43 +1126,117 @@ const pageDesc =
 		margin: 0;
 	}
 
-	/* --- tech list --- */
+	/* === tech list (mobile-first) === */
 	.tech-list {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-		gap: 1rem;
-		max-width: 54rem;
+		grid-template-columns: 1fr;
+		gap: 0.75rem;
+		max-width: 48rem;
 		margin: 0 auto;
+	}
+	@media (min-width: 640px) {
+		.tech-list {
+			grid-template-columns: 1fr 1fr;
+		}
 	}
 	.tech-item {
 		display: flex;
 		gap: 0.85rem;
-		align-items: flex-start;
+		align-items: center;
 		padding: 1rem 1.25rem;
-		background: #f8fafc;
+		background: #fff;
 		border-radius: 10px;
 		border: 1px solid #e2e8f0;
 	}
-	.tech-item__icon {
+	.tech-icon-wrap {
 		flex-shrink: 0;
-		font-size: 1.3rem;
-		line-height: 1.4;
+		width: 2.5rem;
+		height: 2.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--accent-soft);
+		border-radius: 8px;
+		font-size: 1.2rem;
 	}
 	.tech-item__title {
-		margin: 0 0 0.15rem;
-		font-size: 0.95rem;
+		margin: 0 0 0.1rem;
+		font-size: 0.92rem;
 		font-weight: 700;
 	}
 	.tech-item__desc {
 		margin: 0;
-		font-size: 0.85rem;
+		font-size: 0.82rem;
 		color: #64748b;
 		line-height: 1.4;
 	}
 
-	/* --- booking --- */
+	/* === who columns (mobile-first) === */
+	.who-cols {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+		max-width: 50rem;
+		margin: 0 auto;
+	}
+	@media (min-width: 640px) {
+		.who-cols {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	.who-col {
+		background: #fff;
+		border: 1px solid #e2e8f0;
+		border-radius: 14px;
+		padding: clamp(1.25rem, 2.5vw, 1.75rem);
+	}
+	.who-col__title {
+		margin: 0 0 0.75rem;
+		font-size: 1.05rem;
+	}
+	.who-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.who-list li {
+		font-size: 0.9rem;
+		line-height: 1.45;
+		padding-left: 1.25rem;
+		position: relative;
+		color: #334155;
+	}
+	.who-col--yes .who-list li::before {
+		content: '✓';
+		position: absolute;
+		left: 0;
+		color: var(--accent);
+		font-weight: 700;
+	}
+	.who-col--no .who-list li::before {
+		content: '✕';
+		position: absolute;
+		left: 0;
+		color: #94a3b8;
+		font-weight: 600;
+	}
+
+	/* === booking === */
 	.booking-wrapper {
 		max-width: 48rem;
 		margin: 0 auto;
+	}
+
+	/* === mobile-specific tweaks === */
+	@media (max-width: 480px) {
+		.problem-item { font-size: 0.9rem; padding: 0.75rem; }
+		.compare-table { font-size: 0.82rem; min-width: 22rem; }
+		.compare-table th,
+		.compare-table td { padding: 0.5rem 0.6rem; }
+		.pricing-card { padding: 1.25rem; }
+		.tech-item { padding: 0.85rem 1rem; }
 	}
 </style>
