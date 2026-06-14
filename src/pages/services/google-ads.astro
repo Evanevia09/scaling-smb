@@ -1,61 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { brand, contact } from '../../content/site';
+import { brand, contact, contactFormServiceOptions } from '../../content/site';
+import ConsultationBooking from '../../components/landing/ConsultationBooking.astro';
 import CtaBand from '../../components/landing/CtaBand.astro';
 import Footer from '../../components/landing/Footer.astro';
 import Header from '../../components/Header.astro';
+const { scheduling } = contact;
 // --- data ---
-const pageTitle = 'Google Ads Management — Paid Search for Local SMBs | Scaling SMB';
+const pageTitle = 'Adz — AI-Powered Google Ads Management | Scaling SMB';
 const pageDesc =
-	'Get found instantly when customers search. Scalable Google Ads campaigns built with non-commodity ad copy, real keyword data, and transparent pricing. Setup from 5,000 HKD.';
-const pricing = [
-	{
-		tier: 'Small Business',
-		revenue: '100k – 200k HKD / month',
-		setup: '5,000 HKD',
-		retainer: '25% of ads budget',
-	},
-	{
-		tier: 'Medium Business',
-		revenue: '300k – 500k HKD / month',
-		setup: '10,000 HKD',
-		retainer: '25% of ads budget',
-	},
-];
-const processSteps = [
-	{
-		step: '01',
-		title: 'Discovery',
-		desc: 'We learn your business, goals, budget, and competition. Then map the keywords and audiences that matter most.',
-	},
-	{
-		step: '02',
-		title: 'Campaign Build',
-		desc: 'We structure campaigns by intent — brand, commercial, competitor, and retargeting. Ad copy is built around your unique value, not generic templates.',
-	},
-	{
-		step: '03',
-		title: 'Conversion Setup',
-		desc: 'We install and verify conversion tracking so every click is tied to a real business outcome — calls, bookings, or sales.',
-	},
-	{
-		step: '04',
-		title: 'Launch & Optimize',
-		desc: 'Campaigns go live. We monitor weekly, optimize bi-weekly, and report monthly — with clear next steps and data-backed recommendations.',
-	},
-];
-const includedItems = [
-	'Keyword research using Google Search Console + competitor data',
-	'Campaign structure by search intent (brand, commercial, competitor)',
-	'Responsive search ads with non-commodity ad copy',
-	'Ad extensions (sitelinks, callouts, structured snippets, call)',
-	'Conversion tracking setup & verification',
-	'Negative keyword management to eliminate wasted spend',
-	'Weekly performance monitoring',
-	'Bi-weekly optimization (bids, ads, keywords, audiences)',
-	'Monthly report with insights and recommendations',
-	'Quarterly strategy review',
-];
+	'Your campaigns. Running daily. Optimized hourly. Audited constantly. An AI-powered Google Ads strategist that monitors, optimizes, and reports — every single day. No agency bloat. No monthly updates that come too late.';
 ---
 <BaseLayout title={pageTitle} description={pageDesc}>
 	<Header />
@@ -64,132 +18,361 @@ const includedItems = [
 		<section class="hero-inner">
 			<div class="hero-inner__bg" aria-hidden="true"></div>
 			<div class="content-wrap hero-inner__body">
-				<p class="eyebrow hero-inner__eyebrow">Service</p>
+				<p class="eyebrow hero-inner__eyebrow">Adz — AI Google Ads Agent</p>
 				<h1 class="hero-inner__title">
-					Google Ads Management
+					Your campaigns.<br />Running daily.<br />Optimized hourly.<br />Audited constantly.
 				</h1>
 				<p class="hero-inner__subtitle">
-					Get found the same day — not in six months. We build paid search campaigns around what makes your
-					business unique, so you attract qualified leads without burning through your budget.
+					An AI-powered Google Ads strategist built for scaling service businesses. I connect directly to
+					your account, audit everything, and optimize every day — so your budget works harder than your competitors.
 				</p>
-				<a class="btn btn--primary hero-inner__cta" href="#pricing">See pricing →</a>
+				<a class="btn btn--primary hero-inner__cta" href="#book">Book a free audit →</a>
 			</div>
 		</section>
 
-		<!-- Why Google Ads -->
+		<!-- The Problem -->
 		<section class="section section--light">
 			<div class="content-wrap">
 				<header class="section-header">
-					<p class="eyebrow">Why paid search?</p>
-					<h2>When SEO isn't fast enough</h2>
+					<p class="eyebrow">The real problem</p>
+					<h2>Why most Google Ads money burns</h2>
 					<p class="section-header__lede">
-						Organic SEO is the long game. Google Ads puts you in front of ready-to-buy customers today —
-						with full control over budget, targeting, and messaging.
+						Most businesses don't lose money on Google Ads because the platform doesn't work. They lose money because nobody's watching.
+					</p>
+				</header>
+				<ul class="problem-list">
+					<li class="problem-item">
+						<span class="problem-icon">⇢</span>
+						<div>
+							<strong>Keywords drift</strong> — your ad shows up for searches you never intended
+						</div>
+					</li>
+					<li class="problem-item">
+						<span class="problem-icon">⇢</span>
+						<div>
+							<strong>Competitors outbid you</strong> while you're not looking
+						</div>
+					</li>
+					<li class="problem-item">
+						<span class="problem-icon">⇢</span>
+						<div>
+							<strong>Budget bleeds</strong> on irrelevant searches that have nothing to do with what you actually sell
+						</div>
+					</li>
+					<li class="problem-item">
+						<span class="problem-icon">⇢</span>
+						<div>
+							<strong>Conversion tracking breaks</strong> and weeks go by before anyone notices
+						</div>
+					</li>
+					<li class="problem-item">
+						<span class="problem-icon">⇢</span>
+						<div>
+							<strong>Agency updates come monthly</strong> — by then, you've already burned through your budget
+						</div>
+					</li>
+				</ul>
+				<p class="problem-punch">
+					You don't need more "best practices." You need someone actually in your account every day.
+				</p>
+			</div>
+		</section>
+
+		<!-- What Is Adz -->
+		<section class="section section--dark">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">Meet Adz</p>
+					<h2>An AI strategist that never sleeps</h2>
+					<p class="section-header__lede">
+						I connect directly to your Google Ads account through the API — the same pipeline Google's own engineers use.
+						I audit, strategize, build, launch, monitor, and optimize. Every day.
 					</p>
 				</header>
 				<div class="cols-3">
-					<article class="card-tagline">
-						<h3 class="card-tagline__title">🎯 Intent-based targeting</h3>
+					<article class="card-tagline card-tagline--accent">
+						<h3 class="card-tagline__title">👁️ I don't sleep</h3>
 						<p class="card-tagline__desc">
-							Your ads appear only when someone searches for exactly what you offer — not to window
-							shoppers, not to tire-kickers.
+							No weekends. No holidays. No pipeline of 30 other clients I'm juggling. Your account gets my full attention, every day.
 						</p>
 					</article>
-					<article class="card-tagline">
-						<h3 class="card-tagline__title">📊 Full budget control</h3>
+					<article class="card-tagline card-tagline--accent">
+						<h3 class="card-tagline__title">⚡ I act — not just report</h3>
 						<p class="card-tagline__desc">
-							Set your own daily budget. No minimums. Every dollar is tracked back to a click, a call, or a
-							booking.
+							When I find a leak, I flag it and fix it. No waiting for a monthly call. No "we'll include that in next quarter's plan."
 						</p>
 					</article>
-					<article class="card-tagline">
-						<h3 class="card-tagline__title">🔥 Outrank competitors faster</h3>
+					<article class="card-tagline card-tagline--accent">
+						<h3 class="card-tagline__title">🔍 Full transparency</h3>
 						<p class="card-tagline__desc">
-							While competitors wait for organic rankings, you can appear above them — even on their own
-							brand searches.
+							You get search term reports, channel breakdowns, and every recommendation backed by real data. No black boxes. No hiding.
 						</p>
 					</article>
 				</div>
 			</div>
 		</section>
 
+		<!-- What I Deliver -->
+		<section class="section section--light">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">What I deliver</p>
+					<h2>From audit to daily optimization</h2>
+				</header>
+
+				<div class="deliver-stack">
+					<article class="deliver-card">
+						<div class="deliver-card__header">
+							<span class="deliver-card__step">01</span>
+							<h3 class="deliver-card__title">Audit — Before You Spend Another Dollar</h3>
+						</div>
+						<p class="deliver-card__desc">
+							I pull 90 days of data from your account and find every leak within an hour:
+						</p>
+						<ul class="deliver-card__list">
+							<li>Search terms wasting your budget</li>
+							<li>Missing negative keywords</li>
+							<li>Broken conversion tracking</li>
+							<li>Campaign structure problems</li>
+							<li>Bidding strategy mismatches</li>
+						</ul>
+						<p class="deliver-card__outcome"><strong>Deliverable:</strong> A written audit with specific dollars wasted and exactly what to fix.</p>
+					</article>
+
+					<article class="deliver-card">
+						<div class="deliver-card__header">
+							<span class="deliver-card__step">02</span>
+							<h3 class="deliver-card__title">Strategy — Built From Real Data</h3>
+						</div>
+						<p class="deliver-card__desc">
+							I research your market through Google's own Keyword Planning API — real search volumes and CPCs, not third-party estimates. Then I build a campaign structure designed for how your customers actually search.
+						</p>
+						<ul class="deliver-card__list">
+							<li>Thematic ad groups (not SKAGs)</li>
+							<li>Exact + Phrase + Broad match layered with negatives</li>
+							<li>Ad copy tested against competitor angles</li>
+							<li>Landing page alignment verified</li>
+						</ul>
+					</article>
+
+					<article class="deliver-card">
+						<div class="deliver-card__header">
+							<span class="deliver-card__step">03</span>
+							<h3 class="deliver-card__title">Build & Launch — 48 Hours</h3>
+						</div>
+						<p class="deliver-card__desc">
+							Everything is built inside your account via API. Paused, ready for your review. You approve, I launch. Within 48 hours of your sign-off, your campaigns are live.
+						</p>
+					</article>
+
+					<article class="deliver-card">
+						<div class="deliver-card__header">
+							<span class="deliver-card__step">04</span>
+							<h3 class="deliver-card__title">Daily Monitoring</h3>
+						</div>
+						<p class="deliver-card__desc">
+							Every morning you get a report:
+						</p>
+						<ul class="deliver-card__list">
+							<li>What spent and what converted</li>
+							<li>New search terms that showed up — good and bad</li>
+							<li>Recommendations for what to add or block</li>
+						</ul>
+						<p class="deliver-card__outcome">No meetings. No status calls. Just data and action items.</p>
+					</article>
+
+					<article class="deliver-card">
+						<div class="deliver-card__header">
+							<span class="deliver-card__step">05</span>
+							<h3 class="deliver-card__title">Weekly Optimization</h3>
+						</div>
+						<p class="deliver-card__desc">
+							Search term review → add winners, kill losers. Ad copy refresh → swap underperformers. Budget reallocation → move spend to what's working.
+						</p>
+					</article>
+
+					<article class="deliver-card">
+						<div class="deliver-card__header">
+							<span class="deliver-card__step">06</span>
+							<h3 class="deliver-card__title">Monthly Deep-Dive</h3>
+						</div>
+						<ul class="deliver-card__list">
+							<li>Bid strategy review → graduate to Smart Bidding when you have enough conversion data</li>
+							<li>Full account health check</li>
+							<li>Conversion tracking verification — tested across every layer</li>
+						</ul>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- The Black Box Warning -->
+		<section class="section section--dark">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">The Black Box Warning</p>
+					<h2>You deserve to know where every dollar went</h2>
+					<p class="section-header__lede" style="max-width:48rem">
+						Google's Performance Max campaigns are a black box. You give Google your budget and get back conversions — but you never see where your money actually went. We don't run black boxes. You get search term reports. You get channel breakdowns. You get to see exactly what's working.
+					</p>
+				</header>
+			</div>
+		</section>
+
 		<!-- Pricing -->
-		<section class="section section--dark" id="pricing">
+		<section class="section section--light" id="pricing">
 			<div class="content-wrap">
 				<header class="section-header">
 					<p class="eyebrow">Pricing</p>
 					<h2>Simple, transparent, no surprises</h2>
 					<p class="section-header__lede">
-						One-time setup fee + 25% monthly retainer on ad spend. The ads budget itself goes directly to
-						Google — you control it.
+						<strong>No percentage of ad spend. No markup on your budget. No platform fees.</strong>
+						Flat monthly retainer based on account complexity.
 					</p>
 				</header>
 				<div class="pricing-grid">
-					{
-						pricing.map((p) => (
-							<article class="pricing-card">
-								<h3 class="pricing-card__tier">{p.tier}</h3>
-								<p class="pricing-card__revenue">Monthly revenue: {p.revenue}</p>
-								<div class="pricing-card__value">
-									<span class="pricing-card__amount">{p.setup}</span>
-									<span class="pricing-card__label">one-time setup</span>
-								</div>
-								<div class="pricing-card__value">
-									<span class="pricing-card__amount">{p.retainer}</span>
-									<span class="pricing-card__label">monthly retainer</span>
-								</div>
-								<p class="pricing-card__note">No minimum ad budget. Campaigns start from any budget size.</p>
-								<a class="btn btn--primary pricing-card__btn" href="/#contact">Book a free call →</a>
-							</article>
-						))
-					}
+					<article class="pricing-card pricing-card--featured">
+						<h3 class="pricing-card__tier">Starter</h3>
+						<p class="pricing-card__revenue">Monthly ad spend: up to $1,000</p>
+						<div class="pricing-card__value">
+							<span class="pricing-card__amount">$0 setup</span>
+						</div>
+						<div class="pricing-card__value">
+							<span class="pricing-card__amount pricing-card__amount--small">$300/mo</span>
+							<span class="pricing-card__label">flat retainer</span>
+						</div>
+						<p class="pricing-card__note">You control the ad budget. We manage everything else.</p>
+						<a class="btn btn--primary pricing-card__btn" href="#book">Book a free audit →</a>
+					</article>
+					<article class="pricing-card pricing-card--featured">
+						<h3 class="pricing-card__tier">Growth</h3>
+						<p class="pricing-card__revenue">Monthly ad spend: $1,000 – $5,000</p>
+						<div class="pricing-card__value">
+							<span class="pricing-card__amount pricing-card__amount--small">$500/mo</span>
+							<span class="pricing-card__label">flat retainer</span>
+						</div>
+						<p class="pricing-card__note">Includes competitor analysis and weekly ad copy refresh.</p>
+						<a class="btn btn--primary pricing-card__btn" href="#book">Book a free audit →</a>
+					</article>
+					<article class="pricing-card pricing-card--featured">
+						<h3 class="pricing-card__tier">Scale</h3>
+						<p class="pricing-card__revenue">Monthly ad spend: $5,000+</p>
+						<div class="pricing-card__value">
+							<span class="pricing-card__amount pricing-card__amount--small">Contact us</span>
+						</div>
+						<p class="pricing-card__note">Custom retainer with dedicated strategy and advanced reporting.</p>
+						<a class="btn btn--primary pricing-card__btn" href="#book">Book a free audit →</a>
+					</article>
 				</div>
 			</div>
 		</section>
 
-		<!-- What's included -->
-		<section class="section section--light">
-			<div class="content-wrap">
-				<header class="section-header">
-					<p class="eyebrow">Full-service management</p>
-					<h2>Everything included</h2>
-					<p class="section-header__lede">
-						From keyword research to monthly reporting — we manage the entire campaign so you don't have to.
-					</p>
-				</header>
-				<ul class="checklist">
-					{includedItems.map((item) => (
-						<li class="checklist__item">{item}</li>
-					))}
-				</ul>
-			</div>
-		</section>
-
-		<!-- Process -->
+		<!-- How We Start -->
 		<section class="section section--dark">
 			<div class="content-wrap">
 				<header class="section-header">
-					<p class="eyebrow">How it works</p>
+					<p class="eyebrow">How we start</p>
 					<h2>From hello to live campaigns</h2>
 				</header>
 				<div class="process-simple">
-					{
-						processSteps.map((s) => (
-							<article class="process-step">
-								<span class="process-step__number">{s.step}</span>
-								<div class="process-step__body">
-									<h3 class="process-step__title">{s.title}</h3>
-									<p class="process-step__desc">{s.desc}</p>
-								</div>
-							</article>
-						))
-					}
+					<article class="process-step">
+						<span class="process-step__number">01</span>
+						<div class="process-step__body">
+							<h3 class="process-step__title">You sign up for a Google Ads account</h3>
+							<p class="process-step__desc">Use your business email at ads.google.com and add your billing info.</p>
+						</div>
+					</article>
+					<article class="process-step">
+						<span class="process-step__number">02</span>
+						<div class="process-step__body">
+							<h3 class="process-step__title">Link to our MCC</h3>
+							<p class="process-step__desc">We send the request, you accept. We're in your account within minutes.</p>
+						</div>
+					</article>
+					<article class="process-step">
+						<span class="process-step__number">03</span>
+						<div class="process-step__body">
+							<h3 class="process-step__title">Audit (or build from scratch)</h3>
+							<p class="process-step__desc">Within 24 hours, we pull 90 days of data and find every leak. Or if you're starting fresh, we build campaigns from the ground up.</p>
+						</div>
+					</article>
+					<article class="process-step">
+						<span class="process-step__number">04</span>
+						<div class="process-step__body">
+							<h3 class="process-step__title">You review, approve, we launch</h3>
+							<p class="process-step__desc">Total setup time: 48 hours from your sign-off. After that, daily monitoring begins.</p>
+						</div>
+					</article>
+				</div>
+				<div class="how-start__cta" style="text-align:center;margin-top:2rem">
+					<a class="btn btn--primary" href="#book">Start with a free audit →</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- The tech section -->
+		<section class="section section--light">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">The tech behind Adz</p>
+					<h2>How it actually works</h2>
+				</header>
+				<div class="tech-list">
+					<article class="tech-item">
+						<span class="tech-item__icon">📖</span>
+						<div>
+							<h3 class="tech-item__title">Read your account</h3>
+							<p class="tech-item__desc">GAQL queries via Google Ads API</p>
+						</div>
+					</article>
+					<article class="tech-item">
+						<span class="tech-item__icon">🔧</span>
+						<div>
+							<h3 class="tech-item__title">Build campaigns</h3>
+							<p class="tech-item__desc">Full mutation support — budgets, keywords, ads, extensions</p>
+						</div>
+					</article>
+					<article class="tech-item">
+						<span class="tech-item__icon">🔍</span>
+						<div>
+							<h3 class="tech-item__title">Research keywords</h3>
+							<p class="tech-item__desc">KeywordPlanIdeaService — real volumes, CPCs, competition</p>
+						</div>
+					</article>
+					<article class="tech-item">
+						<span class="tech-item__icon">✅</span>
+						<div>
+							<h3 class="tech-item__title">Check tracking</h3>
+							<p class="tech-item__desc">GTM API + Analytics Data API + live page verification</p>
+						</div>
+					</article>
+					<article class="tech-item">
+						<span class="tech-item__icon">🎯</span>
+						<div>
+							<h3 class="tech-item__title">Optimize bids</h3>
+							<p class="tech-item__desc">Bidding strategy changes via CampaignService + FieldMasks</p>
+						</div>
+					</article>
+					<article class="tech-item">
+						<span class="tech-item__icon">📱</span>
+						<div>
+							<h3 class="tech-item__title">Monitor daily</h3>
+							<p class="tech-item__desc">Cron-delivered reports to your phone</p>
+						</div>
+					</article>
+					<article class="tech-item">
+						<span class="tech-item__icon">🔄</span>
+						<div>
+							<h3 class="tech-item__title">Stay current</h3>
+							<p class="tech-item__desc">Self-updating — checks Google's docs daily and patches itself</p>
+						</div>
+					</article>
 				</div>
 			</div>
 		</section>
 
 		<!-- The non-commodity difference -->
-		<section class="section section--light">
+		<section class="section section--dark">
 			<div class="content-wrap">
 				<header class="section-header">
 					<p class="eyebrow">Our edge</p>
@@ -207,6 +390,7 @@ const includedItems = [
 							<li class="checklist__item checklist__item--cross">Broad keywords with wasted spend</li>
 							<li class="checklist__item checklist__item--cross">Sends all traffic to homepage</li>
 							<li class="checklist__item checklist__item--cross">Monthly report, no real insights</li>
+							<li class="checklist__item checklist__item--cross">Monthly call to update — often too late</li>
 						</ul>
 					</div>
 					<div>
@@ -215,22 +399,40 @@ const includedItems = [
 							<li class="checklist__item checklist__item--check">Ads built on your lived experience &amp; data</li>
 							<li class="checklist__item checklist__item--check">Intent-based keyword grouping</li>
 							<li class="checklist__item checklist__item--check">Dedicated landing pages per ad group</li>
-							<li class="checklist__item checklist__item--check">Weekly monitoring + monthly deep-dive reports</li>
+							<li class="checklist__item checklist__item--check">Daily monitoring + weekly optimization</li>
+							<li class="checklist__item checklist__item--check">Real-time alerts when something breaks</li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- CTA -->
-		<section class="section section--accent">
-			<div class="content-wrap" style="text-align:center">
-				<h2>Ready to get found faster?</h2>
-				<p style="max-width:36rem;margin:1rem auto 1.5rem;color:rgba(255,255,255,0.85)">
-					Book a free strategy call. We'll review your business, your competitors, and whether Google Ads is
-					the right move for you — no obligation.
-				</p>
-				<a class="btn btn--white" href="/#contact">Book your free call →</a>
+		<!-- Book a consultation — reused from home page -->
+		<section class="section section--light" id="book">
+			<div class="content-wrap">
+				<header class="section-header">
+					<p class="eyebrow">Get started</p>
+					<h2>One audit. One conversation. No commitment.</h2>
+					<p class="section-header__lede">
+						You'll know exactly what's wrong with your Google Ads account — and exactly how to fix it — before you spend another dollar.
+					</p>
+				</header>
+				<div class="booking-wrapper">
+					<ConsultationBooking
+						meetingTitle={scheduling.meetingTitle}
+						duration={scheduling.duration}
+						description={scheduling.description}
+						features={[...scheduling.features]}
+						timeSlots={[...scheduling.timeSlots]}
+						blockedTimeSlots={[...scheduling.blockedTimeSlots]}
+						timezones={[...scheduling.timezones]}
+						serviceOptions={contactFormServiceOptions}
+						stepLabels={[...scheduling.steps]}
+						stepTitles={scheduling.stepTitles}
+						success={scheduling.success}
+						contactEmail={contact.email}
+					/>
+				</div>
 			</div>
 		</section>
 	</main>
@@ -297,10 +499,6 @@ const includedItems = [
 	.section--dark {
 		background: #f5f7fa;
 	}
-	.section--accent {
-		background: linear-gradient(135deg, #003d99, #0055ff);
-		color: #fff;
-	}
 	.section-header {
 		text-align: center;
 		margin-bottom: clamp(2rem, 4vw, 3rem);
@@ -314,6 +512,43 @@ const includedItems = [
 	}
 	.section--dark .section-header__lede {
 		color: #64748b;
+	}
+
+	/* --- problem list --- */
+	.problem-list {
+		list-style: none;
+		padding: 0;
+		margin: 0 auto;
+		max-width: 40rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+	}
+	.problem-item {
+		display: flex;
+		gap: 0.75rem;
+		align-items: flex-start;
+		font-size: 1rem;
+		line-height: 1.5;
+		color: #334155;
+		padding: 0.75rem 1rem;
+		background: #f8fafc;
+		border-radius: 10px;
+		border: 1px solid #e2e8f0;
+	}
+	.problem-icon {
+		flex-shrink: 0;
+		color: var(--accent);
+		font-weight: 700;
+		font-size: 1.1rem;
+	}
+	.problem-punch {
+		text-align: center;
+		margin: 1.5rem auto 0;
+		max-width: 36rem;
+		font-size: 1.05rem;
+		font-weight: 600;
+		color: var(--accent);
 	}
 
 	/* --- grid helpers --- */
@@ -341,6 +576,9 @@ const includedItems = [
 		border-radius: 12px;
 		padding: clamp(1.25rem, 2.5vw, 1.75rem);
 	}
+	.card-tagline--accent {
+		background: #fff;
+	}
 	.card-tagline__title {
 		margin: 0 0 0.5rem;
 		font-size: 1.05rem;
@@ -356,9 +594,9 @@ const includedItems = [
 	/* --- pricing --- */
 	.pricing-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
 		gap: clamp(1rem, 2vw, 1.5rem);
-		max-width: 54rem;
+		max-width: 60rem;
 		margin: 0 auto;
 	}
 	.pricing-card {
@@ -369,6 +607,11 @@ const includedItems = [
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
+	}
+	.pricing-card--featured {
+		border-color: var(--accent);
+		border-width: 2px;
+		position: relative;
 	}
 	.pricing-card__tier {
 		font-size: 1.25rem;
@@ -389,6 +632,9 @@ const includedItems = [
 		font-weight: 800;
 		color: var(--accent);
 		line-height: 1.1;
+	}
+	.pricing-card__amount--small {
+		font-size: 1.4rem;
 	}
 	.pricing-card__label {
 		font-size: 0.82rem;
@@ -476,5 +722,117 @@ const includedItems = [
 		font-size: 0.9rem;
 		line-height: 1.5;
 		color: #475569;
+	}
+
+	/* --- deliver stack --- */
+	.deliver-stack {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		max-width: 48rem;
+		margin: 0 auto;
+	}
+	.deliver-card {
+		background: #f8fafc;
+		border: 1px solid #e2e8f0;
+		border-radius: 12px;
+		padding: clamp(1.25rem, 2.5vw, 1.75rem);
+	}
+	.deliver-card__header {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 0.75rem;
+	}
+	.deliver-card__step {
+		flex-shrink: 0;
+		width: 2rem;
+		height: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 8px;
+		background: var(--accent-soft);
+		color: var(--accent);
+		font-weight: 700;
+		font-size: 0.85rem;
+	}
+	.deliver-card__title {
+		margin: 0;
+		font-size: 1.05rem;
+		font-weight: 700;
+	}
+	.deliver-card__desc {
+		margin: 0 0 0.5rem;
+		font-size: 0.92rem;
+		line-height: 1.5;
+		color: #475569;
+	}
+	.deliver-card__list {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 0.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+	}
+	.deliver-card__list li {
+		padding-left: 1.25rem;
+		position: relative;
+		font-size: 0.9rem;
+		color: #475569;
+		line-height: 1.45;
+	}
+	.deliver-card__list li::before {
+		content: '•';
+		position: absolute;
+		left: 0;
+		color: var(--accent);
+		font-weight: 700;
+	}
+	.deliver-card__outcome {
+		font-size: 0.9rem;
+		color: #475569;
+		margin: 0;
+	}
+
+	/* --- tech list --- */
+	.tech-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+		gap: 1rem;
+		max-width: 54rem;
+		margin: 0 auto;
+	}
+	.tech-item {
+		display: flex;
+		gap: 0.85rem;
+		align-items: flex-start;
+		padding: 1rem 1.25rem;
+		background: #f8fafc;
+		border-radius: 10px;
+		border: 1px solid #e2e8f0;
+	}
+	.tech-item__icon {
+		flex-shrink: 0;
+		font-size: 1.3rem;
+		line-height: 1.4;
+	}
+	.tech-item__title {
+		margin: 0 0 0.15rem;
+		font-size: 0.95rem;
+		font-weight: 700;
+	}
+	.tech-item__desc {
+		margin: 0;
+		font-size: 0.85rem;
+		color: #64748b;
+		line-height: 1.4;
+	}
+
+	/* --- booking --- */
+	.booking-wrapper {
+		max-width: 48rem;
+		margin: 0 auto;
 	}
 </style>
