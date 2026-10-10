@@ -16,7 +16,7 @@
 	--radius-lg: 16px;
 	--radius-md: 12px;
 	--radius-pill: 999px;
-	--font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--font-sans: 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
 	--space-section: clamp(4rem, 8vw, 6.5rem);
 	--content-max: 72rem;
 	--section-gutter: clamp(1.25rem, 4vw, 3rem);

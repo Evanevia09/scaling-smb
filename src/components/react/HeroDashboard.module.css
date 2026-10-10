@@ -18,7 +18,7 @@
 	--border: #e5e7eb;
 	--green: #10b981;
 	--card: #ffffff;
-	font-family: 'Inter', system-ui, sans-serif;
+	font-family: 'Inter Variable', Inter, system-ui, sans-serif;
 	font-size: 14px;
 	color: var(--text);
 	width: 100%;
