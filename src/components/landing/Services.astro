@@ -1,51 +1,88 @@
 ---
-import { servicesSection, services } from '../../content/site';
+import { Picture } from 'astro:assets';
+import { featuredService, secondaryServices, servicesSection } from '../../content/site';
 import servicesBg from '../../Images/bg-services/Man_standing_showing_confidence_202606021050.jpeg';
+
+const featured = featuredService;
 ---
 
-<section
-	class="landing-section landing-services"
-	id="services"
-	aria-labelledby="services-title"
-	style={`--services-bg-image: url(${servicesBg.src})`}
->
-	<div class="landing-services__bg" aria-hidden="true"></div>
+<section class="landing-section landing-services" id="services" aria-labelledby="services-title">
+	<div class="landing-services__bg" aria-hidden="true">
+		<Picture
+			src={servicesBg}
+			formats={['avif', 'webp']}
+			widths={[640, 960, 1280, 1600]}
+			sizes="100vw"
+			alt=""
+			loading="lazy"
+			decoding="async"
+			class="landing-services__bg-img"
+		/>
+	</div>
 
 	<div class="landing-services__content">
 		<div class="landing-wrap">
 			<header class="landing-head" data-reveal>
 				<p class="eyebrow">{servicesSection.eyebrow}</p>
 				<h2 id="services-title" class="landing-head__title">{servicesSection.title}</h2>
+				<p class="landing-head__lede">{servicesSection.lede}</p>
 			</header>
 
-			<div class="services-stack" data-services-stack>
+			<article class="service-card service-card--featured" data-reveal>
+				<div class="service-card__glass">
+					<div class="service-card__inner">
+						<div class="service-card__header">
+							<span class="service-card__number">{featured.number} · Flagship</span>
+							<h3 class="service-card__title">{featured.title}</h3>
+						</div>
+						<p class="service-card__tagline">{featured.tagline}</p>
+						<p class="service-card__desc">{featured.description}</p>
+						<ul class="service-card__bullets">
+							{featured.bullets.map((bullet) => (
+								<li>{bullet}</li>
+							))}
+						</ul>
+						{
+							featured.href && (
+								<a class="service-card__more" href={featured.href}>
+									Read the FDE story
+									<span aria-hidden="true"> →</span>
+								</a>
+							)
+						}
+					</div>
+				</div>
+			</article>
+
+			<div class="services-secondary">
 				{
-					services.map((service, index) => (
-						<article
-							class="service-card"
-							style={`--stack-index: ${index}`}
-							data-service-index={index}
-							data-reveal
-						>
-							<div class="service-card__glass">
-								<div class="service-card__inner">
-									<div class="service-card__header">
-										<span class="service-card__number">{service.number}</span>
-										<h3 class="service-card__title">{service.title}</h3>
+					secondaryServices.map((service) => {
+						const Tag = service.href ? 'a' : 'article';
+						const extra = service.href
+							? { href: service.href, class: 'service-card service-card--secondary service-card--link' }
+							: { class: 'service-card service-card--secondary' };
+						return (
+							<Tag {...extra} data-reveal>
+								<div class="service-card__glass">
+									<div class="service-card__inner">
+										<div class="service-card__header">
+											<span class="service-card__number">{service.number}</span>
+											<h3 class="service-card__title">{service.title}</h3>
+										</div>
+										<p class="service-card__tagline">{service.tagline}</p>
+										<p class="service-card__desc">{service.description}</p>
+										{service.href && (
+											<span class="service-card__more">
+												Learn more
+												<span aria-hidden="true"> →</span>
+											</span>
+										)}
 									</div>
-									<p class="service-card__tagline">{service.tagline}</p>
-									<p class="service-card__desc">{service.description}</p>
-									<ul class="service-card__bullets">
-										{service.bullets.map((bullet) => (
-											<li>{bullet}</li>
-										))}
-									</ul>
 								</div>
-							</div>
-						</article>
-					))
+							</Tag>
+						);
+					})
 				}
-				<div class="services-stack__spacer" aria-hidden="true"></div>
 			</div>
 		</div>
 	</div>

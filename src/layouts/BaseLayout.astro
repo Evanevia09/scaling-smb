@@ -1,4 +1,5 @@
 ---
+import '@fontsource-variable/inter/wght.css';
 import '../styles/global.css';
 import { brand, seo as seoDefaults } from '../content/site';
 import { getSiteOrigin } from '../lib/seo';
@@ -16,6 +17,8 @@ type Props = {
 	prevUrl?: string;
 	nextUrl?: string;
 	noindex?: boolean;
+	/** Load the process-timeline scrollytelling chunk (home only). */
+	includeProcessTimeline?: boolean;
 };
 
 const {
@@ -29,6 +32,7 @@ const {
 	prevUrl,
 	nextUrl,
 	noindex = false,
+	includeProcessTimeline = false,
 } = Astro.props;
 const socialTitle = ogTitle ?? title;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -87,21 +91,20 @@ const ogImageAbsolute = ogImage
 		<meta name="twitter:description" content={description} />
 		{ogImageAbsolute && <meta name="twitter:image" content={ogImageAbsolute} />}
 		<link rel="icon" href="/favicon.ico" sizes="any" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&display=swap"
-			rel="stylesheet"
-		/>
 	</head>
 	<body>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LLXSEPMTH"></script>
+		<!-- Google tag (gtag.js) — same IDs/events; library loads after window.load -->
 		<script is:inline>
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
 			gtag('config', 'G-2LLXSEPMTH');
+			window.addEventListener('load', function () {
+				var s = document.createElement('script');
+				s.async = true;
+				s.src = 'https://www.googletagmanager.com/gtag/js?id=G-2LLXSEPMTH';
+				document.head.appendChild(s);
+			});
 		</script>
 		<a class="skip-link" href="#main">Skip to content</a>
 		<div class="shell">
@@ -112,12 +115,16 @@ const ogImageAbsolute = ogImage
 			import { initSectionNav } from '../scripts/section-nav';
 			import { initSiteHeader } from '../scripts/site-header';
 			import { initSiteHeaderScroll } from '../scripts/site-header-scroll';
-			import { initProcessTimeline } from '../scripts/process-timeline';
 			initReveal();
 			initSectionNav();
 			initSiteHeader();
 			initSiteHeaderScroll();
-			initProcessTimeline();
 		</script>
+		{includeProcessTimeline && (
+			<script>
+				import { initProcessTimeline } from '../scripts/process-timeline';
+				initProcessTimeline();
+			</script>
+		)}
 	</body>
 </html>

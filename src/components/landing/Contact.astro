@@ -1,4 +1,5 @@
 ---
+import { Picture } from 'astro:assets';
 import { contact, contactFormServiceOptions } from '../../content/site';
 import ConsultationBooking from './ConsultationBooking.astro';
 import bookNowBg from '../../Images/book-now-bg.jpeg';
@@ -9,11 +10,18 @@ const { scheduling } = contact;
 <section class="landing-section landing-contact" id="contact" aria-labelledby="contact-title">
 	<div class="landing-contact__layout">
 		<aside class="landing-contact__hero" aria-label="Contact information">
-			<div
-				class="landing-contact__hero-bg"
-				style={`background-image: url('${bookNowBg.src}')`}
-				role="presentation"
-			/>
+			<div class="landing-contact__hero-bg" role="presentation">
+				<Picture
+					src={bookNowBg}
+					formats={['avif', 'webp']}
+					widths={[480, 768, 1200, 1600]}
+					sizes="(max-width: 900px) 100vw, 42vw"
+					alt=""
+					loading="lazy"
+					decoding="async"
+					class="landing-contact__hero-bg-img"
+				/>
+			</div>
 			<div class="landing-contact__hero-overlay" aria-hidden="true" />
 
 			<div class="landing-contact__hero-content">

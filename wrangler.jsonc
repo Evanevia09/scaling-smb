@@ -2,6 +2,8 @@
 	"name": "scaling-smb",
 	"compatibility_date": "2025-06-01",
 	"pages_build_output_dir": "./dist",
+	// Serve dist/404.html with a real 404 instead of falling through to the homepage.
+	"not_found_handling": "404-page",
 	// Uncomment when wiring D1 for bookings:
 	// "d1_databases": [
 	// 	{

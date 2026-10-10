@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/landing/Hero.astro';
+import Story from '../components/landing/Story.astro';
 import Services from '../components/landing/Services.astro';
 import HowItWorks from '../components/landing/HowItWorks.astro';
 import Projects from '../components/landing/Projects.astro';
@@ -17,13 +18,14 @@ import {
 } from '../lib/seo';
 ---
 
-<BaseLayout title={seo.title} description={seo.description} ogImage={seo.defaultOgImage}>
+<BaseLayout title={seo.title} description={seo.description} ogImage={seo.defaultOgImage} includeProcessTimeline>
 	<JsonLd
 		data={[organizationJsonLd(Astro.site), webSiteJsonLd(Astro.site), professionalServiceJsonLd(Astro.site)]}
 	/>
 	<Header />
 	<main id="main" class="landing">
 		<Hero />
+		<Story />
 		<Services />
 		<HowItWorks />
 		<CtaBand />

@@ -1,8 +1,8 @@
 ---
 import { brand, footer } from '../../content/site';
 
-const onBlog = Astro.url.pathname.startsWith('/blog');
-const home = onBlog ? '/' : '';
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
+const home = isHome ? '' : '/';
 const resolvedLinks = footer.links.map((link) => ({
 	...link,
 	href: link.href.startsWith('#') ? `${home}${link.href}` : link.href,

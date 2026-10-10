@@ -19,6 +19,9 @@ export default defineConfig({
         if (path === '/') {
           item.priority = 1;
           item.changefreq = 'weekly';
+        } else if (path.startsWith('/services/')) {
+          item.priority = 0.9;
+          item.changefreq = 'weekly';
         } else if (path.startsWith('/blog/')) {
           item.priority = path === '/blog/' ? 0.85 : 0.75;
           item.changefreq = 'weekly';

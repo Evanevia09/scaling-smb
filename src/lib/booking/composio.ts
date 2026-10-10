@@ -194,7 +194,7 @@ export async function createBookingEvent(
     const emailBody = [
       `Hi ${params.name},`,
       ``,
-      `Your strategy call with Scaling SMB has been confirmed!`,
+      `Your build session with Scaling SMB has been confirmed!`,
       ``,
       `📅 Date: ${formattedDate}`,
       `⏰ Time: ${params.time} (${params.timezone})`,

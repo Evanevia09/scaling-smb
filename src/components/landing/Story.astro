@@ -1,0 +1,23 @@
+---
+import { storySection } from '../../content/site';
+---
+
+<section class="landing-section landing-story" id="why" aria-labelledby="story-title">
+	<div class="landing-wrap">
+		<header class="landing-head landing-head--center" data-reveal>
+			<p class="eyebrow">{storySection.eyebrow}</p>
+			<h2 id="story-title" class="landing-head__title">{storySection.title}</h2>
+			<p class="landing-head__lede">{storySection.lede}</p>
+		</header>
+		<div class="story-grid">
+			{
+				storySection.points.map((point) => (
+					<article class="story-card" data-reveal>
+						<h3 class="story-card__title">{point.title}</h3>
+						<p class="story-card__desc">{point.description}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

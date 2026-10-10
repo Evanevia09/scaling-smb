@@ -1,0 +1,241 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConsultationBooking from '../../components/landing/ConsultationBooking.astro';
+import CtaBand from '../../components/landing/CtaBand.astro';
+import Footer from '../../components/landing/Footer.astro';
+import Header from '../../components/Header.astro';
+import { contact, contactFormServiceOptions, fdePage } from '../../content/site';
+
+const { scheduling } = contact;
+---
+
+<BaseLayout title={fdePage.title} description={fdePage.description}>
+	<Header />
+	<main id="main" class="landing">
+		<section class="landing-hero" aria-labelledby="fde-hero-title">
+			<div class="landing-hero__inner">
+				<div class="landing-hero__copy">
+					<p class="landing-hero__tagline hero-anim">{fdePage.eyebrow}</p>
+					<h1 id="fde-hero-title" class="landing-hero__title hero-anim">{fdePage.headline}</h1>
+					<p class="landing-hero__lede hero-anim">{fdePage.lede}</p>
+					<div class="landing-hero__actions hero-anim">
+						<a class="btn btn--primary" href={fdePage.ctaHref}>{fdePage.cta}</a>
+						<a class="btn btn--ghost" href="/#services">
+							See all services
+							<span aria-hidden="true"> →</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="landing-section landing-wrap" data-reveal>
+			<div class="landing-head landing-head--center">
+				<p class="eyebrow">{fdePage.problem.eyebrow}</p>
+				<h2 class="landing-head__title">{fdePage.problem.title}</h2>
+				<p class="landing-head__lede">{fdePage.problem.lede}</p>
+			</div>
+			<div class="story-grid">
+				{
+					fdePage.problem.points.map((point) => (
+						<article class="story-card" data-reveal>
+							<h3 class="story-card__title">{point.title}</h3>
+							<p class="story-card__desc">{point.description}</p>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="landing-section" style="background:var(--bg-subtle)">
+			<div class="landing-wrap">
+				<div class="landing-head landing-head--center" data-reveal>
+					<p class="eyebrow">{fdePage.inside.eyebrow}</p>
+					<h2 class="landing-head__title">{fdePage.inside.title}</h2>
+					<p class="landing-head__lede">{fdePage.inside.lede}</p>
+				</div>
+				<div class="story-grid">
+					{
+						fdePage.inside.points.map((point) => (
+							<article class="story-card" data-reveal>
+								<h3 class="story-card__title">{point.title}</h3>
+								<p class="story-card__desc">{point.description}</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section class="landing-section landing-wrap">
+			<div class="landing-head landing-head--center" data-reveal>
+				<p class="eyebrow">{fdePage.runway.eyebrow}</p>
+				<h2 class="landing-head__title">{fdePage.runway.title}</h2>
+			</div>
+			<div class="fde-runway" data-reveal>
+				{
+					fdePage.runway.items.map((item, i) => (
+						<article class="fde-runway__item">
+							<span class="fde-runway__num">{String(i + 1).padStart(2, '0')}</span>
+							<div>
+								<h3 class="fde-runway__title">{item.title}</h3>
+								<p class="fde-runway__desc">{item.description}</p>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="landing-section" style="background:var(--bg-subtle)">
+			<div class="landing-wrap">
+				<div class="landing-head landing-head--center" data-reveal>
+					<p class="eyebrow">{fdePage.agents.eyebrow}</p>
+					<h2 class="landing-head__title">{fdePage.agents.title}</h2>
+					<p class="landing-head__lede">{fdePage.agents.lede}</p>
+				</div>
+				<ul class="fde-agents" data-reveal>
+					{
+						fdePage.agents.items.map((item) => (
+							<li class="fde-agents__item">{item}</li>
+						))
+					}
+				</ul>
+				<p class="fde-agents__more" data-reveal>
+					<a href="/services/google-ads/">Adz, the Google Ads agent</a>, is one example of what flies once spend, tracking, and daily workflow are on the runway.
+				</p>
+			</div>
+		</section>
+
+		<section class="landing-section landing-wrap">
+			<div class="landing-head landing-head--center" data-reveal>
+				<p class="eyebrow">{fdePage.examples.eyebrow}</p>
+				<h2 class="landing-head__title">{fdePage.examples.title}</h2>
+				<p class="landing-head__lede">{fdePage.examples.lede}</p>
+			</div>
+			<div class="story-grid story-grid--two">
+				{
+					fdePage.examples.items.map((item) => (
+						<article class="story-card" data-reveal>
+							<h3 class="story-card__title">{item.name}</h3>
+							<p class="story-card__desc">{item.detail}</p>
+						</article>
+					))
+				}
+			</div>
+			<p class="fde-note" data-reveal>{fdePage.examples.hotelNote}</p>
+		</section>
+
+		<section class="landing-section landing-wrap" id="book">
+			<div class="landing-head landing-head--center" data-reveal>
+				<p class="eyebrow">{fdePage.book.eyebrow}</p>
+				<h2 class="landing-head__title">{fdePage.book.title}</h2>
+				<p class="landing-head__lede">{fdePage.book.lede}</p>
+			</div>
+			<div class="ads-booking" data-reveal>
+				<ConsultationBooking
+					meetingTitle={scheduling.meetingTitle}
+					duration={scheduling.duration}
+					description={scheduling.description}
+					features={[...scheduling.features]}
+					timeSlots={[...scheduling.timeSlots]}
+					blockedTimeSlots={[...scheduling.blockedTimeSlots]}
+					timezones={[...scheduling.timezones]}
+					serviceOptions={contactFormServiceOptions}
+					stepLabels={[...scheduling.steps]}
+					stepTitles={scheduling.stepTitles}
+					success={scheduling.success}
+					contactEmail={contact.email}
+				/>
+			</div>
+		</section>
+	</main>
+	<CtaBand />
+	<Footer />
+</BaseLayout>
+
+<style>
+	.fde-runway {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		max-width: 48rem;
+		margin: 0 auto;
+	}
+	.fde-runway__item {
+		display: flex;
+		gap: 1.15rem;
+		align-items: flex-start;
+		background: var(--bg-subtle);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-md);
+		padding: 1.15rem 1.25rem;
+	}
+	.fde-runway__num {
+		flex-shrink: 0;
+		width: 2.5rem;
+		height: 2.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 8px;
+		background: var(--accent-soft);
+		color: var(--accent);
+		font-weight: 700;
+		font-size: 0.95rem;
+	}
+	.fde-runway__title {
+		margin: 0 0 0.2rem;
+		font-size: 1rem;
+		font-weight: 700;
+	}
+	.fde-runway__desc {
+		margin: 0;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		color: var(--text-muted);
+	}
+	.fde-agents {
+		list-style: none;
+		padding: 0;
+		margin: 0 auto;
+		max-width: 44rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	.fde-agents__item {
+		padding: 1rem 1.15rem 1rem 2.4rem;
+		background: var(--bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-md);
+		position: relative;
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+	.fde-agents__item::before {
+		content: '→';
+		position: absolute;
+		left: 1rem;
+		color: var(--accent);
+		font-weight: 700;
+	}
+	.fde-agents__more {
+		text-align: center;
+		margin: 1.5rem auto 0;
+		max-width: 36rem;
+		color: var(--text-muted);
+		font-size: 0.95rem;
+	}
+	.fde-note {
+		text-align: center;
+		margin: 1.5rem auto 0;
+		max-width: 40rem;
+		font-size: 0.9rem;
+		color: var(--text-muted);
+	}
+	.ads-booking {
+		max-width: 48rem;
+		margin: 0 auto;
+	}
+</style>

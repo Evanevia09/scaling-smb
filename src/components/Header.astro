@@ -1,9 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import { brand, nav, blogNav } from '../content/site';
 import logo from '../Images/SMB.png';
 
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 const onBlog = Astro.url.pathname.startsWith('/blog');
-const home = onBlog ? '/' : '';
+const home = isHome ? '' : '/';
 const blogHref = '/blog/';
 ---
 
@@ -14,13 +16,16 @@ const blogHref = '/blog/';
 >
 	<div class="site-header__bar">
 		<a class="site-logo" href={home || '#hero'} aria-label={`${brand.name} — home`}>
-			<img
+			<Image
 				class="site-logo__img"
-				src={logo.src}
-				width={logo.width}
-				height={logo.height}
+				src={logo}
 				alt=""
+				width={200}
+				height={80}
+				densities={[1, 2]}
+				format="webp"
 				loading="eager"
+				fetchpriority="high"
 				decoding="async"
 			/>
 		</a>

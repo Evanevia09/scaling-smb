@@ -1,6 +1,6 @@
 ---
 import { hero } from '../../content/site';
-import HeroDashboard from '../react/HeroDashboard.tsx';
+import HeroDashboard from './HeroDashboard.astro';
 ---
 
 <section class="landing-hero" id="hero" aria-labelledby="hero-title">
@@ -20,7 +20,7 @@ import HeroDashboard from '../react/HeroDashboard.tsx';
 			</div>
 			<div class="landing-hero__dashboard hero-anim">
 				<div class="landing-hero__dashboard-inner">
-					<HeroDashboard client:visible />
+					<HeroDashboard />
 				</div>
 			</div>
 		</div>
