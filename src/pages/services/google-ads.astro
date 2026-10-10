@@ -5,7 +5,6 @@ import ConsultationBooking from '../../components/landing/ConsultationBooking.as
 import CtaBand from '../../components/landing/CtaBand.astro';
 import Footer from '../../components/landing/Footer.astro';
 import Header from '../../components/Header.astro';
-import businessGrowthImg from '../../Images/blog-featured-images/Business Growth.jpeg';
 import aiEmployeesImg from '../../Images/blog-featured-images/AI Employees.jpeg';
 import softwareDevImg from '../../Images/blog-featured-images/sofware-development.jpeg';
 
@@ -13,30 +12,37 @@ const { scheduling } = contact;
 
 const pageTitle = 'Adz — AI-Powered Google Ads Management | Scaling SMB';
 const pageDesc =
-	'Your campaigns. Running daily. Optimized hourly. Audited constantly. An AI-powered Google Ads strategist that monitors, optimizes, and reports — every single day. No agency bloat. No monthly updates that come too late.';
+	'Finally, someone watching your Google ads like their own money is on the line. An AI-powered Google Ads strategist that monitors, optimizes, and reports — every single day. No agency bloat. No monthly updates that come too late.';
 ---
 <BaseLayout title={pageTitle} description={pageDesc}>
 	<Header />
 	<main id="main" class="landing">
 
-		<!-- Hero -->
-		<section class="landing-hero ads-hero" aria-labelledby="ads-hero-title">
-			<div class="landing-hero__bg-overlay" aria-hidden="true">
-				<img src={businessGrowthImg.src} alt="" class="ads-hero__bg-img" />
-			</div>
-			<div class="landing-hero__inner ads-hero__inner">
-				<div class="landing-hero__copy">
-					<p class="eyebrow hero-anim ads-hero__eyebrow">Adz — AI Google Ads Agent</p>
-					<h1 id="ads-hero-title" class="landing-hero__title hero-anim ads-hero__title">
-						Your campaigns.<br />Running daily.<br />Optimized hourly.<br />Audited constantly.
+		<!-- Hero — preserve live scalingsmb.com copy + dashboard image -->
+		<section class="ads-hero" aria-labelledby="ads-hero-title">
+			<div class="ads-hero__layout landing-wrap">
+				<div class="ads-hero__copy" data-reveal>
+					<p class="eyebrow">Adz — AI Google Ads Agent</p>
+					<h1 id="ads-hero-title" class="ads-hero__title">
+						Finally, someone watching your Google ads<br />like their own money is on the line.
 					</h1>
-					<p class="landing-hero__lede hero-anim ads-hero__lede">
+					<p class="ads-hero__lede">
 						An AI-powered Google Ads strategist built for scaling service businesses. I connect directly to
 						your account, audit everything, and optimize every day — so your budget works harder than your competitors.
 					</p>
-					<div class="landing-hero__actions hero-anim">
+					<div class="ads-hero__actions">
 						<a class="btn btn--primary" href="#book">Book a free audit →</a>
 					</div>
+				</div>
+				<div class="ads-hero__visual" data-reveal>
+					<img
+						src="/images/google-ads-hero.jpg"
+						alt="Google Ads dashboard with growth charts"
+						class="ads-hero__img"
+						width="1280"
+						height="714"
+						decoding="async"
+					/>
 				</div>
 			</div>
 		</section>
@@ -52,23 +58,23 @@ const pageDesc =
 			</div>
 			<ul class="ads-problems">
 				<li class="ads-problems__item" data-reveal>
-					<span class="ads-problems__icon">⇢</span>
+					<span class="ads-problems__icon ads-problems__icon--x">✕</span>
 					<div><strong>Keywords drift</strong> — your ad shows up for searches you never intended</div>
 				</li>
 				<li class="ads-problems__item" data-reveal>
-					<span class="ads-problems__icon">⇢</span>
+					<span class="ads-problems__icon ads-problems__icon--x">✕</span>
 					<div><strong>Competitors outbid you</strong> while you're not looking</div>
 				</li>
 				<li class="ads-problems__item" data-reveal>
-					<span class="ads-problems__icon">⇢</span>
+					<span class="ads-problems__icon ads-problems__icon--x">✕</span>
 					<div><strong>Budget bleeds</strong> on irrelevant searches that have nothing to do with what you actually sell</div>
 				</li>
 				<li class="ads-problems__item" data-reveal>
-					<span class="ads-problems__icon">⇢</span>
+					<span class="ads-problems__icon ads-problems__icon--x">✕</span>
 					<div><strong>Conversion tracking breaks</strong> and weeks go by before anyone notices</div>
 				</li>
 				<li class="ads-problems__item" data-reveal>
-					<span class="ads-problems__icon">⇢</span>
+					<span class="ads-problems__icon ads-problems__icon--x">✕</span>
 					<div><strong>Agency updates come monthly</strong> — by then, you've already burned through your budget</div>
 				</li>
 			</ul>
@@ -515,44 +521,57 @@ const pageDesc =
    conventions from global.css
    ============================================ */
 
-/* ---- Hero ---- */
+/* ---- Hero (matches live scalingsmb.com/services/google-ads/) ---- */
 .ads-hero {
-	position: relative;
+	padding: calc(var(--header-height) + clamp(1.5rem, 3vw, 2.5rem)) 0 0;
+}
+.ads-hero__layout {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(2rem, 4vw, 4rem);
+	align-items: center;
+}
+.ads-hero__copy {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+.ads-hero__title {
+	font-size: clamp(1.8rem, 4vw, 2.8rem);
+	font-weight: 800;
+	line-height: 1.12;
+	letter-spacing: -0.02em;
+	color: var(--text);
+	margin: 0;
+}
+.ads-hero__lede {
+	font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+	line-height: 1.55;
+	color: var(--text-muted);
+	margin: 0;
+	max-width: 46ch;
+}
+.ads-hero__actions {
+	display: flex;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+}
+.ads-hero__visual {
+	border-radius: var(--radius-lg);
 	overflow: hidden;
+	box-shadow: var(--shadow-md);
+	margin-bottom: -0.25rem;
 }
-.ads-hero__inner .landing-hero__title {
-	font-size: clamp(2.2rem, 5vw, 3.5rem);
-}
-@media (min-width: 1080px) {
-	.ads-hero__inner {
-		display: flex;
-		justify-content: center;
-	}
-	.ads-hero__inner .landing-hero__copy {
-		text-align: center;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	.ads-hero__inner .landing-hero__lede {
-		text-align: center;
-		max-width: 44rem;
-	}
-	.ads-hero__inner .landing-hero__actions {
-		justify-content: center;
-	}
-}
-.ads-hero__bg-img {
-	position: absolute;
-	inset: 0;
+.ads-hero__img {
+	display: block;
 	width: 100%;
-	height: 100%;
+	height: auto;
 	object-fit: cover;
-	opacity: 0.06;
-	pointer-events: none;
 }
-.ads-hero__eyebrow {
-	color: var(--accent-strong);
+@media (max-width: 767px) {
+	.ads-hero__layout { grid-template-columns: 1fr; }
+	.ads-hero__visual { order: -1; max-height: 18rem; }
+	.ads-hero__visual img { height: 100%; object-fit: cover; }
 }
 
 /* ---- Problem list ---- */
@@ -584,11 +603,12 @@ const pageDesc =
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: var(--accent-soft);
-	border-radius: 8px;
-	color: var(--accent);
-	font-weight: 700;
-	font-size: 1rem;
+	background: #fef2f2;
+	border-radius: 50%;
+	color: #dc2626;
+	font-weight: 600;
+	font-size: 0.85rem;
+	line-height: 1;
 }
 .ads-problems__punch {
 	text-align: center;

@@ -3,8 +3,8 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 export type BlogPost = CollectionEntry<'blog'>;
 
 export const LANDING_CTA = {
-	headline: 'Ready to grow your local business?',
-	button: 'Book your free strategy call',
+	headline: 'Ready to build the runway AI can land on?',
+	button: 'Start a build',
 	href: '/#contact',
 } as const;
 

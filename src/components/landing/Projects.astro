@@ -1,5 +1,5 @@
 ---
-import { projectsSection, projects } from '../../content/site';
+import { projectsSection, projects, adzProduct } from '../../content/site';
 import islandJunksImg from '../../Images/portfolio images/island-junks.jpeg';
 import transpolinkImg from '../../Images/portfolio images/transpolink.jpeg';
 import lofHotelImg from '../../Images/portfolio images/lof-hotel.jpeg';
@@ -21,6 +21,7 @@ const [featured, ...rest] = projects;
 		<header class="landing-head landing-head--center" data-reveal>
 			<p class="eyebrow">{projectsSection.eyebrow}</p>
 			<h2 id="projects-title" class="landing-head__title">{projectsSection.title}</h2>
+			<p class="landing-head__lede">{projectsSection.lede}</p>
 		</header>
 
 		<div class="projects-layout">
@@ -69,5 +70,15 @@ const [featured, ...rest] = projects;
 				}
 			</div>
 		</div>
+
+		<a class="adz-product" href={adzProduct.href} data-reveal>
+			<p class="adz-product__eyebrow">{adzProduct.eyebrow}</p>
+			<h3 class="adz-product__title">{adzProduct.title}</h3>
+			<p class="adz-product__desc">{adzProduct.description}</p>
+			<span class="adz-product__cta">
+				{adzProduct.cta}
+				<span aria-hidden="true"> →</span>
+			</span>
+		</a>
 	</div>
 </section>

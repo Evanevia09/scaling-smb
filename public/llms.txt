@@ -1,34 +1,38 @@
 # Scaling SMB
 
-> Scaling SMB helps small and medium local businesses get found online, convert more leads, and automate operations with local SEO, websites, custom web apps, and AI assistants.
+> Scaling SMB builds the runway AI agents land on — data, systems, and workflows — through forward deployed engineering inside your company. Then we put those agents to work alongside your team.
 
 ## Services
 
-- Local SEO — Google Maps and local search visibility for nearby customers
-- Website — Conversion-focused sites for local businesses
-- Web Application — Custom tools and workflow automation
-- AI Employees — 24/7 lead response, booking, and follow-up in your brand voice
+- Forward Deployed Engineering — embed inside the business to connect data, stand up systems, design workflows and guardrails, then launch agents
+- Websites — conversion-focused sites that sit on the same foundation
+- Web Apps / Portals — tools and customer portals that replace manual glue
+- Local SEO — Google Maps and local search visibility
+- Google Ads (Adz) — daily-watched paid demand; see /services/google-ads/
 
 ## Primary pages
 
 - Home: /
+- Forward Deployed Engineering: /services/forward-deployed-engineering/
+- Google Ads / Adz: /services/google-ads/
 - Blog: /blog/
-- Book a strategy call: /#contact
+- Start a build: /#contact
 
 ## Blog topics
 
+- Forward deployed engineering and AI platforms
 - Local SEO and Google Business Profile
 - Website conversion and local lead generation
 - Web applications and SMB automation
-- AI for local business customer service
+- AI agents that work alongside a team
 - Business growth and local marketing
 
 ## Contact
 
-- Email: hello@scalingsmb.com
+- Email: scalingsmb@gmail.com
 - Phone: +853 6275 0705
 - Location: Macau · APAC (remote worldwide)
-- Website: https://scaling-smb.pages.dev/
+- Website: https://scalingsmb.com/
 
 ## Technical
 
